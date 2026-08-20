@@ -3,8 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AGENTROPOLIS AQUEDUCT is a 3D cross-chain testnet provisioning map for wallet discovery, faucet routing, network adapters, policy controls, and verifiable receipts.">
-  <meta name="theme-color" content="#041018">
+  <meta name="description" content="AGENTROPOLIS AQUEDUCT is a 3D cross-chain testnet provisioning grid with governed faucet routing, wallet discovery, privacy lanes, and verifiable receipts.">
+  <meta name="theme-color" content="#05070b">
+  <meta property="og:title" content="AGENTROPOLIS AQUEDUCT">
+  <meta property="og:description" content="Cross-Chain Testnet Provisioning Infrastructure">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AGENTROPOLIS AQUEDUCT">
+  <meta name="twitter:description" content="Cross-Chain Testnet Provisioning Infrastructure">
   <title>AGENTROPOLIS AQUEDUCT | Cross-Chain Testnet Grid</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -16,111 +22,158 @@
   <header class="nav">
     <a class="brand" href="#top" aria-label="AGENTROPOLIS AQUEDUCT home">
       <span class="brand-mark">AQ</span>
-      <span><strong>AGENTROPOLIS</strong><small>AQUEDUCT</small></span>
+      <span class="brand-type"><strong>AGENTROPOLIS</strong><small>AQUEDUCT</small></span>
     </a>
     <nav aria-label="Primary navigation">
-      <a href="#map">3D Aqueduct</a>
-      <a href="#faucets">Chainwells</a>
-      <a href="#protocol">Protocol</a>
-      <a href="https://github.com/wiredchaos/AGENTROPOLIS-AQUEDUCT" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="#map">AQUEDUCT</a>
+      <a href="#faucets">CHAINWELLS</a>
+      <a class="privacy-nav" href="#veilwell">VEILWELL</a>
+      <a href="#protocol">FLOWKEEPER</a>
+      <a href="#protocol">MCP</a>
+      <a href="https://github.com/wiredchaos/AGENTROPOLIS-AQUEDUCT" target="_blank" rel="noreferrer">GITHUB</a>
     </nav>
   </header>
 
+  <div class="status-rail" aria-label="System status">
+    <span><i class="dot live"></i> GRID ONLINE</span>
+    <span>FLOWKEEPER: ACTIVE</span>
+    <span>WALLET ATLAS: READ ONLY</span>
+    <span>54-T: READY</span>
+    <span>TESTNET ONLY</span>
+  </div>
+
   <main id="top">
     <section class="hero section">
+      <div class="hero-backplate" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-copy reveal">
-        <p class="eyebrow">AGENTROPOLIS infrastructure · testnet only</p>
-        <h1>Prime the<br><span>Aqueduct.</span></h1>
-        <p class="lede">A 3D cross-chain provisioning map where every test network is represented as a faucet monument connected to one governed resource grid. The public surface visualizes networks, faucet modes, and adapter state without exposing wallet secrets or execution authority.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#map">Enter the Aqueduct</a>
-          <a class="button ghost" href="#faucets">Inspect Chainwells</a>
+        <p class="eyebrow red">AGENTROPOLIS INFRASTRUCTURE // TESTNET ONLY</p>
+        <h1><span class="agent">AGENTROPOLIS</span><br><span class="aqua">AQUEDUCT</span></h1>
+        <p class="hero-kicker">Cross-Chain Testnet Provisioning Infrastructure</p>
+        <div class="system-strip" aria-label="Core systems">
+          <span>FLOWKEEPER</span><b>+</b><span>WALLET ATLAS</span><b>+</b><span>AQUEDUCT MCP</span><b>+</b><span>AGENT KIT</span>
         </div>
-        <div class="hero-badges" aria-label="System properties">
-          <span>Static Three.js</span><span>GitHub Pages</span><span>Apache-2.0</span><span>No wallet custody</span>
+        <p class="lede">Route, provision, and verify testnet resources across chain families from one governed public surface. The interface shows the waterworks. Execution authority stays behind AGENTROPOLIS controls.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#map">ENTER AQUEDUCT</a>
+          <a class="button ghost" href="#faucets">INSPECT CHAINWELLS</a>
+          <a class="button privacy" href="#veilwell">OPEN PRIVACY LANE</a>
         </div>
       </div>
 
-      <aside class="hud-panel reveal" aria-label="Aqueduct telemetry">
-        <p class="eyebrow">Flowkeeper telemetry</p>
-        <div class="hud-row"><span>Grid</span><strong>AGENTROPOLIS AQUEDUCT</strong></div>
-        <div class="hud-row"><span>Network class</span><strong>PUBLIC TESTNETS</strong></div>
-        <div class="hud-row"><span>Chainwells mapped</span><strong id="chainCount">—</strong></div>
-        <div class="hud-row"><span>Execution</span><strong>VISUAL / READ-ONLY</strong></div>
-        <div class="hud-row"><span>Governor</span><strong>FLOWKEEPER</strong></div>
-        <div class="hud-row"><span>Registry</span><strong>WALLET ATLAS</strong></div>
-        <div class="hud-row"><span>Policy</span><strong>54-T / ASBE READY</strong></div>
-        <div class="hud-row"><span>Status</span><strong class="status-online">ONLINE</strong></div>
+      <aside class="hud-panel authority reveal" aria-label="Aqueduct telemetry">
+        <div class="hud-title"><span>FLOWKEEPER TELEMETRY</span><strong>LIVE</strong></div>
+        <div class="hud-row"><span>GRID</span><strong>AGENTROPOLIS AQUEDUCT</strong></div>
+        <div class="hud-row"><span>NETWORK CLASS</span><strong>PUBLIC TESTNETS</strong></div>
+        <div class="hud-row"><span>CHAINWELLS</span><strong id="chainCount">--</strong></div>
+        <div class="hud-row"><span>PRIVACY LANE</span><strong class="orange">VEILWELL / XMR</strong></div>
+        <div class="hud-row"><span>EXECUTION</span><strong>VISUAL / READ ONLY</strong></div>
+        <div class="hud-row"><span>GOVERNOR</span><strong>FLOWKEEPER</strong></div>
+        <div class="hud-row"><span>REGISTRY</span><strong>WALLET ATLAS</strong></div>
+        <div class="hud-row"><span>POLICY</span><strong>54-T / ASBE READY</strong></div>
       </aside>
     </section>
 
     <section id="map" class="section map-section">
       <div class="section-head reveal">
-        <p class="eyebrow">3D infrastructure map</p>
-        <h2>One reservoir. Many chainwells.</h2>
-        <p>Hover or tap a faucet monument in the 3D field. AQUEDUCT keeps the public interface chain-neutral while each network retains its own faucet and wallet semantics.</p>
+        <p class="eyebrow red">3D INFRASTRUCTURE MAP</p>
+        <h2>One reservoir.<br><span>Many chainwells.</span></h2>
+        <p>Hover or tap a faucet monument in the live 3D field. Red frames authority. Cyan traces resource flow. Orange marks the XMR privacy lane.</p>
       </div>
       <div class="map-console reveal">
-        <div class="terminal-bar"><span></span><span></span><span></span><b>aqueduct://flowkeeper</b></div>
+        <div class="terminal-bar"><span></span><span></span><span></span><b>aqueduct://flowkeeper</b><em>GOVERNED</em></div>
         <pre id="typewriter">boot://agentropolis-aqueduct</pre>
       </div>
     </section>
 
     <section id="faucets" class="section faucet-section">
       <div class="section-head reveal">
-        <p class="eyebrow">Chainwell registry</p>
+        <p class="eyebrow red">CHAINWELL REGISTRY</p>
         <h2>Faucets by network family.</h2>
-        <p>These public cards describe known testing lanes and their current acquisition mode. Provider rules and rate limits remain authoritative; AQUEDUCT never bypasses CAPTCHA, identity checks, account limits, or faucet policy.</p>
+        <p>Provider rules remain authoritative. AQUEDUCT does not bypass account controls, human verification, cooldowns, or rate limits.</p>
+      </div>
+      <div class="filter-rail reveal" role="group" aria-label="Filter chainwells">
+        <button class="filter active" data-filter="all" type="button">ALL LANES</button>
+        <button class="filter" data-filter="evm" type="button">EVM</button>
+        <button class="filter" data-filter="non-evm" type="button">NON-EVM</button>
+        <button class="filter privacy-filter" data-filter="privacy" type="button">PRIVACY</button>
       </div>
       <div id="faucetGrid" class="cards" aria-live="polite"></div>
     </section>
 
+    <section id="veilwell" class="section veilwell-section">
+      <div class="veilwell-shell reveal">
+        <div class="veilwell-copy">
+          <p class="eyebrow orange">AGENTROPOLIS AQUEDUCT // PRIVACY LANE</p>
+          <h2>VEILWELL <span>XMR</span></h2>
+          <p class="lede">Monero is not treated like a generic faucet. VEILWELL separates privacy-sensitive test infrastructure from ordinary chain routing, with Stagenet as the primary development lane and Testnet as the experimental lane.</p>
+          <div class="privacy-rules">
+            <span>STAGENET PRIMARY</span>
+            <span>SELF-HOSTED NODE PREFERRED</span>
+            <span>REMOTE METADATA IS PART OF THE THREAT MODEL</span>
+            <span>MAINNET LOCKED</span>
+          </div>
+        </div>
+        <div class="veilwell-hud">
+          <div><span>NETWORK</span><strong>MONERO STAGENET</strong></div>
+          <div><span>ASSET</span><strong>sXMR</strong></div>
+          <div><span>ADAPTER</span><strong>MoneroAdapter</strong></div>
+          <div><span>NODE POLICY</span><strong>SELF-HOSTED PREFERRED</strong></div>
+          <div><span>WALLET RPC</span><strong>ISOLATED</strong></div>
+          <div><span>MAINNET</span><strong>DENY</strong></div>
+        </div>
+      </div>
+    </section>
+
     <section id="protocol" class="section protocol-section">
       <div class="section-head reveal">
-        <p class="eyebrow">Aqueduct protocol</p>
-        <h2>Visual today. Governed execution next.</h2>
+        <p class="eyebrow red">AQUEDUCT PROTOCOL</p>
+        <h2>Governed execution path.</h2>
       </div>
       <div class="protocol-grid">
-        <article class="protocol-card reveal"><span>01</span><h3>Discover</h3><p>Read the chain registry and resolve the correct wallet family, test network, faucet source, and current provider mode.</p></article>
-        <article class="protocol-card reveal"><span>02</span><h3>Measure</h3><p>Check test-wallet balance and compare it against a bounded target, minimum threshold, cooldown, and provider policy.</p></article>
-        <article class="protocol-card reveal"><span>03</span><h3>Authorize</h3><p>FLOWKEEPER requests scoped authority through AGENTROPOLIS governance. No raw seed phrase or private key enters model context.</p></article>
-        <article class="protocol-card reveal"><span>04</span><h3>Route</h3><p>The Agent Kit selects the chain adapter. MCP exposes one stable interface while chain-specific mechanics stay behind the grid.</p></article>
-        <article class="protocol-card reveal"><span>05</span><h3>Verify</h3><p>Confirm the test asset landed, capture the transaction or provider receipt, and update the wallet registry state.</p></article>
-        <article class="protocol-card reveal"><span>06</span><h3>Receipt</h3><p>Emit auditable evidence with network, wallet ID, amount, source, timestamp, policy decision, and verification state.</p></article>
+        <article class="protocol-card reveal"><span>01</span><h3>DISCOVER</h3><p>Resolve chain family, wallet class, test network, provider mode, and current registry state.</p></article>
+        <article class="protocol-card reveal"><span>02</span><h3>MEASURE</h3><p>Read balance and compare against bounded target, minimum threshold, cooldown, and provider policy.</p></article>
+        <article class="protocol-card reveal"><span>03</span><h3>AUTHORIZE</h3><p>FLOWKEEPER requests scoped authority. Raw seeds and private keys never enter model context.</p></article>
+        <article class="protocol-card reveal"><span>04</span><h3>ROUTE</h3><p>AQUEDUCT MCP exposes a stable interface while the Agent Kit selects the correct chain adapter.</p></article>
+        <article class="protocol-card reveal"><span>05</span><h3>VERIFY</h3><p>Confirm the test asset landed and correlate provider, transaction, and wallet registry evidence.</p></article>
+        <article class="protocol-card reveal"><span>06</span><h3>RECEIPT</h3><p>Emit durable evidence with network, wallet ID, source, amount, timestamp, policy decision, and state.</p></article>
       </div>
     </section>
 
     <section class="section boundary reveal">
-      <p class="eyebrow">Public boundary</p>
-      <h2>Show the waterworks. Protect the keys.</h2>
+      <p class="eyebrow red">PUBLIC BOUNDARY</p>
+      <h2>Show the waterworks.<br><span>Protect the keys.</span></h2>
       <div class="boundary-grid">
-        <div><h3>Public here</h3><ul><li>3D chainwell map</li><li>Testnet names and families</li><li>Faucet documentation links</li><li>Adapter and policy states</li><li>Non-sensitive protocol schemas</li></ul></div>
-        <div><h3>Never public here</h3><ul><li>Private keys or mnemonics</li><li>Production wallet secrets</li><li>Provider credentials</li><li>Internal capability handles</li><li>Mainnet autonomous execution authority</li></ul></div>
+        <div><h3>PUBLIC HERE</h3><ul><li>3D chainwell map</li><li>Testnet names and families</li><li>Faucet documentation links</li><li>Adapter and policy states</li><li>Non-sensitive protocol schemas</li></ul></div>
+        <div><h3>NEVER PUBLIC HERE</h3><ul><li>Private keys or mnemonics</li><li>Production wallet secrets</li><li>Provider credentials</li><li>Internal capability handles</li><li>Mainnet autonomous execution authority</li></ul></div>
       </div>
     </section>
   </main>
 
   <aside id="detailPanel" class="detail-panel" aria-live="polite" aria-label="Selected chainwell detail">
-    <button id="closeDetail" class="detail-close" type="button" aria-label="Close detail">×</button>
-    <p class="eyebrow">Selected chainwell</p>
+    <button id="closeDetail" class="detail-close" type="button" aria-label="Close detail">X</button>
+    <p class="eyebrow red">SELECTED CHAINWELL</p>
     <div id="detailMark" class="detail-mark">AQ</div>
     <h2 id="detailName">AQUEDUCT CORE</h2>
     <p id="detailNetwork" class="detail-network">Choose a faucet monument in the 3D field.</p>
     <dl>
-      <div><dt>Asset</dt><dd id="detailAsset">—</dd></div>
-      <div><dt>Family</dt><dd id="detailFamily">—</dd></div>
-      <div><dt>Mode</dt><dd id="detailMode">—</dd></div>
-      <div><dt>Adapter</dt><dd id="detailAdapter">—</dd></div>
+      <div><dt>ASSET</dt><dd id="detailAsset">--</dd></div>
+      <div><dt>FAMILY</dt><dd id="detailFamily">--</dd></div>
+      <div><dt>MODE</dt><dd id="detailMode">--</dd></div>
+      <div><dt>ADAPTER</dt><dd id="detailAdapter">--</dd></div>
     </dl>
     <p id="detailNote" class="detail-note">The public visualization does not request funds directly.</p>
     <div class="detail-actions">
-      <a id="detailFaucet" class="button primary" href="#faucets">Faucet source</a>
-      <a id="detailDocs" class="button ghost" href="#protocol">Network docs</a>
+      <a id="detailFaucet" class="button primary" href="#faucets">FAUCET SOURCE</a>
+      <a id="detailDocs" class="button ghost" href="#protocol">NETWORK DOCS</a>
     </div>
   </aside>
 
   <footer class="footer">
-    <p><strong>AGENTROPOLIS AQUEDUCT</strong> · Cross-chain testnet provisioning infrastructure · Apache-2.0 · Public visualization only.</p>
+    <div class="footer-rail">
+      <span>GITHUB PAGES</span><b>+</b><span>APACHE-2.0</span><b>+</b><span>TESTNET ONLY</span><b>+</b><span>AGENTROPOLIS</span>
+    </div>
+    <p>AGENTROPOLIS AQUEDUCT - Cross-chain testnet provisioning infrastructure. Public visualization only.</p>
     <p class="muted">Visual scaffold adapted from HERMES CITY. Test assets have no intended real-world value. Provider limits and network documentation remain authoritative.</p>
   </footer>
 
