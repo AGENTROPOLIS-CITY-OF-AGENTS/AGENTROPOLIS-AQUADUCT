@@ -64,7 +64,7 @@ The browser is never an authority boundary.
 13. `cargo test --workspace --all-features` passes.
 14. release build passes.
 15. dependency audit passes or has a documented reviewed exception.
-16. 54-T / ASBE promotion review approves the effective capability surface.
+16. 54-T / BE promotion review approves the effective capability surface.
 
 ## Public v1 release classification
 
