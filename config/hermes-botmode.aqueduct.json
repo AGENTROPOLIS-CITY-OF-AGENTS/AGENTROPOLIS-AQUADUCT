@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "agentropolis.aqueduct.botmode",
+  "name": "AQUEDUCT BOT MODE",
+  "district": "AGENTROPOLIS AQUEDUCT",
+  "runtime": {
+    "kind": "HERMES_BOT_MODE",
+    "scope": "district",
+    "status": "launched",
+    "surface": "github-pages-visualization",
+    "gateway": {
+      "enabled": false,
+      "transport": "websocket",
+      "url": null,
+      "publicTelemetryOnly": true
+    }
+  },
+  "authority": {
+    "identityLayer": "AGENTROPOLIS-L1",
+    "mandate": "Cross-chain testnet provisioning and verification only",
+    "policy": [
+      "testnet-only",
+      "no-private-keys-in-browser",
+      "no-seed-material",
+      "provider-rate-limits-authoritative",
+      "no-captcha-bypass",
+      "no-mainnet-execution",
+      "receipt-required"
+    ],
+    "mainnetAllowed": false
+  },
+  "approvedCapabilities": {
+    "tools": [
+      "FLOWKEEPER",
+      "WALLET_ATLAS",
+      "AQUEDUCT_MCP",
+      "AQUEDUCT_AGENT_KIT",
+      "CHAINWELLS",
+      "VEILWELL"
+    ],
+    "data": [
+      "public-testnet-network-metadata",
+      "public-faucet-metadata",
+      "public-wallet-addresses-only",
+      "public-execution-receipts"
+    ],
+    "models": ["district-approved-only"],
+    "skills": ["district-approved-only"]
+  },
+  "agents": [
+    {
+      "id": "flowkeeper",
+      "name": "FLOWKEEPER",
+      "role": "governor",
+      "color": "#ff2738",
+      "responsibilities": ["thresholds", "cooldowns", "provider-policy", "authorization"]
+    },
+    {
+      "id": "wallet-atlas",
+      "name": "WALLET ATLAS",
+      "role": "registry",
+      "color": "#28efff",
+      "responsibilities": ["wallet-family-resolution", "network-resolution", "balance-observation"]
+    },
+    {
+      "id": "route-engine",
+      "name": "ROUTE ENGINE",
+      "role": "router",
+      "color": "#8ea1ff",
+      "responsibilities": ["adapter-selection", "chainwell-selection", "execution-routing"]
+    },
+    {
+      "id": "verifier",
+      "name": "CHAIN VERIFIER",
+      "role": "verification",
+      "color": "#78f0cf",
+      "responsibilities": ["transaction-confirmation", "balance-verification", "provider-result-correlation"]
+    },
+    {
+      "id": "receipt-scribe",
+      "name": "RECEIPT SCRIBE",
+      "role": "audit",
+      "color": "#ac5cff",
+      "responsibilities": ["receipt-generation", "provenance", "audit-evidence"]
+    },
+    {
+      "id": "veil-sentinel",
+      "name": "VEIL SENTINEL",
+      "role": "privacy",
+      "color": "#ff7a18",
+      "responsibilities": ["xmr-stagenet-policy", "remote-node-risk", "wallet-rpc-isolation", "mainnet-deny"]
+    }
+  ],
+  "workflow": [
+    "DISCOVER",
+    "MEASURE",
+    "AUTHORIZE",
+    "ROUTE",
+    "EXECUTE",
+    "VERIFY",
+    "RECEIPT"
+  ],
+  "chainFamilies": [
+    {"id":"evm","label":"EVM","color":"#8ea1ff"},
+    {"id":"solana","label":"SOLANA","color":"#14f195"},
+    {"id":"move","label":"MOVE","color":"#6fbcf0"},
+    {"id":"xrpl","label":"XRPL","color":"#e7f4ff"},
+    {"id":"stellar","label":"STELLAR","color":"#28efff"},
+    {"id":"substrate","label":"POLKADOT","color":"#ff4da6"},
+    {"id":"privacy","label":"VEILWELL / XMR","color":"#ff7a18"}
+  ],
+  "receipt": {
+    "required": true,
+    "fields": [
+      "profileId",
+      "agentId",
+      "network",
+      "walletId",
+      "provider",
+      "amount",
+      "policyDecision",
+      "transactionId",
+      "verificationState",
+      "timestamp"
+    ]
+  }
+}
