@@ -26,7 +26,7 @@ Any production-capable adapter must have:
 9. unit and integration tests
 10. dependency audit and clippy-clean CI
 11. threat review for egress, replay, confused-deputy, SSRF, credential exposure, and mainnet-crossing risks
-12. 54-T / ASBE review before promotion
+12. 54-T / BE review before promotion
 
 ## Rust requirements
 
