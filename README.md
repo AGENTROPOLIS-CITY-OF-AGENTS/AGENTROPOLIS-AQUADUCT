@@ -2,7 +2,7 @@
 
 **Cross-chain testnet provisioning infrastructure for AGENTROPOLIS.**
 
-AGENTROPOLIS AQUEDUCT is a public 3D testnet map for wallet discovery, faucet routing, network adapters, policy controls, privacy lanes, HERMES Bot Mode visualization, and verifiable funding receipts.
+AGENTROPOLIS AQUEDUCT combines a public 3D/HERMES visualization layer with a Rust-first trusted control plane for testnet policy, routing, receipts, and future chain execution.
 
 > Prime the Aqueduct.
 
@@ -10,11 +10,93 @@ AGENTROPOLIS AQUEDUCT is a public 3D testnet map for wallet discovery, faucet ro
 
 **Live GitHub Pages:** `https://agentropolis-city-of-agents.github.io/AGENTROPOLIS-AQUADUCT/`
 
-## Current release
+## Trust architecture
 
-The current release is a static GitHub Pages surface adapted from the HERMES CITY Three.js public-shell pattern and the spatial-agent visualization principles used by Hermes3D. It represents supported test networks as **Chainwells** connected to a central AQUEDUCT reservoir, with **VEILWELL** as the dedicated Monero privacy lane and a district-scoped **HERMES Bot Mode** control room.
+AQUEDUCT is finance-adjacent infrastructure. The browser is **not** the trusted execution environment.
 
-The public site is intentionally **read-only**:
+```text
+GitHub Pages / Three.js / HERMES Bot Mode visualization
+                         |
+                 intent + telemetry
+                         v
+                 Rust Gateway Boundary
+                         |
+             deterministic policy core
+                         |
+              capability-scoped adapters
+                         |
+                 signer / wallet provider
+                         |
+              verification + receipts
+```
+
+### Rust owns
+
+- typed financial/testnet intent data
+- integer-only asset-unit representation (`u128`)
+- deterministic policy evaluation
+- rate-limit/cooldown enforcement decisions
+- human-required decisions
+- receipt construction and SHA-256 evidence digests
+- backend API boundary
+- future chain adapters and signer-provider interfaces
+
+### Browser JavaScript owns
+
+- Three.js rendering
+- HERMES Bot Mode visualization
+- public network/faucet metadata
+- user interaction and read-only telemetry
+
+### Browser JavaScript must never own
+
+- seed phrases or private keys
+- signer credentials
+- provider secrets
+- authorization decisions
+- transaction signing
+- autonomous asset execution
+- mainnet authority
+
+## Rust workspace
+
+The production control plane is organized as:
+
+| Crate | Responsibility |
+| --- | --- |
+| `aqueduct-core` | typed domain objects and validation |
+| `aqueduct-policy` | deterministic fail-closed policy evaluation |
+| `aqueduct-receipts` | canonical receipt serialization and SHA-256 evidence digest |
+| `aqueduct-gateway` | narrow HTTP trust boundary for UI/runtime integration |
+
+Workspace policy:
+
+- Rust 2024 edition
+- `unsafe_code = "forbid"`
+- Clippy denies `unwrap`, `expect`, `panic`, `todo`, and `unimplemented`
+- no floating-point representation for requested asset units
+- gateway binds to localhost by default
+- CORS is restricted to the AQUEDUCT Pages origin unless explicitly overridden
+- current gateway reports `execution_enabled: false`
+- mainnet is not representable as an AQUEDUCT execution environment
+
+## CI trust gates
+
+`.github/workflows/rust-trust.yml` runs on Rust changes and requires:
+
+1. `cargo fmt --check`
+2. `cargo clippy --workspace --all-targets --all-features -- -D warnings`
+3. `cargo test --workspace --all-features`
+4. release build
+5. `cargo audit`
+
+Rust is not presented as proof of safety by itself. Production promotion additionally requires review of effective capabilities, dependency risk, chain-adapter behavior, signer boundaries, and execution receipts.
+
+## Current execution status
+
+**The Rust execution adapters are not live yet.** The current Rust gateway provides health and deterministic policy-evaluation endpoints only. This is intentional: chain execution and signer integrations should not be enabled until adapter-specific tests, threat review, and receipt verification are in place.
+
+The public Pages site remains read-only:
 
 - no private keys
 - no mnemonics
@@ -24,55 +106,41 @@ The public site is intentionally **read-only**:
 - no browser-side autonomous faucet calls
 - no CAPTCHA or rate-limit bypassing
 
-Faucet cards link to official network documentation or public faucet resources where available.
-
 ## Naming system
 
 | Component | Role |
 | --- | --- |
 | **AGENTROPOLIS AQUEDUCT** | Cross-chain testnet infrastructure layer |
 | **HERMES Bot Mode** | District-scoped multi-agent orchestration environment |
-| **AQUEDUCT MCP** | Planned chain-neutral capability interface |
-| **AQUEDUCT Agent Kit** | Planned governed execution framework |
+| **AQUEDUCT MCP** | Chain-neutral capability interface |
+| **AQUEDUCT Agent Kit** | Governed chain execution framework |
 | **FLOWKEEPER** | Faucet governor and policy controller |
 | **WALLET ATLAS** | Testnet wallet registry |
 | **CHAINWELLS** | Network faucet/provider adapters |
 | **FLOW ROUTERS** | Chain-family execution adapters |
-| **VEILWELL** | Privacy lane for Monero test infrastructure |
+| **VEILWELL** | Monero privacy lane |
 | **AQUEDUCT RECEIPTS** | Funding and verification evidence |
 
 ## HERMES Bot Mode
 
-AQUEDUCT includes a checked-in district Bot Mode profile at:
+The district profile lives at `config/hermes-botmode.aqueduct.json` and defines district scope, approved capabilities, testnet-only policy, specialized agent roles, required receipts, and the workflow:
 
-`config/hermes-botmode.aqueduct.json`
+```text
+DISCOVER -> MEASURE -> AUTHORIZE -> ROUTE -> EXECUTE -> VERIFY -> RECEIPT
+```
 
-The profile defines:
+The Pages surface renders the profile with `botmode.js` and `botmode.css`. The visualization is not the authority layer; live execution must remain behind the Rust/backend gateway seam.
 
-- district scope and mandate
-- approved capabilities
-- testnet-only policy controls
-- specialized agent roles
-- the `DISCOVER -> MEASURE -> AUTHORIZE -> ROUTE -> EXECUTE -> VERIFY -> RECEIPT` workflow
-- required receipt fields
-- a future gateway seam for live public telemetry
+### Bot Mode team
 
-The current Pages surface renders that profile in a dedicated Three.js control room through `botmode.js` and `botmode.css`.
-
-The visualization is not itself the authority layer. A future live runtime connection must remain behind a governed gateway or same-origin backend seam. Do not put upstream gateway tokens, wallet credentials, or signer material into GitHub Pages source.
-
-### AQUEDUCT Bot Mode team
-
-- **FLOWKEEPER** — governor, thresholds, cooldowns, provider policy, authorization
+- **FLOWKEEPER** — thresholds, cooldowns, provider policy, authorization
 - **WALLET ATLAS** — wallet-family and network registry
 - **ROUTE ENGINE** — adapter and Chainwell routing
-- **CHAIN VERIFIER** — confirmation and post-funding verification
+- **CHAIN VERIFIER** — post-funding verification
 - **RECEIPT SCRIBE** — provenance and audit evidence
 - **VEIL SENTINEL** — XMR Stagenet privacy and remote-node policy
 
 ## Represented testnet lanes
-
-The current visual registry includes:
 
 - Ethereum Sepolia
 - Base Sepolia
@@ -90,93 +158,26 @@ The current visual registry includes:
 - Polkadot Paseo
 - Monero Stagenet via **VEILWELL**
 
-The registry is intentionally adapter-driven. Networks can be added without changing the core visual or governance model.
-
-## Architecture
-
-```text
-HERMES / AGENTROPOLIS
-        |
-        v
-AGENTROPOLIS AQUEDUCT
-        |
-        +-- HERMES BOT MODE (district-scoped)
-        |       +-- FLOWKEEPER
-        |       +-- WALLET ATLAS
-        |       +-- ROUTE ENGINE
-        |       +-- CHAIN VERIFIER
-        |       +-- RECEIPT SCRIBE
-        |       +-- VEIL SENTINEL
-        |
-        +-- AQUEDUCT MCP
-        +-- VEILWELL / XMR privacy lane
-        +-- AQUEDUCT AGENT KIT
-                |
-                +-- EVM adapters
-                +-- Solana adapter
-                +-- XRPL adapter
-                +-- Stellar adapter
-                +-- Move adapters
-                +-- Substrate adapter
-                +-- Monero adapter
-        |
-        v
-54-T / ASBE policy gate
-        |
-        v
-Testnet execution + verification receipts
-```
-
-The current GitHub Pages build implements the public visualization and documentation layer. Live MCP, Agent Kit, and Bot Mode execution remain governed backend components.
-
-## Local preview
-
-No build step is required. Serve the repository root with any static HTTP server.
-
-Example:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then open `http://localhost:8000`.
-
-## GitHub Pages
-
-A Pages deployment workflow is included at `.github/workflows/pages.yml`.
-
-Deployment source:
-
-- repository: `AGENTROPOLIS-CITY-OF-AGENTS/AGENTROPOLIS-AQUADUCT`
-- branch: `main`
-- source: GitHub Actions
-- live URL: `https://agentropolis-city-of-agents.github.io/AGENTROPOLIS-AQUADUCT/`
-
-Pushes to `main` trigger the Pages workflow automatically. It can also be run manually with `workflow_dispatch`.
-
 ## Security boundary
 
-AQUEDUCT must never expose:
+AQUEDUCT must never expose or accept through the public Pages layer:
 
 - private keys or seed phrases
 - production wallet credentials
 - gateway access tokens
 - provider secrets
-- internal capability handles
 - unrestricted transaction permissions
 - autonomous mainnet asset authority
 
-Future faucet execution should occur behind capability-scoped MCP/Agent Kit/Bot Mode interfaces with provider-policy enforcement, rate-limit respect, 54-T/ASBE checks, and auditable receipts.
-
-For VEILWELL, privacy is treated as an end-to-end infrastructure property: remote-node metadata, RPC exposure, logging, wallet isolation, and provider use remain part of the threat model.
+For VEILWELL, remote-node metadata, RPC exposure, logging, wallet isolation, and provider use remain part of the privacy threat model.
 
 ## Attribution
 
-The initial static 3D interaction pattern is adapted from [HERMES CITY](https://github.com/wiredchaos/HERMES-CITY), which remains hosted in the Wired Chaos namespace.
+The initial static 3D interaction pattern is adapted from [HERMES CITY](https://github.com/wiredchaos/HERMES-CITY).
 
-The HERMES Bot Mode spatial visualization also follows architectural principles from [Hermes3D](https://github.com/iamlukethedev/Hermes3D), an MIT-licensed community project that treats the 3D environment as a visualization/interaction layer over a separate agent runtime. AQUEDUCT does not claim affiliation with that project's maintainers.
+The HERMES Bot Mode spatial visualization follows architectural principles from [Hermes3D](https://github.com/iamlukethedev/Hermes3D), an MIT-licensed community project that treats the 3D environment as a visualization layer over a separate agent runtime. AQUEDUCT does not claim affiliation with that project's maintainers.
 
-See `NOTICE.md` for the license and identity boundary.
+See `NOTICE.md` for license and identity boundaries.
 
 ## License
 
