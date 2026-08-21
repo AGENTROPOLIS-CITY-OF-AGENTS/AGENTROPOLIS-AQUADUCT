@@ -2,13 +2,17 @@
 
 **Cross-chain testnet provisioning infrastructure for AGENTROPOLIS.**
 
-AGENTROPOLIS AQUEDUCT is a public 3D testnet map for wallet discovery, faucet routing, network adapters, policy controls, and verifiable funding receipts.
+AGENTROPOLIS AQUEDUCT is a public 3D testnet map for wallet discovery, faucet routing, network adapters, policy controls, privacy lanes, and verifiable funding receipts.
 
 > Prime the Aqueduct.
 
+**Canonical repository:** `AGENTROPOLIS-CITY-OF-AGENTS/AGENTROPOLIS-AQUADUCT`
+
+**Live GitHub Pages:** `https://agentropolis-city-of-agents.github.io/AGENTROPOLIS-AQUADUCT/`
+
 ## Current release
 
-The first release is a static GitHub Pages surface adapted from the HERMES CITY Three.js public-shell pattern. It represents supported test networks as **Chainwells** connected to a central AQUEDUCT reservoir.
+The current release is a static GitHub Pages surface adapted from the HERMES CITY Three.js public-shell pattern. It represents supported test networks as **Chainwells** connected to a central AQUEDUCT reservoir, with **VEILWELL** as the dedicated Monero privacy lane.
 
 The site is intentionally **read-only**:
 
@@ -32,11 +36,12 @@ Faucet cards link to official network documentation or public faucet resources w
 | **WALLET ATLAS** | Testnet wallet registry |
 | **CHAINWELLS** | Network faucet/provider adapters |
 | **FLOW ROUTERS** | Chain-family execution adapters |
+| **VEILWELL** | Privacy lane for Monero test infrastructure |
 | **AQUEDUCT RECEIPTS** | Funding and verification evidence |
 
 ## Represented testnet lanes
 
-The initial visual registry includes:
+The current visual registry includes:
 
 - Ethereum Sepolia
 - Base Sepolia
@@ -52,6 +57,7 @@ The initial visual registry includes:
 - Sui Testnet
 - Aptos Testnet
 - Polkadot Paseo
+- Monero Stagenet via **VEILWELL**
 
 The registry is intentionally adapter-driven. Networks can be added without changing the core visual or governance model.
 
@@ -66,6 +72,7 @@ AGENTROPOLIS AQUEDUCT
         +-- AQUEDUCT MCP
         +-- FLOWKEEPER
         +-- WALLET ATLAS
+        +-- VEILWELL / XMR privacy lane
         +-- AQUEDUCT AGENT KIT
                 |
                 +-- EVM adapters
@@ -74,6 +81,7 @@ AGENTROPOLIS AQUEDUCT
                 +-- Stellar adapter
                 +-- Move adapters
                 +-- Substrate adapter
+                +-- Monero adapter
         |
         v
 54-T / ASBE policy gate
@@ -82,7 +90,7 @@ AGENTROPOLIS AQUEDUCT
 Testnet execution + verification receipts
 ```
 
-The current GitHub Pages build implements only the public visualization and documentation layer. MCP and Agent Kit execution remain future governed components.
+The current GitHub Pages build implements the public visualization and documentation layer. MCP and Agent Kit execution remain future governed components.
 
 ## Local preview
 
@@ -100,17 +108,14 @@ Then open `http://localhost:8000`.
 
 A Pages deployment workflow is included at `.github/workflows/pages.yml`.
 
-For a public launch:
+Deployment source:
 
-1. Set repository visibility to **Public**.
-2. In **Settings → Pages**, select **GitHub Actions** as the source if it is not already enabled.
-3. Push to `main` or manually run the Pages workflow.
+- repository: `AGENTROPOLIS-CITY-OF-AGENTS/AGENTROPOLIS-AQUADUCT`
+- branch: `main`
+- source: GitHub Actions
+- live URL: `https://agentropolis-city-of-agents.github.io/AGENTROPOLIS-AQUADUCT/`
 
-Expected project-site URL after Pages is enabled:
-
-```text
-https://wiredchaos.github.io/AGENTROPOLIS-AQUEDUCT/
-```
+Pushes to `main` trigger the Pages workflow automatically. It can also be run manually with `workflow_dispatch`.
 
 ## Security boundary
 
@@ -125,9 +130,11 @@ AQUEDUCT must never expose:
 
 Future faucet execution should occur behind capability-scoped MCP/Agent Kit interfaces with provider-policy enforcement, rate-limit respect, 54-T/ASBE checks, and auditable receipts.
 
+For VEILWELL, privacy is treated as an end-to-end infrastructure property: remote-node metadata, RPC exposure, logging, wallet isolation, and provider use remain part of the threat model.
+
 ## Attribution
 
-The initial static 3D interaction pattern is adapted from [HERMES CITY](https://github.com/wiredchaos/HERMES-CITY), also maintained by Wired Chaos. See `NOTICE.md` for the license and identity boundary.
+The initial static 3D interaction pattern is adapted from [HERMES CITY](https://github.com/wiredchaos/HERMES-CITY), which remains hosted in the Wired Chaos namespace. See `NOTICE.md` for the license and identity boundary.
 
 ## License
 
