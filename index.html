@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AGENTROPOLIS AQUEDUCT is a 3D cross-chain testnet provisioning grid with governed faucet routing, wallet discovery, privacy lanes, and verifiable receipts.">
+  <meta name="description" content="AGENTROPOLIS AQUEDUCT is a 3D cross-chain testnet provisioning grid with governed HERMES Bot Mode orchestration, faucet routing, wallet discovery, privacy lanes, and verifiable receipts.">
   <meta name="theme-color" content="#05070b">
   <meta property="og:title" content="AGENTROPOLIS AQUEDUCT">
   <meta property="og:description" content="Cross-Chain Testnet Provisioning Infrastructure">
@@ -14,6 +14,7 @@
   <meta name="twitter:description" content="Cross-Chain Testnet Provisioning Infrastructure">
   <title>AGENTROPOLIS AQUEDUCT | Cross-Chain Testnet Grid</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="botmode.css">
 </head>
 <body>
   <canvas id="aqueduct3d" aria-label="3D AGENTROPOLIS AQUEDUCT cross-chain faucet map"></canvas>
@@ -27,6 +28,7 @@
     </a>
     <nav aria-label="Primary navigation">
       <a href="#map">AQUEDUCT</a>
+      <a href="#botmode">BOT MODE</a>
       <a href="#faucets">CHAINWELLS</a>
       <a class="privacy-nav" href="#veilwell">VEILWELL</a>
       <a href="#protocol">FLOWKEEPER</a>
@@ -37,6 +39,7 @@
 
   <div class="status-rail" aria-label="System status">
     <span><i class="dot live"></i> GRID ONLINE</span>
+    <span>HERMES BOT MODE: LAUNCHED</span>
     <span>FLOWKEEPER: ACTIVE</span>
     <span>WALLET ATLAS: READ ONLY</span>
     <span>54-T: READY</span>
@@ -52,11 +55,12 @@
         <h1><span class="agent">AGENTROPOLIS</span><br><span class="aqua">AQUEDUCT</span></h1>
         <p class="hero-kicker">Cross-Chain Testnet Provisioning Infrastructure</p>
         <div class="system-strip" aria-label="Core systems">
-          <span>FLOWKEEPER</span><b>+</b><span>WALLET ATLAS</span><b>+</b><span>AQUEDUCT MCP</span><b>+</b><span>AGENT KIT</span>
+          <span>HERMES BOT MODE</span><b>+</b><span>FLOWKEEPER</span><b>+</b><span>WALLET ATLAS</span><b>+</b><span>AQUEDUCT MCP</span><b>+</b><span>AGENT KIT</span>
         </div>
-        <p class="lede">Route, provision, and verify testnet resources across chain families from one governed public surface. The interface shows the waterworks. Execution authority stays behind AGENTROPOLIS controls.</p>
+        <p class="lede">Route, provision, and verify testnet resources across chain families from one governed public surface. HERMES Bot Mode visualizes the district-scoped agent team while execution authority stays behind AGENTROPOLIS controls.</p>
         <div class="hero-actions">
           <a class="button primary" href="#map">ENTER AQUEDUCT</a>
+          <a class="button ghost" href="#botmode">OPEN BOT MODE</a>
           <a class="button ghost" href="#faucets">INSPECT CHAINWELLS</a>
           <a class="button privacy" href="#veilwell">OPEN PRIVACY LANE</a>
         </div>
@@ -65,6 +69,7 @@
       <aside class="hud-panel authority reveal" aria-label="Aqueduct telemetry">
         <div class="hud-title"><span>FLOWKEEPER TELEMETRY</span><strong>LIVE</strong></div>
         <div class="hud-row"><span>GRID</span><strong>AGENTROPOLIS AQUEDUCT</strong></div>
+        <div class="hud-row"><span>BOT MODE</span><strong>HERMES / DISTRICT</strong></div>
         <div class="hud-row"><span>NETWORK CLASS</span><strong>PUBLIC TESTNETS</strong></div>
         <div class="hud-row"><span>CHAINWELLS</span><strong id="chainCount">--</strong></div>
         <div class="hud-row"><span>PRIVACY LANE</span><strong class="orange">VEILWELL / XMR</strong></div>
@@ -84,6 +89,55 @@
       <div class="map-console reveal">
         <div class="terminal-bar"><span></span><span></span><span></span><b>aqueduct://flowkeeper</b><em>GOVERNED</em></div>
         <pre id="typewriter">boot://agentropolis-aqueduct</pre>
+      </div>
+    </section>
+
+    <section id="botmode" class="botmode-section">
+      <div class="botmode-head reveal">
+        <p class="eyebrow red">HERMES BOT MODE // DISTRICT EXECUTION ENVIRONMENT</p>
+        <h2>See the agent team.<br><span>Keep authority governed.</span></h2>
+        <p class="lede">AQUEDUCT Bot Mode is district-scoped. The 3D control room is driven by the checked-in Bot Mode profile and shows the specialized team, workflow state, and policy boundary. GitHub Pages remains a public visualization surface; live execution requires the governed gateway seam.</p>
+      </div>
+
+      <div class="botmode-stage reveal">
+        <div class="botmode-canvas-shell">
+          <canvas id="botmode3d" aria-label="HERMES Bot Mode 3D multi-agent orchestration visualization"></canvas>
+          <div class="botmode-canvas-hud" aria-hidden="true">
+            <span class="bot-live">HERMES BOT MODE // LAUNCHED</span>
+            <span class="bot-scope">DISTRICT SCOPE // AQUEDUCT</span>
+          </div>
+        </div>
+
+        <aside class="botmode-panel" aria-label="HERMES Bot Mode controls">
+          <div class="botmode-card">
+            <h3>RUNTIME STATE</h3>
+            <div id="botmodeState" class="botmode-state"><span>CONFIG</span><strong>LOADING</strong></div>
+          </div>
+
+          <div class="botmode-card">
+            <h3>AGENT TEAM</h3>
+            <div id="botmodeAgents" class="bot-agents"></div>
+          </div>
+
+          <div class="botmode-card">
+            <h3>WORKFLOW</h3>
+            <div id="botmodeWorkflow" class="bot-workflow"></div>
+          </div>
+
+          <div class="botmode-card">
+            <h3>CONTROL SURFACE</h3>
+            <div class="botmode-actions">
+              <button id="botmodeFocus" class="botmode-button primary" type="button">FOCUS GOVERNOR</button>
+              <button id="botmodeReset" class="botmode-button" type="button">RESET VIEW</button>
+            </div>
+            <p id="botmodeGateway" class="botmode-note"><strong>PUBLIC TELEMETRY / NO EXECUTION</strong></p>
+          </div>
+
+          <div class="botmode-card">
+            <h3>DISTRICT PROFILE</h3>
+            <pre id="botmodeConfig" class="botmode-json">loading config/hermes-botmode.aqueduct.json...</pre>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -145,8 +199,8 @@
       <p class="eyebrow red">PUBLIC BOUNDARY</p>
       <h2>Show the waterworks.<br><span>Protect the keys.</span></h2>
       <div class="boundary-grid">
-        <div><h3>PUBLIC HERE</h3><ul><li>3D chainwell map</li><li>Testnet names and families</li><li>Faucet documentation links</li><li>Adapter and policy states</li><li>Non-sensitive protocol schemas</li></ul></div>
-        <div><h3>NEVER PUBLIC HERE</h3><ul><li>Private keys or mnemonics</li><li>Production wallet secrets</li><li>Provider credentials</li><li>Internal capability handles</li><li>Mainnet autonomous execution authority</li></ul></div>
+        <div><h3>PUBLIC HERE</h3><ul><li>3D chainwell map</li><li>HERMES Bot Mode visualization</li><li>District Bot Mode profile</li><li>Testnet names and families</li><li>Adapter and policy states</li><li>Non-sensitive protocol schemas</li></ul></div>
+        <div><h3>NEVER PUBLIC HERE</h3><ul><li>Private keys or mnemonics</li><li>Gateway tokens</li><li>Production wallet secrets</li><li>Provider credentials</li><li>Internal capability handles</li><li>Mainnet autonomous execution authority</li></ul></div>
       </div>
     </section>
   </main>
@@ -172,12 +226,13 @@
 
   <footer class="footer">
     <div class="footer-rail">
-      <span>GITHUB PAGES</span><b>+</b><span>APACHE-2.0</span><b>+</b><span>TESTNET ONLY</span><b>+</b><span>AGENTROPOLIS</span>
+      <span>HERMES BOT MODE</span><b>+</b><span>GITHUB PAGES</span><b>+</b><span>APACHE-2.0</span><b>+</b><span>TESTNET ONLY</span><b>+</b><span>AGENTROPOLIS</span>
     </div>
     <p>AGENTROPOLIS AQUEDUCT - Cross-chain testnet provisioning infrastructure. Public visualization only.</p>
-    <p class="muted">Visual scaffold adapted from HERMES CITY. Test assets have no intended real-world value. Provider limits and network documentation remain authoritative.</p>
+    <p class="muted">3D interaction architecture follows the HERMES/Hermes3D visualization principle: make agent activity spatially visible while keeping runtime authority in the governed backend.</p>
   </footer>
 
   <script type="module" src="app.js"></script>
+  <script type="module" src="botmode.js"></script>
 </body>
 </html>
