@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AGENTROPOLIS AQUEDUCT is the governed testnet utility network inside HERMES3D Agent City, with Chainwell service stations, wallet discovery, privacy lanes, and verifiable receipts.">
+  <meta name="description" content="AGENTROPOLIS AQUEDUCT is the governed testnet utility network inside HERMES3D Agent City, with Chainwell service stations, HERMES Bot Mode, privacy lanes, and verifiable receipts.">
   <meta name="theme-color" content="#05070b">
   <meta property="og:title" content="AGENTROPOLIS AQUEDUCT">
   <meta property="og:description" content="Agent City Testnet Utility Infrastructure">
@@ -15,11 +15,10 @@
   <title>AGENTROPOLIS AQUEDUCT | Agent City Utility Grid</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="botmode.css">
+  <link rel="stylesheet" href="ui-2027.css">
 </head>
 <body>
   <canvas id="aqueduct3d" aria-label="HERMES3D AGENTROPOLIS city with AQUEDUCT Chainwell utility stations"></canvas>
-  <div class="grid-bg" aria-hidden="true"></div>
-  <div class="scanline" aria-hidden="true"></div>
 
   <header class="nav">
     <a class="brand" href="#top" aria-label="AGENTROPOLIS AQUEDUCT home">
@@ -32,111 +31,108 @@
       <a href="#faucets">CHAINWELLS</a>
       <a class="privacy-nav" href="#veilwell">VEILWELL</a>
       <a href="#protocol">FLOWKEEPER</a>
-      <a href="#protocol">MCP</a>
       <a href="https://github.com/AGENTROPOLIS-CITY-OF-AGENTS/AGENTROPOLIS-AQUADUCT" target="_blank" rel="noreferrer">GITHUB</a>
     </nav>
   </header>
 
   <div class="status-rail" aria-label="System status">
     <span><i class="dot live"></i> AGENT CITY ONLINE</span>
-    <span>HERMES BOT MODE: LAUNCHED</span>
-    <span>AQUEDUCT UTILITY: ACTIVE</span>
-    <span>WALLET ATLAS: READ ONLY</span>
+    <span>BOT MODE: LAUNCHED</span>
+    <span>AQUEDUCT: ACTIVE</span>
     <span>54-T / BE: READY</span>
     <span>TESTNET ONLY</span>
   </div>
 
   <main id="top">
-    <section class="hero section">
+    <section class="hero section" aria-labelledby="heroTitle">
       <div class="hero-backplate" aria-hidden="true"></div>
       <div class="hero-overlay" aria-hidden="true"></div>
+
       <div class="hero-copy reveal">
-        <p class="eyebrow red">HERMES3D AGENT CITY // UTILITY INFRASTRUCTURE // TESTNET ONLY</p>
-        <h1><span class="agent">AGENTROPOLIS</span><br><span class="aqua">AQUEDUCT</span></h1>
-        <p class="hero-kicker">Testnet Utility Infrastructure for Agent City</p>
+        <p class="eyebrow">HERMES3D / AGENT CITY UTILITY</p>
+        <h1 id="heroTitle"><span class="agent">Agentropolis</span><br><span class="aqua">Aqueduct</span></h1>
+        <p class="hero-kicker">Testnet infrastructure agents can actually use.</p>
         <div class="system-strip" aria-label="Core systems">
-          <span>HERMES3D</span><b>+</b><span>HERMES BOT MODE</span><b>+</b><span>FLOWKEEPER</span><b>+</b><span>WALLET ATLAS</span><b>+</b><span>AQUEDUCT MCP</span><b>+</b><span>AGENT KIT</span>
+          <span>HERMES3D</span><span>BOT MODE</span><span>FLOWKEEPER</span><span>WALLET ATLAS</span><span>AQUEDUCT MCP</span><span>RUST CORE</span>
         </div>
-        <p class="lede">HERMES3D is the city. AQUEDUCT is one of its governed utilities. Agents move through AGENTROPOLIS and use Chainwell service stations to obtain, verify, and replenish testnet resources without exposing keys or moving execution authority into the browser.</p>
+        <p class="lede">The city is the interface. AQUEDUCT is the utility network beneath it. Agents travel through AGENTROPOLIS and pull into Chainwell service stations when they need governed testnet resources.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#map">ENTER AGENT CITY</a>
-          <a class="button ghost" href="#botmode">OPEN BOT MODE</a>
-          <a class="button ghost" href="#faucets">VIEW UTILITY STATIONS</a>
-          <a class="button privacy" href="#veilwell">OPEN PRIVACY UTILITY</a>
+          <a class="button primary" href="#map">Explore Agent City</a>
+          <a class="button ghost" href="#botmode">Open Bot Mode</a>
+          <a class="button ghost" href="#faucets">Find Chainwells</a>
+          <a class="button privacy" href="#veilwell">Veilwell / XMR</a>
         </div>
       </div>
 
-      <aside class="hud-panel authority reveal" aria-label="Aqueduct telemetry">
-        <div class="hud-title"><span>AGENT CITY UTILITY TELEMETRY</span><strong>LIVE</strong></div>
+      <aside class="hud-panel authority reveal" aria-label="Live utility state">
+        <div class="hud-title"><span>LIVE CITY STATE</span><strong>ONLINE</strong></div>
         <div class="hud-row"><span>CITY</span><strong>AGENTROPOLIS</strong></div>
-        <div class="hud-row"><span>VISUALIZATION</span><strong>HERMES3D</strong></div>
+        <div class="hud-row"><span>SPATIAL LAYER</span><strong>HERMES3D</strong></div>
         <div class="hud-row"><span>UTILITY</span><strong>AQUEDUCT</strong></div>
-        <div class="hud-row"><span>BOT MODE</span><strong>HERMES / DISTRICT</strong></div>
-        <div class="hud-row"><span>CHAINWELL STATIONS</span><strong id="chainCount">--</strong></div>
-        <div class="hud-row"><span>PRIVACY UTILITY</span><strong class="orange">VEILWELL / XMR</strong></div>
-        <div class="hud-row"><span>EXECUTION</span><strong>VISUAL / READ ONLY</strong></div>
-        <div class="hud-row"><span>GOVERNOR</span><strong>FLOWKEEPER</strong></div>
-        <div class="hud-row"><span>REGISTRY</span><strong>WALLET ATLAS</strong></div>
-        <div class="hud-row"><span>EVALUATION</span><strong>54-T / BE READY</strong></div>
+        <div class="hud-row"><span>BOT MODE</span><strong>DISTRICT</strong></div>
+        <div class="hud-row"><span>CHAINWELLS</span><strong id="chainCount">--</strong></div>
+        <div class="hud-row"><span>PRIVACY</span><strong class="orange">VEILWELL</strong></div>
+        <div class="hud-row"><span>AUTHORITY</span><strong>RUST</strong></div>
+        <div class="hud-row"><span>EVALUATION</span><strong>54-T / BE</strong></div>
       </aside>
     </section>
 
     <section id="map" class="section map-section">
       <div class="section-head reveal">
-        <p class="eyebrow red">HERMES3D // AGENT CITY</p>
-        <h2>The city is the interface.<br><span>AQUEDUCT is the utility.</span></h2>
-        <p>Districts, roads, agents, and utility stations share one spatial model. Chainwells behave like governed service stations: an agent routes to a station, receives approved testnet resources, verifies delivery, and leaves with a receipt.</p>
+        <p class="eyebrow">HERMES3D / LIVE CITY</p>
+        <h2>Infrastructure becomes <span>place.</span></h2>
+        <p>Districts, moving agents, roads, utility corridors, and service points occupy one spatial model. Chainwells are not decorative faucets. They are places an agent routes to for a bounded service.</p>
       </div>
       <div class="map-console reveal">
-        <div class="terminal-bar"><span></span><span></span><span></span><b>hermes3d://agent-city/aqueduct</b><em>UTILITY ONLINE</em></div>
+        <div class="terminal-bar"><span></span><span></span><span></span><b>hermes3d://city/aqueduct</b><em>UTILITY ONLINE</em></div>
         <pre id="typewriter">boot://hermes3d-agent-city</pre>
       </div>
     </section>
 
     <section id="botmode" class="botmode-section">
       <div class="botmode-head reveal">
-        <p class="eyebrow red">HERMES BOT MODE // AQUEDUCT UTILITY TEAM</p>
-        <h2>Agents run the utility.<br><span>The city makes it visible.</span></h2>
-        <p class="lede">AQUEDUCT Bot Mode is district-scoped. HERMES3D visualizes the specialized utility team, its workflow state, and the policy boundary while the authoritative execution path remains behind the governed Rust gateway.</p>
+        <p class="eyebrow">HERMES BOT MODE</p>
+        <h2>The utility has its own <span>agent team.</span></h2>
+        <p class="lede">HERMES Bot Mode is embedded as a spatial operating layer. The city shows the team and workflow; Rust retains policy and execution authority.</p>
       </div>
 
       <div class="botmode-stage reveal">
         <div class="botmode-canvas-shell">
-          <canvas id="botmode3d" aria-label="HERMES Bot Mode 3D multi-agent orchestration visualization"></canvas>
+          <canvas id="botmode3d" aria-label="HERMES Bot Mode spatial multi-agent visualization"></canvas>
           <div class="botmode-canvas-hud" aria-hidden="true">
-            <span class="bot-live">HERMES BOT MODE // LAUNCHED</span>
-            <span class="bot-scope">UTILITY SCOPE // AQUEDUCT</span>
+            <span class="bot-live">BOT MODE / LIVE</span>
+            <span class="bot-scope">UTILITY / AQUEDUCT</span>
           </div>
         </div>
 
         <aside class="botmode-panel" aria-label="HERMES Bot Mode controls">
-          <div class="botmode-card"><h3>RUNTIME STATE</h3><div id="botmodeState" class="botmode-state"><span>CONFIG</span><strong>LOADING</strong></div></div>
-          <div class="botmode-card"><h3>AGENT TEAM</h3><div id="botmodeAgents" class="bot-agents"></div></div>
-          <div class="botmode-card"><h3>WORKFLOW</h3><div id="botmodeWorkflow" class="bot-workflow"></div></div>
+          <div class="botmode-card"><h3>Runtime</h3><div id="botmodeState" class="botmode-state"><span>CONFIG</span><strong>LOADING</strong></div></div>
+          <div class="botmode-card"><h3>Agent Team</h3><div id="botmodeAgents" class="bot-agents"></div></div>
+          <div class="botmode-card"><h3>Workflow</h3><div id="botmodeWorkflow" class="bot-workflow"></div></div>
           <div class="botmode-card">
-            <h3>CONTROL SURFACE</h3>
+            <h3>View</h3>
             <div class="botmode-actions">
-              <button id="botmodeFocus" class="botmode-button primary" type="button">FOCUS GOVERNOR</button>
-              <button id="botmodeReset" class="botmode-button" type="button">RESET VIEW</button>
+              <button id="botmodeFocus" class="botmode-button primary" type="button">Focus Governor</button>
+              <button id="botmodeReset" class="botmode-button" type="button">Reset</button>
             </div>
             <p id="botmodeGateway" class="botmode-note"><strong>PUBLIC TELEMETRY / NO EXECUTION</strong></p>
           </div>
-          <div class="botmode-card"><h3>UTILITY PROFILE</h3><pre id="botmodeConfig" class="botmode-json">loading config/hermes-botmode.aqueduct.json...</pre></div>
+          <div class="botmode-card"><h3>Utility Profile</h3><pre id="botmodeConfig" class="botmode-json">loading configuration...</pre></div>
         </aside>
       </div>
     </section>
 
     <section id="faucets" class="section faucet-section">
       <div class="section-head reveal">
-        <p class="eyebrow red">CHAINWELL UTILITY REGISTRY</p>
-        <h2>Service stations for agent resources.</h2>
-        <p>Each Chainwell is a governed city service point mapped to an upstream testnet provider or protocol. Provider rules remain authoritative; AQUEDUCT does not bypass account controls, human verification, cooldowns, or rate limits.</p>
+        <p class="eyebrow">CHAINWELL NETWORK</p>
+        <h2>Pull in. <span>Provision. Continue.</span></h2>
+        <p>Each Chainwell maps a city service station to an approved testnet source and chain adapter. Think charging infrastructure for agents, with policy and receipts built in.</p>
       </div>
-      <div class="filter-rail reveal" role="group" aria-label="Filter chainwell stations">
-        <button class="filter active" data-filter="all" type="button">ALL STATIONS</button>
+      <div class="filter-rail reveal" role="group" aria-label="Filter Chainwell stations">
+        <button class="filter active" data-filter="all" type="button">All</button>
         <button class="filter" data-filter="evm" type="button">EVM</button>
-        <button class="filter" data-filter="non-evm" type="button">NON-EVM</button>
-        <button class="filter privacy-filter" data-filter="privacy" type="button">PRIVACY</button>
+        <button class="filter" data-filter="non-evm" type="button">Non-EVM</button>
+        <button class="filter privacy-filter" data-filter="privacy" type="button">Privacy</button>
       </div>
       <div id="faucetGrid" class="cards" aria-live="polite"></div>
     </section>
@@ -144,13 +140,13 @@
     <section id="veilwell" class="section veilwell-section">
       <div class="veilwell-shell reveal">
         <div class="veilwell-copy">
-          <p class="eyebrow orange">AGENT CITY // AQUEDUCT PRIVACY UTILITY</p>
+          <p class="eyebrow orange">PRIVACY UTILITY</p>
           <h2>VEILWELL <span>XMR</span></h2>
-          <p class="lede">VEILWELL is the privacy-sensitive service station inside the AQUEDUCT utility network. Monero Stagenet is the primary development lane; remote-node metadata, wallet-RPC isolation, and provider choice remain part of the threat model.</p>
+          <p class="lede">The privacy-sensitive service point inside AQUEDUCT. Monero Stagenet is the primary development lane; node choice, RPC isolation, and metadata exposure stay inside the threat model.</p>
           <div class="privacy-rules">
             <span>STAGENET PRIMARY</span>
-            <span>SELF-HOSTED NODE PREFERRED</span>
-            <span>REMOTE METADATA IS PART OF THE THREAT MODEL</span>
+            <span>SELF-HOSTED PREFERRED</span>
+            <span>RPC ISOLATED</span>
             <span>MAINNET LOCKED</span>
           </div>
         </div>
@@ -159,7 +155,7 @@
           <div><span>ASSET</span><strong>sXMR</strong></div>
           <div><span>SERVICE POINT</span><strong>VEILWELL</strong></div>
           <div><span>ADAPTER</span><strong>MoneroAdapter</strong></div>
-          <div><span>NODE POLICY</span><strong>SELF-HOSTED PREFERRED</strong></div>
+          <div><span>NODE POLICY</span><strong>SELF-HOSTED</strong></div>
           <div><span>MAINNET</span><strong>DENY</strong></div>
         </div>
       </div>
@@ -167,57 +163,55 @@
 
     <section id="protocol" class="section protocol-section">
       <div class="section-head reveal">
-        <p class="eyebrow red">AQUEDUCT UTILITY PROTOCOL</p>
-        <h2>Agent service path.</h2>
+        <p class="eyebrow">AQUEDUCT PROTOCOL</p>
+        <h2>A service path with <span>receipts.</span></h2>
       </div>
       <div class="protocol-grid">
-        <article class="protocol-card reveal"><span>01</span><h3>DISCOVER</h3><p>Resolve the agent wallet, requested chain family, target test network, and nearest approved Chainwell capability.</p></article>
-        <article class="protocol-card reveal"><span>02</span><h3>MEASURE</h3><p>Read testnet balance and compare against bounded target, minimum threshold, cooldown, and provider policy.</p></article>
-        <article class="protocol-card reveal"><span>03</span><h3>AUTHORIZE</h3><p>FLOWKEEPER requests scoped authority through the Rust trust boundary. Raw seeds and private keys never enter model context.</p></article>
-        <article class="protocol-card reveal"><span>04</span><h3>SERVICE</h3><p>AQUEDUCT MCP routes the request to the correct Chainwell and chain adapter without giving the browser execution authority.</p></article>
-        <article class="protocol-card reveal"><span>05</span><h3>VERIFY</h3><p>Confirm the test asset arrived and correlate provider, transaction, wallet-registry, and policy evidence.</p></article>
-        <article class="protocol-card reveal"><span>06</span><h3>RECEIPT</h3><p>Emit durable evidence with network, wallet ID, source, amount, timestamp, BE decision, and verification state.</p></article>
+        <article class="protocol-card reveal"><span>01</span><h3>Discover</h3><p>Resolve wallet, network, service need, and approved Chainwell capability.</p></article>
+        <article class="protocol-card reveal"><span>02</span><h3>Measure</h3><p>Read current testnet balance and bounded target state.</p></article>
+        <article class="protocol-card reveal"><span>03</span><h3>Authorize</h3><p>FLOWKEEPER crosses the Rust trust boundary and evaluates the request.</p></article>
+        <article class="protocol-card reveal"><span>04</span><h3>Service</h3><p>AQUEDUCT MCP routes to the correct Chainwell and adapter.</p></article>
+        <article class="protocol-card reveal"><span>05</span><h3>Verify</h3><p>Confirm delivery and correlate provider, chain, wallet, and policy evidence.</p></article>
+        <article class="protocol-card reveal"><span>06</span><h3>Receipt</h3><p>Emit durable evidence including BE decision and verification state.</p></article>
       </div>
     </section>
 
     <section class="section boundary reveal">
-      <p class="eyebrow red">PUBLIC CITY BOUNDARY</p>
-      <h2>Show the city.<br><span>Protect authority.</span></h2>
+      <p class="eyebrow">TRUST BOUNDARY</p>
+      <h2>Spatial on the surface. <span>Deterministic underneath.</span></h2>
       <div class="boundary-grid">
-        <div><h3>PUBLIC HERE</h3><ul><li>HERMES3D Agent City</li><li>Districts and utility corridors</li><li>Moving agent visualization</li><li>Chainwell service stations</li><li>HERMES Bot Mode visualization</li><li>Non-sensitive network and policy state</li></ul></div>
-        <div><h3>NEVER PUBLIC HERE</h3><ul><li>Private keys or mnemonics</li><li>Gateway tokens</li><li>Production wallet secrets</li><li>Provider credentials</li><li>Internal capability handles</li><li>Mainnet autonomous execution authority</li></ul></div>
+        <div><h3>Public</h3><ul><li>HERMES3D Agent City</li><li>Districts and utility corridors</li><li>Moving agents</li><li>Chainwell stations</li><li>Bot Mode telemetry</li><li>Non-sensitive state</li></ul></div>
+        <div><h3>Protected</h3><ul><li>Private keys and mnemonics</li><li>Gateway tokens</li><li>Signer credentials</li><li>Provider credentials</li><li>Capability handles</li><li>Mainnet authority</li></ul></div>
       </div>
     </section>
   </main>
 
-  <aside id="detailPanel" class="detail-panel" aria-live="polite" aria-label="Selected Chainwell utility station detail">
-    <button id="closeDetail" class="detail-close" type="button" aria-label="Close detail">X</button>
-    <p class="eyebrow red">SELECTED UTILITY STATION</p>
+  <aside id="detailPanel" class="detail-panel" aria-live="polite" aria-label="Selected Chainwell station">
+    <button id="closeDetail" class="detail-close" type="button" aria-label="Close detail">×</button>
+    <p class="eyebrow">CHAINWELL</p>
     <div id="detailMark" class="detail-mark">AQ</div>
-    <h2 id="detailName">AQUEDUCT UTILITY</h2>
-    <p id="detailNetwork" class="detail-network">Choose a Chainwell station in Agent City.</p>
+    <h2 id="detailName">Utility Station</h2>
+    <p id="detailNetwork" class="detail-network">Choose a station in Agent City.</p>
     <dl>
       <div><dt>ASSET</dt><dd id="detailAsset">--</dd></div>
       <div><dt>FAMILY</dt><dd id="detailFamily">--</dd></div>
-      <div><dt>SERVICE MODE</dt><dd id="detailMode">--</dd></div>
+      <div><dt>SERVICE</dt><dd id="detailMode">--</dd></div>
       <div><dt>ADAPTER</dt><dd id="detailAdapter">--</dd></div>
     </dl>
-    <p id="detailNote" class="detail-note">The public city visualization does not request or sign asset transfers.</p>
+    <p id="detailNote" class="detail-note">The public city layer never signs or holds assets.</p>
     <div class="detail-actions">
-      <a id="detailFaucet" class="button primary" href="#faucets">UPSTREAM SOURCE</a>
-      <a id="detailDocs" class="button ghost" href="#protocol">NETWORK DOCS</a>
+      <a id="detailFaucet" class="button primary" href="#faucets">Upstream Source</a>
+      <a id="detailDocs" class="button ghost" href="#protocol">Network Docs</a>
     </div>
   </aside>
 
   <footer class="footer">
-    <div class="footer-rail">
-      <span>HERMES3D AGENT CITY</span><b>+</b><span>AQUEDUCT UTILITY</span><b>+</b><span>HERMES BOT MODE</span><b>+</b><span>RUST TRUST PLANE</span><b>+</b><span>TESTNET ONLY</span>
-    </div>
+    <div class="footer-rail"><span>HERMES3D</span><b>+</b><span>AQUEDUCT</span><b>+</b><span>BOT MODE</span><b>+</b><span>RUST</span><b>+</b><span>BE</span></div>
     <p>AGENTROPOLIS AQUEDUCT — governed testnet utility infrastructure inside HERMES3D Agent City.</p>
-    <p class="muted">The city makes agents, districts, and utilities spatially visible. Runtime authority remains in the governed backend.</p>
   </footer>
 
   <script type="module" src="app.js"></script>
   <script type="module" src="botmode.js"></script>
+  <script type="module" src="ui-2027.js"></script>
 </body>
 </html>
