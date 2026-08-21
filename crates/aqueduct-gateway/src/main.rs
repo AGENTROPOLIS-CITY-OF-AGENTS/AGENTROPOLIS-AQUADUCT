@@ -9,15 +9,17 @@ use axum::{
 use serde::{Deserialize, Serialize};
 use std::{env, net::SocketAddr, sync::Arc};
 use tokio::net::TcpListener;
-use tower_http::{
-    cors::CorsLayer,
-    trace::TraceLayer,
-};
+use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use tracing::info;
+
+const POLICY_VERSION: &str = "aqueduct-policy-v1";
+const EXECUTION_ENABLED: bool = false;
+const MAINNET_ALLOWED: bool = false;
 
 #[derive(Clone)]
 struct AppState {
     service_name: &'static str,
+    version: &'static str,
 }
 
 #[derive(Debug, Deserialize)]
@@ -29,23 +31,31 @@ struct EvaluateRequest {
 #[derive(Debug, Serialize)]
 struct EvaluateResponse {
     service: &'static str,
+    version: &'static str,
+    policy_version: &'static str,
     decision: aqueduct_core::Decision,
 }
 
 #[derive(Debug, Serialize)]
 struct HealthResponse {
     service: &'static str,
+    version: &'static str,
+    policy_version: &'static str,
     status: &'static str,
     execution_enabled: bool,
     mainnet_allowed: bool,
+    trust_boundary: &'static str,
 }
 
 async fn health(State(state): State<Arc<AppState>>) -> Json<HealthResponse> {
     Json(HealthResponse {
         service: state.service_name,
+        version: state.version,
+        policy_version: POLICY_VERSION,
         status: "ok",
-        execution_enabled: false,
-        mainnet_allowed: false,
+        execution_enabled: EXECUTION_ENABLED,
+        mainnet_allowed: MAINNET_ALLOWED,
+        trust_boundary: "rust-control-plane",
     })
 }
 
@@ -56,14 +66,15 @@ async fn evaluate_intent(
     request.intent.validate().map_err(|_| StatusCode::BAD_REQUEST)?;
     Ok(Json(EvaluateResponse {
         service: state.service_name,
+        version: state.version,
+        policy_version: POLICY_VERSION,
         decision: evaluate(&request.intent, &request.context),
     }))
 }
 
 fn allowed_origin() -> Result<HeaderValue, Box<dyn std::error::Error>> {
-    let origin = env::var("AQUEDUCT_ALLOWED_ORIGIN").unwrap_or_else(|_| {
-        "https://agentropolis-city-of-agents.github.io".to_string()
-    });
+    let origin = env::var("AQUEDUCT_ALLOWED_ORIGIN")
+        .unwrap_or_else(|_| "https://agentropolis-city-of-agents.github.io".to_string());
     Ok(HeaderValue::from_str(&origin)?)
 }
 
@@ -73,7 +84,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
         .init();
 
-    let state = Arc::new(AppState { service_name: "aqueduct-gateway" });
+    let state = Arc::new(AppState {
+        service_name: "aqueduct-gateway",
+        version: env!("CARGO_PKG_VERSION"),
+    });
     let cors = CorsLayer::new()
         .allow_origin(allowed_origin()?)
         .allow_methods([Method::GET, Method::POST])
