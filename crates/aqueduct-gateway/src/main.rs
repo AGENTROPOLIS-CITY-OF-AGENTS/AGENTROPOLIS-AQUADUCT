@@ -1,10 +1,18 @@
 use aqueduct_core::{FaucetIntent, PolicyContext};
 use aqueduct_policy::evaluate;
-use axum::{extract::State, http::StatusCode, routing::{get, post}, Json, Router};
+use axum::{
+    extract::State,
+    http::{HeaderValue, Method, StatusCode},
+    routing::{get, post},
+    Json, Router,
+};
 use serde::{Deserialize, Serialize};
-use std::{net::SocketAddr, sync::Arc};
+use std::{env, net::SocketAddr, sync::Arc};
 use tokio::net::TcpListener;
-use tower_http::{cors::{Any, CorsLayer}, trace::TraceLayer};
+use tower_http::{
+    cors::CorsLayer,
+    trace::TraceLayer,
+};
 use tracing::info;
 
 #[derive(Clone)]
@@ -52,6 +60,13 @@ async fn evaluate_intent(
     }))
 }
 
+fn allowed_origin() -> Result<HeaderValue, Box<dyn std::error::Error>> {
+    let origin = env::var("AQUEDUCT_ALLOWED_ORIGIN").unwrap_or_else(|_| {
+        "https://agentropolis-city-of-agents.github.io".to_string()
+    });
+    Ok(HeaderValue::from_str(&origin)?)
+}
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing_subscriber::fmt()
@@ -59,7 +74,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .init();
 
     let state = Arc::new(AppState { service_name: "aqueduct-gateway" });
-    let cors = CorsLayer::new().allow_origin(Any).allow_methods(Any).allow_headers(Any);
+    let cors = CorsLayer::new()
+        .allow_origin(allowed_origin()?)
+        .allow_methods([Method::GET, Method::POST])
+        .allow_headers([axum::http::header::CONTENT_TYPE]);
+
     let app = Router::new()
         .route("/health", get(health))
         .route("/v1/policy/evaluate", post(evaluate_intent))
