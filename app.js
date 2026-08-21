@@ -27,7 +27,7 @@ const bootLines = [
   "registry: WALLET ATLAS",
   "interface: AQUEDUCT MCP [planned]",
   "execution: AQUEDUCT AGENT KIT [planned]",
-  "policy: 54-T / ASBE gate",
+  "policy: 54-T / BE gate",
   "boundary: testnet only / no secrets",
   "ready: waterworks online"
 ];
