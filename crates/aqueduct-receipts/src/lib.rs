@@ -64,7 +64,7 @@ mod tests {
     use aqueduct_core::Environment;
 
     #[test]
-    fn receipt_digest_is_deterministic() {
+    fn receipt_digest_is_deterministic() -> Result<(), Box<dyn std::error::Error>> {
         let intent = FaucetIntent {
             wallet_id: "aq-test-1".into(),
             network: "solana-devnet".into(),
@@ -72,8 +72,23 @@ mod tests {
             requested_units: 1,
             environment: Environment::Testnet,
         };
-        let a = Receipt::new(intent.clone(), Decision::Allow, "provider".into(), None, "verified".into(), 1).unwrap();
-        let b = Receipt::new(intent, Decision::Allow, "provider".into(), None, "verified".into(), 1).unwrap();
+        let a = Receipt::new(
+            intent.clone(),
+            Decision::Allow,
+            "provider".into(),
+            None,
+            "verified".into(),
+            1,
+        )?;
+        let b = Receipt::new(
+            intent,
+            Decision::Allow,
+            "provider".into(),
+            None,
+            "verified".into(),
+            1,
+        )?;
         assert_eq!(a.digest_sha256, b.digest_sha256);
+        Ok(())
     }
 }
