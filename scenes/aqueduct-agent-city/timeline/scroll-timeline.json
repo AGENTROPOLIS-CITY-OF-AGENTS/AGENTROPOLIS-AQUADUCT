@@ -1,0 +1,58 @@
+{
+  "version": "agentropolis.scroll.v1",
+  "scene": "aqueduct-agent-city",
+  "cameraPath": "../camera/camera-path.json",
+  "beats": [
+    {
+      "id": "city-arrival",
+      "start": 0.00,
+      "end": 0.18,
+      "bindings": [
+        { "target": "camera.path", "from": 0.00, "to": 0.18, "ease": "none" },
+        { "target": "ui.hero.opacity", "from": 1.0, "to": 0.15, "ease": "power1.out" },
+        { "target": "agent.city.state", "value": "arriving" }
+      ]
+    },
+    {
+      "id": "utility-grid-reveal",
+      "start": 0.18,
+      "end": 0.42,
+      "bindings": [
+        { "target": "camera.path", "from": 0.18, "to": 0.42, "ease": "power1.inOut" },
+        { "target": "light.utility.intensity", "from": 0.55, "to": 1.0, "ease": "power1.out" },
+        { "target": "district.utility-grid.state", "value": "focused" }
+      ]
+    },
+    {
+      "id": "chainwell-service",
+      "start": 0.42,
+      "end": 0.66,
+      "bindings": [
+        { "target": "camera.path", "from": 0.42, "to": 0.66, "ease": "none" },
+        { "target": "agent.city.state", "value": "servicing" },
+        { "target": "ui.chainwells.opacity", "from": 0.25, "to": 1.0, "ease": "power1.out" }
+      ]
+    },
+    {
+      "id": "botmode-operations",
+      "start": 0.66,
+      "end": 0.84,
+      "bindings": [
+        { "target": "camera.path", "from": 0.66, "to": 0.84, "ease": "power1.inOut" },
+        { "target": "agent.hermes.state", "value": "orchestrating" },
+        { "target": "ui.botmode.opacity", "from": 0.25, "to": 1.0, "ease": "power1.out" }
+      ]
+    },
+    {
+      "id": "verify-and-receipt",
+      "start": 0.84,
+      "end": 1.00,
+      "bindings": [
+        { "target": "camera.path", "from": 0.84, "to": 1.00, "ease": "power1.out" },
+        { "target": "agent.verifier.state", "value": "verifying" },
+        { "target": "agent.receipt-scribe.state", "value": "receipting" },
+        { "target": "district.utility-grid.state", "value": "complete" }
+      ]
+    }
+  ]
+}
