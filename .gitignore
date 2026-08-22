@@ -1,0 +1,19 @@
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+
+# 21st.dev local auth/cache
+.21st/
+
+# Client-local MCP config
+.mcp.local.json
+
+# Node tooling
+node_modules/
+dist/
+.vite/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
