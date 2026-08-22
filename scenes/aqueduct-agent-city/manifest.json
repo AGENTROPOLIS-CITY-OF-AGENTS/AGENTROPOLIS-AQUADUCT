@@ -1,0 +1,34 @@
+{
+  "schema": "agentropolis.spatial-scene.v1",
+  "id": "aqueduct-agent-city",
+  "district": "utility-grid",
+  "sourceClass": "D",
+  "experienceTier": 2,
+  "assets": {
+    "panorama": null,
+    "panoramaScrub": null,
+    "poster": null,
+    "depth": null,
+    "glb": null,
+    "splat": null
+  },
+  "procedural": {
+    "engine": "threejs",
+    "seed": 8261975,
+    "scene": "hermes3d-agent-city-aqueduct"
+  },
+  "camera": "camera/camera-path.json",
+  "timeline": "timeline/scroll-timeline.json",
+  "fallback": {
+    "reducedMotion": "static-viewpoints",
+    "noWebGL": "html"
+  },
+  "delivery": {
+    "scrubMedia": null,
+    "randomAccess": "not-applicable"
+  },
+  "verification": {
+    "evaluator": "BE",
+    "receiptSchema": "agentropolis.be.scene-receipt.v1"
+  }
+}
