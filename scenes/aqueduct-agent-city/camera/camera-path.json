@@ -1,0 +1,12 @@
+{
+  "version": "agentropolis.camera-path.v1",
+  "interpolation": "catmull-rom",
+  "keyframes": [
+    { "t": 0.00, "position": [24, 20, 30], "target": [0, 2.2, 0], "fov": 50 },
+    { "t": 0.18, "position": [16, 13, 19], "target": [4, 2.4, -3], "fov": 46 },
+    { "t": 0.42, "position": [10, 8, 9], "target": [7.8, 2.2, -6.4], "fov": 42 },
+    { "t": 0.66, "position": [2, 5.5, 7], "target": [0, 2.3, 0], "fov": 40 },
+    { "t": 0.84, "position": [-8, 6.8, 10], "target": [-2, 1.8, 4], "fov": 39 },
+    { "t": 1.00, "position": [0, 8.5, -8], "target": [0, 2.0, -13], "fov": 38 }
+  ]
+}
