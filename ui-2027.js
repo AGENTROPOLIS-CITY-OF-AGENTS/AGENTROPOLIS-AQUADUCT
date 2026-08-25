@@ -1,3 +1,5 @@
+import "./spatial-runtime.js";
+
 const cssHref = new URL("./ui-2027.css", import.meta.url).href;
 if (![...document.styleSheets].some((sheet) => sheet.href === cssHref)) {
   const link = document.createElement("link");
@@ -162,6 +164,29 @@ function setupHeroParallax() {
   });
 }
 
+function showSceneFallback(reason = "3D renderer unavailable") {
+  if (document.querySelector("[data-scene-fallback]")) return;
+  document.documentElement.dataset.sceneError = "true";
+  const notice = document.createElement("div");
+  notice.dataset.sceneFallback = "true";
+  notice.setAttribute("role", "status");
+  notice.style.cssText = "position:fixed;left:50%;top:50%;z-index:12;transform:translate(-50%,-50%);max-width:520px;padding:18px 20px;border:1px solid rgba(140,248,255,.18);border-radius:22px;background:rgba(6,9,14,.86);backdrop-filter:blur(24px);box-shadow:0 24px 80px rgba(0,0,0,.42);color:#eef7fb;font:600 14px/1.5 Inter,system-ui,sans-serif;text-align:center;pointer-events:none";
+  notice.innerHTML = `<strong style="display:block;margin-bottom:6px">AGENT CITY HTML FALLBACK</strong><span style="color:#a9b8c4">${reason}. The AQUEDUCT controls, Chainwell registry, protocol, and safety boundary remain available below.</span>`;
+  document.body.appendChild(notice);
+}
+
+function setupSceneWatchdog() {
+  const canvas = document.querySelector("#aqueduct3d");
+  if (!canvas) return;
+  addEventListener("error", (event) => {
+    const source = String(event.filename || event.target?.src || "");
+    if (source.includes("three") || source.includes("app.js") || source.includes("scroll-scene")) showSceneFallback("WebGL scene failed to initialize");
+  }, true);
+  setTimeout(() => {
+    if (canvas.width <= 300 && canvas.height <= 150) showSceneFallback("WebGL renderer did not start");
+  }, 5000);
+}
+
 function markExperience() {
   document.documentElement.dataset.uiGeneration = "2027";
   document.documentElement.dataset.componentSystem = "21st-inspired-spatial";
@@ -175,6 +200,7 @@ function init() {
   setupActiveSection();
   setupSpotlights();
   setupHeroParallax();
+  setupSceneWatchdog();
 }
 
 if (document.readyState === "loading") {
