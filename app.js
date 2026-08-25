@@ -20,27 +20,28 @@ const chains = [
 ];
 
 const districts = [
-  { name:"HERMES TOWER", x:0, z:0, color:0xff2738, height:10 },
-  { name:"IDENTITY PLAZA", x:-8, z:-6, color:0xff5364, height:6 },
-  { name:"UTILITY GRID", x:8, z:-6, color:0x28efff, height:7 },
-  { name:"DOCKING DISTRICT", x:-9, z:7, color:0x8ea1ff, height:7 },
-  { name:"ENTERTAINMENT", x:0, z:9, color:0xac5cff, height:7 },
-  { name:"GAMING DISTRICT", x:9, z:7, color:0x14f195, height:6 }
+  { id:"hermes", name:"HERMES TOWER", x:0, z:0, color:0xff2738, height:10 },
+  { id:"identity", name:"IDENTITY PLAZA", x:-8, z:-6, color:0xff5364, height:6 },
+  { id:"utility-grid", name:"UTILITY GRID", x:8, z:-6, color:0x28efff, height:7 },
+  { id:"docking", name:"DOCKING DISTRICT", x:-9, z:7, color:0x8ea1ff, height:7 },
+  { id:"entertainment", name:"ENTERTAINMENT", x:0, z:9, color:0xac5cff, height:7 },
+  { id:"gaming", name:"GAMING DISTRICT", x:9, z:7, color:0x14f195, height:6 }
 ];
 
 const stationSlots = [[-14,-10],[-9,-11],[-4,-11],[2,-11],[7,-11],[13,-9],[-14,-3],[-14,4],[-11,10],[-5,12],[1,12],[7,12],[13,8],[14,1],[13,-5]];
+const agentSpawns = [[-2,-1],[2,1],[-7,-3],[6,-2],[-4,6],[4,6],[10,4],[-10,3],[1,7],[-1,-7]];
 const bootLines = [
   "boot://hermes3d-agent-city",
   "scene contract: agentropolis.spatial-scene.v1",
   "experience tier: 2 / procedural 3D",
-  "scroll: camera operator",
+  "scroll: camera operator / GSAP ScrollTrigger",
   `chainwell stations: ${chains.length}`,
-  "agent traffic: online",
+  "agent behavior: navigate -> dock -> replenish -> receipt -> depart",
   "governor: FLOWKEEPER",
   "registry: WALLET ATLAS",
   "evaluator: BE",
   "privacy utility: VEILWELL / XMR STAGENET",
-  "ready: traversable city scene"
+  "ready: WebGL diorama online"
 ];
 
 const terminal = document.querySelector("#typewriter");
@@ -67,7 +68,7 @@ function typeBootSequence() {
       charIndex = 0;
     }
     if (lineIndex < bootLines.length) setTimeout(tick, charIndex === 0 ? 130 : 13);
-    else terminal.textContent = output + "\nSCENE READY";
+    else terminal.textContent = output + "\nDIORAMA READY";
   };
   tick();
 }
@@ -131,199 +132,109 @@ function makeLabel(text, className = "") {
   return label;
 }
 
-function createBuilding(group, x, z, w, d, h, accent) {
-  const body = new THREE.Mesh(
-    new THREE.BoxGeometry(w, h, d),
-    new THREE.MeshStandardMaterial({ color:0x0a1017, emissive:accent, emissiveIntensity:.08, metalness:.82, roughness:.27 })
-  );
-  body.position.set(x, h / 2, z);
-  group.add(body);
-  const cap = new THREE.Mesh(new THREE.BoxGeometry(w * .78, .06, d * .78), new THREE.MeshBasicMaterial({ color:accent, transparent:true, opacity:.72 }));
-  cap.position.set(x, h + .04, z);
-  group.add(cap);
+function createDioramaBase(world) {
+  const lower = new THREE.Mesh(new THREE.BoxGeometry(42.8,1.15,36.8),new THREE.MeshStandardMaterial({ color:0x04070a, emissive:0x02070a, emissiveIntensity:.28, metalness:.72, roughness:.34 }));
+  lower.position.y=-.72; lower.receiveShadow=true; world.add(lower);
+  const top = new THREE.Mesh(new THREE.BoxGeometry(41.4,.28,35.4),new THREE.MeshStandardMaterial({ color:0x080d12, emissive:0x051016, emissiveIntensity:.18, metalness:.58, roughness:.5 }));
+  top.position.y=-.08; top.receiveShadow=true; world.add(top);
+  const edges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(42.86,1.18,36.86)),new THREE.LineBasicMaterial({ color:0x28efff, transparent:true, opacity:.2 }));
+  edges.position.y=-.72; world.add(edges);
+  const underGlow = new THREE.Mesh(new THREE.PlaneGeometry(43.8,37.8),new THREE.MeshBasicMaterial({ color:0x071e25, transparent:true, opacity:.34, side:THREE.DoubleSide }));
+  underGlow.rotation.x=-Math.PI/2; underGlow.position.y=-1.32; world.add(underGlow);
 }
 
-function createHumanoid(color, role, route, offset) {
-  const group = new THREE.Group();
-  const dark = new THREE.MeshStandardMaterial({ color:0x101820, metalness:.65, roughness:.34 });
-  const accent = new THREE.MeshStandardMaterial({ color:0x17222d, emissive:color, emissiveIntensity:.58, metalness:.7, roughness:.22 });
-  const head = new THREE.Mesh(new THREE.SphereGeometry(.16, 14, 12), accent);
-  head.position.y = .92;
-  const torso = new THREE.Mesh(new THREE.CapsuleGeometry(.14, .38, 4, 8), dark);
-  torso.position.y = .57;
-  const armL = new THREE.Mesh(new THREE.CapsuleGeometry(.05, .28, 3, 7), accent);
-  const armR = armL.clone();
-  armL.position.set(-.18,.58,0); armR.position.set(.18,.58,0);
-  const legL = new THREE.Mesh(new THREE.CapsuleGeometry(.055, .32, 3, 7), dark);
-  const legR = legL.clone();
-  legL.position.set(-.08,.2,0); legR.position.set(.08,.2,0);
-  group.add(head, torso, armL, armR, legL, legR);
-  group.scale.setScalar(1.25);
-  group.userData = { role, route, offset, armL, armR, legL, legR, state:"walking", speed:1 };
-  return group;
-}
-
-function createChainwellStation(world, chain, x, z, selectable) {
-  const group = new THREE.Group();
-  group.position.set(x, 0, z);
-  const color = new THREE.Color(chain.color);
-  const base = new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.35,.12,24), new THREE.MeshStandardMaterial({ color:0x0a0f14, emissive:color, emissiveIntensity:.08, metalness:.76, roughness:.3 }));
-  base.position.y = .07;
-  group.add(base);
-  const canopy = new THREE.Mesh(new THREE.CylinderGeometry(1.15,1.15,.12,24), new THREE.MeshStandardMaterial({ color:0x101820, emissive:color, emissiveIntensity:.3, metalness:.82, roughness:.2 }));
-  canopy.position.y = 1.65;
-  canopy.userData.chain = chain;
-  group.add(canopy); selectable.push(canopy);
-  [-.55,.55].forEach((px) => {
-    const dispenser = new THREE.Mesh(new THREE.BoxGeometry(.32,.8,.38), new THREE.MeshStandardMaterial({ color:0x0d151c, emissive:color, emissiveIntensity:.42, metalness:.72, roughness:.24 }));
-    dispenser.position.set(px,.55,.1); dispenser.userData.chain = chain; group.add(dispenser); selectable.push(dispenser);
-  });
-  const halo = new THREE.Mesh(new THREE.TorusGeometry(1.32,.025,8,48), new THREE.MeshBasicMaterial({ color, transparent:true, opacity:.58 }));
-  halo.rotation.x = Math.PI/2; halo.position.y=.15; group.add(halo);
-  world.add(group);
-  return group;
-}
-
-async function createAqueduct() {
-  const canvas = document.querySelector("#aqueduct3d");
-  if (!canvas) return;
-
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x030407, .017);
-  const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, .1, 180);
-  camera.position.set(24,20,30); camera.lookAt(0,2.2,0);
-
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, matchMedia("(max-width: 820px)").matches ? 1.25 : 1.65));
-  renderer.setSize(innerWidth, innerHeight);
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-  const world = new THREE.Group();
-  scene.add(world);
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(42,36), new THREE.MeshStandardMaterial({ color:0x05080c, emissive:0x020406, emissiveIntensity:.2, metalness:.5, roughness:.7 }));
-  ground.rotation.x = -Math.PI/2; world.add(ground);
-  const grid = new THREE.GridHelper(42,42,0x24404a,0x101a22); grid.position.y=.025; grid.material.transparent=true; grid.material.opacity=.26; world.add(grid);
-
-  const labelLayer = document.createElement("div");
-  labelLayer.className = "city-label-layer";
-  document.body.appendChild(labelLayer);
-  const labels = [];
-  const selectable = [];
-
-  districts.forEach((district, di) => {
-    const group = new THREE.Group();
-    const count = 7;
-    for (let i=0;i<count;i+=1) {
-      const angle = (i/count)*Math.PI*2;
-      const radius = i===0 ? 0 : 1.5 + ((di*31+i*17)%10)/10;
-      const h = i===0 ? district.height : 2 + ((di*23+i*13)%10)/10 * district.height*.48;
-      createBuilding(group, district.x + Math.cos(angle)*radius, district.z + Math.sin(angle)*radius, i===0?1.7:.7+((i*7)%5)*.13, i===0?1.7:.7+((i*5)%4)*.16, h, district.color);
-    }
-    world.add(group);
-    const label = makeLabel(district.name,"district-label");
-    labelLayer.appendChild(label); labels.push({ label, position:new THREE.Vector3(district.x,district.height+1,district.z) });
-  });
-
-  const utilityLight = new THREE.PointLight(0x28efff, 100, 38); utilityLight.position.set(8,10,-6); scene.add(utilityLight);
-  const redLight = new THREE.PointLight(0xff2738, 92, 36); redLight.position.set(0,12,1); scene.add(redLight);
-  const violetLight = new THREE.PointLight(0xac5cff, 40, 30); violetLight.position.set(0,8,10); scene.add(violetLight);
-  scene.add(new THREE.AmbientLight(0xaac8ff,.42));
-
-  chains.forEach((chain,index) => {
-    const [x,z] = stationSlots[index];
-    createChainwellStation(world,chain,x,z,selectable);
-    const label = makeLabel(`${chain.mark} / ${chain.network}`, chain.category === "privacy" ? "privacy-label" : "utility-label");
-    labelLayer.appendChild(label); labels.push({ label, position:new THREE.Vector3(x,2.3,z) });
-  });
-
-  const routes = [
-    [[-16,-3],[16,-3]], [[-16,4],[16,4]], [[-5,-15],[-5,15]], [[5,-15],[5,15]], [[0,-15],[0,15]], [[-14,10],[13,-9]]
-  ];
-  const roles = ["city","hermes","wallet-atlas","route-engine","verifier","receipt-scribe","veil-sentinel","city","city","city"];
-  const agents = [];
-  roles.forEach((role,index) => {
-    const color = role === "hermes" ? 0xff2738 : role === "veil-sentinel" ? 0xff7a18 : role === "receipt-scribe" ? 0xac5cff : 0x28efff;
-    const agent = createHumanoid(color,role,routes[index % routes.length],index/roles.length);
-    agent.position.y=.1; world.add(agent); agents.push(agent);
-  });
-
-  const raycaster = new THREE.Raycaster();
-  const pointer = new THREE.Vector2();
-  const intersectAt = (x,y) => {
-    pointer.x = (x/innerWidth)*2-1; pointer.y = -(y/innerHeight)*2+1;
-    raycaster.setFromCamera(pointer,camera);
-    return raycaster.intersectObjects(selectable,false)[0];
-  };
-  canvas.addEventListener("pointermove", (event) => { canvas.style.cursor = intersectAt(event.clientX,event.clientY) ? "pointer" : "default"; });
-  canvas.addEventListener("click", (event) => { const hit = intersectAt(event.clientX,event.clientY); if (hit?.object?.userData?.chain) showDetail(hit.object.userData.chain); });
-
-  const agentState = new Map();
-  const districtState = new Map();
-  const scrollScene = await createScrollScene({
-    manifestUrl:"./scenes/aqueduct-agent-city/manifest.json",
-    camera,
-    utilityLight,
-    onAgentState:(id,state) => agentState.set(id,state),
-    onDistrictState:(id,state) => districtState.set(id,state),
-    onBeat:({id}) => {
-      document.querySelectorAll("[data-beat]").forEach((el) => el.classList.toggle("active", el.dataset.beat === id));
-    }
-  });
-  scrollScene.mount();
-
-  const clock = new THREE.Clock();
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let visible = true;
-  const observer = new IntersectionObserver((entries) => { visible = entries.some((entry) => entry.isIntersecting); }, { threshold:.01 });
-  observer.observe(document.querySelector("#top") || document.body);
-
-  function animateAgent(agent, elapsed) {
-    const data = agent.userData;
-    const state = agentState.get(data.role) || (data.role === "city" ? agentState.get("city") : null) || "walking";
-    const stateSpeed = state === "servicing" || state === "verifying" || state === "receipting" ? .42 : state === "orchestrating" ? 1.35 : 1;
-    const route = data.route;
-    const cycle = (elapsed * .055 * stateSpeed + data.offset) % 1;
-    const ping = cycle < .5 ? cycle*2 : (1-cycle)*2;
-    agent.position.x = THREE.MathUtils.lerp(route[0][0],route[1][0],ping);
-    agent.position.z = THREE.MathUtils.lerp(route[0][1],route[1][1],ping);
-    const phase = elapsed*7*stateSpeed + data.offset*10;
-    data.armL.rotation.x = Math.sin(phase)*.55; data.armR.rotation.x = -Math.sin(phase)*.55;
-    data.legL.rotation.x = -Math.sin(phase)*.45; data.legR.rotation.x = Math.sin(phase)*.45;
-    agent.position.y = .12 + Math.abs(Math.sin(phase))*0.025;
+function createRoad(world,x,z,width,depth,orientation="x") {
+  const road = new THREE.Mesh(new THREE.BoxGeometry(width,.075,depth),new THREE.MeshStandardMaterial({ color:0x090d12, metalness:.58, roughness:.62 }));
+  road.position.set(x,.095,z); road.receiveShadow=true; world.add(road);
+  const length=orientation==="x"?width:depth;
+  const dashCount=Math.max(2,Math.floor(length/1.6));
+  const dashGeometry=orientation==="x"?new THREE.BoxGeometry(.62,.018,.035):new THREE.BoxGeometry(.035,.018,.62);
+  const dashMaterial=new THREE.MeshBasicMaterial({ color:0x7fdfe8, transparent:true, opacity:.28 });
+  for(let i=0;i<dashCount;i+=1){
+    const dash=new THREE.Mesh(dashGeometry,dashMaterial);
+    const t=dashCount===1?.5:i/(dashCount-1);
+    if(orientation==="x") dash.position.set(x-width*.46+t*width*.92,.142,z);
+    else dash.position.set(x,.142,z-depth*.46+t*depth*.92);
+    world.add(dash);
   }
-
-  function projectLabels() {
-    labels.forEach(({label,position}) => {
-      const projected = position.clone().applyMatrix4(world.matrixWorld).project(camera);
-      const x = (projected.x*.5+.5)*innerWidth;
-      const y = (-projected.y*.5+.5)*innerHeight;
-      const show = projected.z < 1 && x > -180 && x < innerWidth+180 && y > -100 && y < innerHeight+100;
-      label.style.transform = `translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;
-      label.style.opacity = show ? ".84" : "0";
-    });
-  }
-
-  function render() {
-    requestAnimationFrame(render);
-    if (!visible || document.hidden) return;
-    const elapsed = clock.getElapsedTime();
-    if (!reducedMotion) agents.forEach((agent) => animateAgent(agent,elapsed));
-    projectLabels();
-    renderer.render(scene,camera);
-  }
-  render();
-
-  addEventListener("resize", () => {
-    camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight);
-  });
-  addEventListener("beforeunload", () => { observer.disconnect(); scrollScene.destroy(); });
 }
 
-closeDetail?.addEventListener("click", () => detailPanel?.classList.remove("open"));
-addEventListener("keydown", (event) => { if (event.key === "Escape") detailPanel?.classList.remove("open"); });
-addEventListener("load", () => {
-  renderCards(); setupFilters(); typeBootSequence(); createAqueduct().catch((error) => {
-    console.error(error);
-    document.documentElement.dataset.sceneError = "true";
-  });
-});
+function createDistrictPad(world,district){
+  const pad=new THREE.Mesh(new THREE.BoxGeometry(5.7,.12,4.7),new THREE.MeshStandardMaterial({ color:0x0a1016, emissive:district.color, emissiveIntensity:.055, metalness:.54, roughness:.46 }));
+  pad.position.set(district.x,.12,district.z); pad.receiveShadow=true; world.add(pad);
+  const edge=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(5.72,.13,4.72)),new THREE.LineBasicMaterial({ color:district.color, transparent:true, opacity:.3 }));
+  edge.position.copy(pad.position); world.add(edge); return {pad,edge};
+}
+
+function createBuilding(group,x,z,w,d,h,accent,seed=0){
+  const material=new THREE.MeshStandardMaterial({ color:0x0a1017, emissive:accent, emissiveIntensity:.07, metalness:.82, roughness:.27 });
+  const body=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material); body.position.set(x,h/2+.17,z); body.castShadow=true; body.receiveShadow=true; group.add(body);
+  const cap=new THREE.Mesh(new THREE.BoxGeometry(w*.78,.07,d*.78),new THREE.MeshBasicMaterial({ color:accent, transparent:true, opacity:.68 })); cap.position.set(x,h+.21,z); group.add(cap);
+  if(h>2.2){const rows=Math.max(2,Math.min(8,Math.floor(h/.75)));const windowMaterial=new THREE.MeshBasicMaterial({ color:accent, transparent:true, opacity:.26 });for(let row=0;row<rows;row+=1){if((row+seed)%3===0)continue;const y=.65+row*((h-.75)/rows);const front=new THREE.Mesh(new THREE.PlaneGeometry(w*.48,.045),windowMaterial);front.position.set(x,y,z+d/2+.006);group.add(front);}}
+  return body;
+}
+
+function createUtilityHub(world){
+  const hub=new THREE.Group(); hub.position.set(8,0,-6);
+  const base=new THREE.Mesh(new THREE.BoxGeometry(3.8,.2,3.2),new THREE.MeshStandardMaterial({ color:0x071017, emissive:0x28efff, emissiveIntensity:.12, metalness:.75, roughness:.28 })); base.position.y=.25; base.receiveShadow=true; hub.add(base);
+  [-1.05,0,1.05].forEach((x,index)=>{const core=new THREE.Mesh(new THREE.CylinderGeometry(.36,.48,2.5,12),new THREE.MeshStandardMaterial({ color:0x0b161d, emissive:index===1?0xff2738:0x28efff, emissiveIntensity:.34, metalness:.82, roughness:.2 }));core.position.set(x,1.55,0);core.castShadow=true;hub.add(core);const ring=new THREE.Mesh(new THREE.TorusGeometry(.55,.035,8,36),new THREE.MeshBasicMaterial({ color:index===1?0xff2738:0x28efff, transparent:true, opacity:.72 }));ring.rotation.x=Math.PI/2;ring.position.set(x,2.78,0);hub.add(ring);});
+  const beam=new THREE.Mesh(new THREE.BoxGeometry(3.3,.08,.08),new THREE.MeshBasicMaterial({ color:0x28efff, transparent:true, opacity:.42 })); beam.position.set(0,2.5,0); hub.add(beam); world.add(hub); return hub;
+}
+
+function createHumanoid(color,role,route,offset,stationIndex){
+  const group=new THREE.Group(); const dark=new THREE.MeshStandardMaterial({ color:0x101820, metalness:.65, roughness:.34 }); const accent=new THREE.MeshStandardMaterial({ color:0x17222d, emissive:color, emissiveIntensity:.62, metalness:.7, roughness:.22 });
+  const head=new THREE.Mesh(new THREE.SphereGeometry(.16,14,12),accent); head.position.y=.92; const visor=new THREE.Mesh(new THREE.BoxGeometry(.18,.055,.035),new THREE.MeshBasicMaterial({ color, transparent:true, opacity:.95 })); visor.position.set(0,.95,.145);
+  const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.14,.38,4,8),dark); torso.position.y=.57; const armL=new THREE.Mesh(new THREE.CapsuleGeometry(.05,.28,3,7),accent); const armR=armL.clone(); armL.position.set(-.18,.58,0); armR.position.set(.18,.58,0); const legL=new THREE.Mesh(new THREE.CapsuleGeometry(.055,.32,3,7),dark); const legR=legL.clone(); legL.position.set(-.08,.2,0); legR.position.set(.08,.2,0);
+  group.add(head,visor,torso,armL,armR,legL,legR); group.scale.setScalar(1.25); group.traverse((child)=>{if(child.isMesh)child.castShadow=true;}); group.userData={role,route,offset,stationIndex,armL,armR,legL,legR,state:"walking"}; return group;
+}
+
+function createChainwellStation(world,chain,x,z,selectable,index){
+  const group=new THREE.Group(); group.position.set(x,0,z); const color=new THREE.Color(chain.color); const stationMaterial=new THREE.MeshStandardMaterial({ color:0x0c141b, emissive:color, emissiveIntensity:.14, metalness:.76, roughness:.27 });
+  const pad=new THREE.Mesh(new THREE.BoxGeometry(2.8,.13,2.15),new THREE.MeshStandardMaterial({ color:0x091016, emissive:color, emissiveIntensity:.045, metalness:.62, roughness:.45 })); pad.position.y=.14; pad.receiveShadow=true; group.add(pad);
+  const canopy=new THREE.Mesh(new THREE.BoxGeometry(2.55,.16,1.9),stationMaterial); canopy.position.y=2; canopy.userData.chain=chain; canopy.castShadow=true; group.add(canopy); selectable.push(canopy);
+  [-.92,.92].forEach((px)=>{const post=new THREE.Mesh(new THREE.BoxGeometry(.1,1.72,.1),stationMaterial);post.position.set(px,1.08,-.45);post.castShadow=true;post.userData.chain=chain;group.add(post);selectable.push(post);});
+  [-.55,.55].forEach((px)=>{const dispenser=new THREE.Mesh(new THREE.BoxGeometry(.34,.86,.42),stationMaterial);dispenser.position.set(px,.64,.12);dispenser.userData.chain=chain;dispenser.castShadow=true;group.add(dispenser);selectable.push(dispenser);const screen=new THREE.Mesh(new THREE.PlaneGeometry(.2,.22),new THREE.MeshBasicMaterial({ color, transparent:true, opacity:.92, side:THREE.DoubleSide }));screen.position.set(px,.78,.337);group.add(screen);});
+  const serviceLane=new THREE.Mesh(new THREE.BoxGeometry(2.45,.025,.65),new THREE.MeshBasicMaterial({ color, transparent:true, opacity:.12 })); serviceLane.position.set(0,.225,.64); group.add(serviceLane);
+  const haloMaterial=new THREE.MeshBasicMaterial({ color, transparent:true, opacity:.38 }); const halo=new THREE.Mesh(new THREE.TorusGeometry(1.42,.026,8,48),haloMaterial); halo.rotation.x=Math.PI/2; halo.position.y=.22; group.add(halo);
+  const beacon=new THREE.Mesh(new THREE.SphereGeometry(.08,12,10),new THREE.MeshBasicMaterial({ color })); beacon.position.set(0,2.28,-.45); group.add(beacon);
+  if(chain.category==="privacy"){const shield=new THREE.Mesh(new THREE.TorusGeometry(1.62,.04,8,54),new THREE.MeshBasicMaterial({ color:0xff7a18, transparent:true, opacity:.66 }));shield.rotation.x=Math.PI/2;shield.position.y=.23;group.add(shield);}
+  world.add(group); return {index,chain,group,halo,haloMaterial,beacon,activity:0,bay:new THREE.Vector3(x,.12,z+.72),approach:new THREE.Vector3(x,.12,z+2.2)};
+}
+
+function createServiceCurve(start,station,index){
+  const bend=index%2===0?1:-1; const midpoint=new THREE.Vector3(THREE.MathUtils.lerp(start.x,station.approach.x,.5)+bend*1.2,.12,THREE.MathUtils.lerp(start.z,station.approach.z,.5)); return new THREE.CatmullRomCurve3([new THREE.Vector3(start.x,.12,start.z),midpoint,station.approach.clone(),station.bay.clone()],false,"catmullrom",.35);
+}
+
+function createFlowConduit(world,from,station,index){
+  const color=station.chain.category==="privacy"?0xff7a18:0x28efff; const side=index%2===0?.8:-.8; const points=[from.clone(),new THREE.Vector3((from.x+station.bay.x)*.5+side,.2,(from.z+station.bay.z)*.5),new THREE.Vector3(station.bay.x,.2,station.bay.z)]; const curve=new THREE.CatmullRomCurve3(points,false,"catmullrom",.4); const tube=new THREE.Mesh(new THREE.TubeGeometry(curve,24,.018,5,false),new THREE.MeshBasicMaterial({ color, transparent:true, opacity:station.chain.category==="privacy"?.5:.18 })); world.add(tube); const pulse=new THREE.Mesh(new THREE.SphereGeometry(.065,8,6),new THREE.MeshBasicMaterial({ color, transparent:true, opacity:.88 })); world.add(pulse); return {curve,pulse,offset:(index*.117)%1,speed:.055+(index%4)*.008};
+}
+
+async function createAqueduct(){
+  const canvas=document.querySelector("#aqueduct3d"); if(!canvas)return;
+  const mobile=matchMedia("(max-width: 820px)").matches; const reducedMotion=matchMedia("(prefers-reduced-motion: reduce)").matches; const scene=new THREE.Scene(); scene.background=new THREE.Color(0x020407); scene.fog=new THREE.FogExp2(0x030407,.018);
+  const camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,220); camera.position.set(24,20,30); camera.lookAt(0,2.2,0);
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:!mobile,alpha:false,powerPreference:"high-performance"}); renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.15:1.6)); renderer.setSize(innerWidth,innerHeight); renderer.outputColorSpace=THREE.SRGBColorSpace; renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.1; renderer.shadowMap.enabled=!mobile; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  const world=new THREE.Group(); scene.add(world); createDioramaBase(world);
+  createRoad(world,0,-10.2,38,1.45,"x"); createRoad(world,0,-3.1,38,1.6,"x"); createRoad(world,0,4,38,1.6,"x"); createRoad(world,0,10.6,38,1.45,"x"); createRoad(world,-13.4,0,1.45,31,"z"); createRoad(world,-5.1,0,1.6,31,"z"); createRoad(world,0,0,1.5,31,"z"); createRoad(world,5.1,0,1.6,31,"z"); createRoad(world,13.4,0,1.45,31,"z");
+  const labelLayer=document.createElement("div"); labelLayer.className="city-label-layer"; document.body.appendChild(labelLayer); const labels=[]; const selectable=[]; const districtVisuals=new Map();
+  districts.forEach((district,di)=>{const visual=createDistrictPad(world,district);districtVisuals.set(district.id,visual);const group=new THREE.Group();const count=7;for(let i=0;i<count;i+=1){const angle=(i/count)*Math.PI*2;const radius=i===0?0:1.3+((di*31+i*17)%10)/12;const h=i===0?district.height:1.8+((di*23+i*13)%10)/10*district.height*.47;createBuilding(group,district.x+Math.cos(angle)*radius,district.z+Math.sin(angle)*radius,i===0?1.7:.65+((i*7)%5)*.12,i===0?1.7:.65+((i*5)%4)*.15,h,district.color,di+i);}world.add(group);const label=makeLabel(district.name,"district-label");labelLayer.appendChild(label);labels.push({label,position:new THREE.Vector3(district.x,district.height+1.25,district.z),priority:"district"});});
+  const utilityHub=createUtilityHub(world); const utilityLight=new THREE.PointLight(0x28efff,100,38); utilityLight.position.set(8,10,-6); scene.add(utilityLight); const redLight=new THREE.PointLight(0xff2738,88,34); redLight.position.set(0,11,1); scene.add(redLight); const violetLight=new THREE.PointLight(0xac5cff,38,29); violetLight.position.set(0,8,10); scene.add(violetLight); scene.add(new THREE.HemisphereLight(0x7ccfff,0x08090d,.7)); const keyLight=new THREE.DirectionalLight(0xd7f8ff,2.2); keyLight.position.set(18,30,16); keyLight.castShadow=!mobile; keyLight.shadow.mapSize.set(1024,1024); keyLight.shadow.camera.left=-24; keyLight.shadow.camera.right=24; keyLight.shadow.camera.top=22; keyLight.shadow.camera.bottom=-22; scene.add(keyLight);
+  const stations=chains.map((chain,index)=>{const [x,z]=stationSlots[index];const station=createChainwellStation(world,chain,x,z,selectable,index);const label=makeLabel(`${chain.mark} CHAINWELL`,chain.category==="privacy"?"privacy-label":"utility-label");labelLayer.appendChild(label);labels.push({label,position:new THREE.Vector3(x,2.55,z),priority:"station"});return station;});
+  const flowOrigin=new THREE.Vector3(8,.28,-6); const flowConduits=stations.map((station,index)=>createFlowConduit(world,flowOrigin,station,index));
+  const roles=["city","hermes","wallet-atlas","route-engine","verifier","receipt-scribe","veil-sentinel","city","city","city"]; const agents=roles.map((role,index)=>{const stationIndex=role==="veil-sentinel"?stations.length-1:(index*2+1)%Math.max(1,stations.length-1);const station=stations[stationIndex];const spawn=agentSpawns[index%agentSpawns.length];const route=createServiceCurve(new THREE.Vector3(spawn[0],.12,spawn[1]),station,index);const color=role==="hermes"?0xff2738:role==="veil-sentinel"?0xff7a18:role==="receipt-scribe"?0xac5cff:role==="wallet-atlas"?0xff4da6:0x28efff;const agent=createHumanoid(color,role,route,index/roles.length,stationIndex);world.add(agent);return agent;});
+  const starGeometry=new THREE.BufferGeometry(); const starCount=mobile?180:420; const starPositions=new Float32Array(starCount*3); for(let i=0;i<starCount;i+=1){starPositions[i*3]=(Math.random()-.5)*100;starPositions[i*3+1]=6+Math.random()*46;starPositions[i*3+2]=(Math.random()-.5)*100;} starGeometry.setAttribute("position",new THREE.BufferAttribute(starPositions,3)); scene.add(new THREE.Points(starGeometry,new THREE.PointsMaterial({color:0xcffcff,size:.035,transparent:true,opacity:.38})));
+  const raycaster=new THREE.Raycaster(); const pointer=new THREE.Vector2(); const intersectAt=(x,y)=>{pointer.x=(x/innerWidth)*2-1;pointer.y=-(y/innerHeight)*2+1;raycaster.setFromCamera(pointer,camera);return raycaster.intersectObjects(selectable,false)[0];}; canvas.addEventListener("pointermove",(event)=>{canvas.style.cursor=intersectAt(event.clientX,event.clientY)?"pointer":"default";}); canvas.addEventListener("click",(event)=>{const hit=intersectAt(event.clientX,event.clientY);if(hit?.object?.userData?.chain)showDetail(hit.object.userData.chain);});
+  const agentState=new Map(); const districtState=new Map(); const scrollScene=await createScrollScene({manifestUrl:"./scenes/aqueduct-agent-city/manifest.json",camera,utilityLight,onAgentState:(id,state)=>agentState.set(id,state),onDistrictState:(id,state)=>districtState.set(id,state),onBeat:({id})=>{document.documentElement.dataset.dioramaBeat=id;document.querySelectorAll("[data-beat]").forEach((el)=>el.classList.toggle("active",el.dataset.beat===id));}}); scrollScene.mount();
+  const clock=new THREE.Clock(); let sceneVisible=true; const mapSection=document.querySelector("#map"); const observer=new IntersectionObserver((entries)=>{sceneVisible=entries.some((entry)=>entry.isIntersecting);},{rootMargin:"25% 0px 25% 0px",threshold:.01}); if(mapSection)observer.observe(mapSection);
+  function animateAgent(agent,elapsed){const data=agent.userData;const runtimeState=agentState.get(data.role)||(data.role==="city"?agentState.get("city"):null)||"walking";const baseSpeed=runtimeState==="orchestrating"?1.25:runtimeState==="verifying"||runtimeState==="receipting"?.82:1;const cycle=(elapsed*.052*baseSpeed+data.offset)%1;let routeT=0;let docked=false;if(cycle<.4)routeT=cycle/.4;else if(cycle<.62){routeT=1;docked=true;}else routeT=1-(cycle-.62)/.38;const position=data.route.getPointAt(THREE.MathUtils.clamp(routeT,0,1));const tangent=data.route.getTangentAt(THREE.MathUtils.clamp(routeT,0,1));agent.position.copy(position);agent.rotation.y=Math.atan2(tangent.x,tangent.z);const phase=elapsed*7*baseSpeed+data.offset*10;if(docked){data.armL.rotation.x=-.15;data.armR.rotation.x=.15;data.legL.rotation.x=0;data.legR.rotation.x=0;agent.position.y=.12+Math.sin(phase*.5)*.008;stations[data.stationIndex].activity=Math.max(stations[data.stationIndex].activity,1);}else{data.armL.rotation.x=Math.sin(phase)*.55;data.armR.rotation.x=-Math.sin(phase)*.55;data.legL.rotation.x=-Math.sin(phase)*.45;data.legR.rotation.x=Math.sin(phase)*.45;agent.position.y=.12+Math.abs(Math.sin(phase))*.025;}}
+  function animateStations(elapsed){stations.forEach((station,index)=>{const activity=station.activity;const pulse=.5+.5*Math.sin(elapsed*4+index*.5);station.haloMaterial.opacity=.26+activity*.45+pulse*.06;station.halo.scale.setScalar(1+activity*.08+pulse*.015);station.beacon.scale.setScalar(1+activity*.9+pulse*.18);station.activity=Math.max(0,activity-.045);});}
+  function animateConduits(elapsed){flowConduits.forEach((flow)=>{const t=(elapsed*flow.speed+flow.offset)%1;flow.pulse.position.copy(flow.curve.getPointAt(t));});}
+  function applyDistrictState(elapsed){const state=districtState.get("utility-grid");const visual=districtVisuals.get("utility-grid");if(!visual)return;const focused=state==="focused"||state==="complete";visual.edge.material.opacity=focused?.62:.3;visual.pad.material.emissiveIntensity=focused?.16:.055;utilityHub.rotation.y=focused?Math.sin(elapsed*.4)*.05:0;}
+  function projectLabels(){labels.forEach(({label,position,priority})=>{const projected=position.clone().applyMatrix4(world.matrixWorld).project(camera);const x=(projected.x*.5+.5)*innerWidth;const y=(-projected.y*.5+.5)*innerHeight;const show=projected.z<1&&x>-180&&x<innerWidth+180&&y>-100&&y<innerHeight+100;label.style.transform=`translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;label.style.opacity=show?(priority==="district"?".9":".72"):"0";});}
+  function render(){requestAnimationFrame(render);if(!sceneVisible||document.hidden)return;const elapsed=clock.getElapsedTime();if(!reducedMotion){stations.forEach((station)=>{station.activity*=.96;});agents.forEach((agent)=>animateAgent(agent,elapsed));animateStations(elapsed);animateConduits(elapsed);applyDistrictState(elapsed);}projectLabels();renderer.render(scene,camera);} render();
+  addEventListener("resize",()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,matchMedia("(max-width: 820px)").matches?1.15:1.6));renderer.setSize(innerWidth,innerHeight);}); addEventListener("beforeunload",()=>{observer.disconnect();scrollScene.destroy();labelLayer.remove();renderer.dispose();});
+}
+
+closeDetail?.addEventListener("click",()=>detailPanel?.classList.remove("open"));
+addEventListener("keydown",(event)=>{if(event.key==="Escape")detailPanel?.classList.remove("open");});
+addEventListener("load",()=>{renderCards();setupFilters();typeBootSequence();createAqueduct().catch((error)=>{console.error(error);document.documentElement.dataset.sceneError="true";});});
