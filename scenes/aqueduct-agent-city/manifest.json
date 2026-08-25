@@ -2,7 +2,7 @@
   "schema": "agentropolis.spatial-scene.v1",
   "id": "aqueduct-agent-city",
   "district": "utility-grid",
-  "sourceClass": "D",
+  "sourceClass": "V",
   "experienceTier": 2,
   "assets": {
     "panorama": null,
@@ -12,10 +12,17 @@
     "glb": null,
     "splat": null
   },
+  "spatialEvidence": {
+    "type": "procedural-mesh",
+    "runtime": "app.js",
+    "engine": "threejs",
+    "trueCameraTranslation": true
+  },
   "procedural": {
     "engine": "threejs",
-    "seed": 8261975,
-    "scene": "hermes3d-agent-city-aqueduct"
+    "seed": 33301,
+    "scene": "hermes3d-agent-city-aqueduct",
+    "deterministic": true
   },
   "camera": "camera/camera-path.json",
   "timeline": "timeline/scroll-timeline.json",
@@ -29,6 +36,7 @@
   },
   "verification": {
     "evaluator": "BE",
-    "receiptSchema": "agentropolis.be.scene-receipt.v1"
+    "receiptSchema": "agentropolis.be.scene-receipt.v1",
+    "status": "pending-deployment-gate"
   }
 }
