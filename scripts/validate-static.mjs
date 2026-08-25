@@ -38,11 +38,13 @@ for (const rel of required) {
   if (!fs.existsSync(path.join(root, rel))) fail(`missing required file ${rel}`);
 }
 
-const htmlPath = path.join(root, 'index.html');
-const html = fs.readFileSync(htmlPath, 'utf8');
-for (const ref of ['styles.css','botmode.css','ui-2027.css','app.js','botmode.js','ui-2027.js','spatial-runtime.js']) {
+const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+for (const ref of ['styles.css','botmode.css','ui-2027.css','app.js','botmode.js','ui-2027.js']) {
   if (!html.includes(ref)) fail(`index.html does not reference ${ref}`);
 }
+
+const uiSource = fs.readFileSync(path.join(root, 'ui-2027.js'), 'utf8');
+if (!uiSource.includes('import "./spatial-runtime.js"')) fail('ui-2027.js must import spatial-runtime.js so source equals deployed artifact');
 
 for (const rel of ['app.js','botmode.js','ui-2027.js','scroll-scene.js','spatial-runtime.js']) {
   try {
@@ -55,7 +57,7 @@ for (const rel of ['app.js','botmode.js','ui-2027.js','scroll-scene.js','spatial
 const manifest = readJson('scenes/aqueduct-agent-city/manifest.json');
 const camera = readJson('scenes/aqueduct-agent-city/camera/camera-path.json');
 const timeline = readJson('scenes/aqueduct-agent-city/timeline/scroll-timeline.json');
-readJson('config/hermes-botmode.aqueduct.json');
+const botConfig = readJson('config/hermes-botmode.aqueduct.json');
 readJson('spatial-runtime-manifest.json');
 
 if (manifest) {
@@ -67,6 +69,7 @@ if (manifest) {
   if (manifest.sourceClass === 'V' && !manifest.spatialEvidence?.trueCameraTranslation) fail('Class V requires true spatial translation evidence');
   if (manifest.fallback?.reducedMotion !== 'static-viewpoints') fail('reduced-motion fallback must be declared');
   if (manifest.fallback?.noWebGL !== 'html') fail('no-WebGL HTML fallback must be declared');
+  if (manifest.verification?.evaluator !== 'BE') fail('scene verification evaluator must be BE');
 }
 
 if (camera) {
@@ -96,6 +99,11 @@ if (timeline) {
       if (binding.target === 'camera.path' && !(typeof binding.from === 'number' && typeof binding.to === 'number')) fail(`beat ${beat.id} camera.path needs numeric from/to`);
     }
   }
+}
+
+if (botConfig) {
+  if (botConfig.authority?.mainnetAllowed !== false) fail('Bot Mode mainnetAllowed must remain false');
+  if (botConfig.runtime?.gateway?.publicTelemetryOnly !== true) fail('Bot Mode public gateway must be telemetry-only');
 }
 
 if (!process.exitCode) console.log('AQUEDUCT static deployment gate: PASS');
