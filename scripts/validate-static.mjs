@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
 const required = [
@@ -34,6 +34,15 @@ function readJson(rel) {
   }
 }
 
+function checkModuleSyntax(rel) {
+  const source = fs.readFileSync(path.join(root, rel), 'utf8');
+  const result = spawnSync(process.execPath, ['--input-type=module', '--check'], {
+    input: source,
+    encoding: 'utf8'
+  });
+  if (result.status !== 0) fail(`${rel} failed JavaScript module syntax validation\n${result.stderr || result.stdout}`);
+}
+
 for (const rel of required) {
   if (!fs.existsSync(path.join(root, rel))) fail(`missing required file ${rel}`);
 }
@@ -46,13 +55,7 @@ for (const ref of ['styles.css','botmode.css','ui-2027.css','app.js','botmode.js
 const uiSource = fs.readFileSync(path.join(root, 'ui-2027.js'), 'utf8');
 if (!uiSource.includes('import "./spatial-runtime.js"')) fail('ui-2027.js must import spatial-runtime.js so source equals deployed artifact');
 
-for (const rel of ['app.js','botmode.js','ui-2027.js','scroll-scene.js','spatial-runtime.js']) {
-  try {
-    execFileSync(process.execPath, ['--check', path.join(root, rel)], { stdio: 'pipe' });
-  } catch (error) {
-    fail(`${rel} failed JavaScript syntax validation\n${error.stderr?.toString() || error.message}`);
-  }
-}
+for (const rel of ['app.js','botmode.js','ui-2027.js','scroll-scene.js','spatial-runtime.js']) checkModuleSyntax(rel);
 
 const manifest = readJson('scenes/aqueduct-agent-city/manifest.json');
 const camera = readJson('scenes/aqueduct-agent-city/camera/camera-path.json');
