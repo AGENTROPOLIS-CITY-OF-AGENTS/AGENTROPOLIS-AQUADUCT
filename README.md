@@ -142,6 +142,7 @@ The Pages surface renders the profile with `botmode.js` and `botmode.css`. The v
 
 ## Represented testnet lanes
 
+- Robinhood Chain Testnet
 - Ethereum Sepolia
 - Base Sepolia
 - OP Sepolia
@@ -157,6 +158,19 @@ The Pages surface renders the profile with `botmode.js` and `botmode.css`. The v
 - Aptos Testnet
 - Polkadot Paseo
 - Monero Stagenet via **VEILWELL**
+
+## HOLOFOIL / HOOD TERPS provisioning
+
+HOLOFOIL delegates testnet funding to AQUEDUCT before a Robinhood Chain Testnet sample mint. The user-facing handoff is `robinhood-testnet.html`, which sends the user to the official Robinhood Chain Testnet faucet while preserving AQUEDUCT's non-custodial boundary.
+
+```text
+HOOD TERPS -> HOLOFOIL -> AQUEDUCT -> Robinhood Chain Testnet faucet
+           <- balance verification <- funded wallet
+```
+
+Funding is not proof of mint. HOLOFOIL must still verify a real testnet transaction and token ID before a mint receipt can become `CONFIRMED`.
+
+See `docs/ROBINHOOD-TESTNET-CHAINWELL.md`.
 
 ## Security boundary
 
