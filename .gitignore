@@ -9,6 +9,10 @@
 # Client-local MCP config
 .mcp.local.json
 
+# AQUEDUCT local wallet registry + runtime receipts
+config/agentd.dev.json
+var/aqueduct/receipts/
+
 # Node tooling
 node_modules/
 dist/
