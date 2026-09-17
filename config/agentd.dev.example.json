@@ -38,7 +38,7 @@
       "enabled": false,
       "network": "ethereum-sepolia",
       "asset": "ETH",
-      "address": "REPLACE_WITH_PUBLIC_EVM_DEV_ADDRESS",
+      "address": "0x921b4c20ef5cd65f8678a47b1600c1c2818110c1",
       "minimum_units": 10000000000000000,
       "top_up_units": 50000000000000000,
       "cooldown_secs": 86400,
