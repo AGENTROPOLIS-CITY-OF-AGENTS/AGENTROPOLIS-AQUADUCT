@@ -28,7 +28,7 @@
       "enabled": false,
       "network": "xrpl-testnet",
       "asset": "XRP",
-      "address": "REPLACE_WITH_PUBLIC_XRPL_TEST_ADDRESS",
+      "address": "rU95aW9A1znRiZFoa1Q3vPjfzdywBrd2DQ",
       "minimum_units": 10000000,
       "top_up_units": 100000000,
       "cooldown_secs": 3600,
