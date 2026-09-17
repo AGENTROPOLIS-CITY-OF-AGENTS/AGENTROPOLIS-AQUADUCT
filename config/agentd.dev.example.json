@@ -8,7 +8,7 @@
       "enabled": false,
       "network": "solana-devnet",
       "asset": "SOL",
-      "address": "REPLACE_WITH_PUBLIC_SOLANA_DEV_ADDRESS",
+      "address": "3Hgd67zF7KFkhd3mwKF8K7rDsPNu1VbuG75P5sYDeBt6",
       "minimum_units": 1000000000,
       "top_up_units": 2000000000,
       "cooldown_secs": 3600,
