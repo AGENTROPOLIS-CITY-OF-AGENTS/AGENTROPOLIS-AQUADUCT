@@ -196,3 +196,25 @@ See `NOTICE.md` for license and identity boundaries.
 ## License
 
 Apache License 2.0. See `LICENSE`.
+
+
+## FISCALITH / AGENT-ENTITY FORGE certification plane
+
+AQUADUCT is the pre-production proving plane for governed financial-agent capabilities.
+
+```text
+ATRALITH / ATG
+  -> FISCALITH
+  -> Execution Envelope
+  -> AEGIS
+  -> AQUADUCT sandbox / testnet proving
+  -> verification + receipts
+  -> Proof Graph
+  -> AGENT-ENTITY FORGE
+  -> approved promotion
+  -> PAYRAIL production routing
+```
+
+AQUADUCT does **not** become a second PAYRAIL. It remains the sandbox, testnet, adapter-conformance, verification and receipt plane. Production routing and settlement remain PAYRAIL responsibilities.
+
+See `docs/FISCALITH-FORGE-CERTIFICATION-PLANE.md`.
