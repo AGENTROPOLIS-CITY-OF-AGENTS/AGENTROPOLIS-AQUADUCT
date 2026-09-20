@@ -3,6 +3,7 @@ members = [
   "crates/aqueduct-core",
   "crates/aqueduct-policy",
   "crates/aqueduct-receipts",
+  "crates/aqueduct-aegis",
   "crates/aqueduct-gateway",
 ]
 resolver = "2"
