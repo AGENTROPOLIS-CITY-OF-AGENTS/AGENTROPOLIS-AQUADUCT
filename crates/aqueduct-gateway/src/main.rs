@@ -1,10 +1,10 @@
 use aqueduct_core::{FaucetIntent, PolicyContext};
 use aqueduct_policy::evaluate;
 use axum::{
+    Json, Router,
     extract::State,
     http::{HeaderValue, Method, StatusCode},
     routing::{get, post},
-    Json, Router,
 };
 use serde::{Deserialize, Serialize};
 use std::{env, net::SocketAddr, sync::Arc};
@@ -63,7 +63,10 @@ async fn evaluate_intent(
     State(state): State<Arc<AppState>>,
     Json(request): Json<EvaluateRequest>,
 ) -> Result<Json<EvaluateResponse>, StatusCode> {
-    request.intent.validate().map_err(|_| StatusCode::BAD_REQUEST)?;
+    request
+        .intent
+        .validate()
+        .map_err(|_| StatusCode::BAD_REQUEST)?;
     Ok(Json(EvaluateResponse {
         service: state.service_name,
         version: state.version,

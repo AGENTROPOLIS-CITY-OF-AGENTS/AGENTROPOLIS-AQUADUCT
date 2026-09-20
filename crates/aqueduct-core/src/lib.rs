@@ -57,7 +57,9 @@ impl FaucetIntent {
             return Err(AqueductError::InvalidIntent("asset is empty".into()));
         }
         if self.requested_units == 0 {
-            return Err(AqueductError::InvalidIntent("requested_units must be greater than zero".into()));
+            return Err(AqueductError::InvalidIntent(
+                "requested_units must be greater than zero".into(),
+            ));
         }
         Ok(())
     }
