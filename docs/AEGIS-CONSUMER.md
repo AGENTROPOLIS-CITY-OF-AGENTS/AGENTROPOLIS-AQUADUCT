@@ -13,7 +13,9 @@ AGENT-ENTITY
   -> AEGIS          (authorizes: ALLOW / DENY / ESCALATE)
   -> AQUADUCT       (THIS CRATE: verifies / proves)
   -> Proof Graph
+  -> BE             (evaluates evidence)
   -> FORGE          (certifies / promotes)
+  -> 54-T           (governance / security review)
   -> PAYRAIL        (executes approved value movement)
   -> Settlement
   -> SettlementReceipt
@@ -130,3 +132,15 @@ references FORGE and Proof Graph can ingest later.
 The receipt (proofs_satisfied, evidence_refs) is consumed by FORGE for a
 **separate governed promotion decision**. Capability growth does not imply
 authority growth.
+
+Downstream promotion path (BE and 54-T remain explicit; neither is bypassed by
+a generic approval):
+
+```
+AQUADUCT verification
+  -> Proof Graph / evidence
+  -> BE evaluation
+  -> FORGE certification / promotion orchestration
+  -> 54-T governance / security review
+  -> PAYRAIL
+```

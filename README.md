@@ -210,11 +210,12 @@ ATRALITH / ATG
   -> AQUADUCT sandbox / testnet proving
   -> verification + receipts
   -> Proof Graph
-  -> AGENT-ENTITY FORGE
-  -> approved promotion
+  -> BE evaluation
+  -> AGENT-ENTITY FORGE certification / promotion
+  -> 54-T governance / security review
   -> PAYRAIL production routing
 ```
 
-AQUADUCT does **not** become a second PAYRAIL. It remains the sandbox, testnet, adapter-conformance, verification and receipt plane. Production routing and settlement remain PAYRAIL responsibilities.
+AQUADUCT does **not** become a second PAYRAIL. It remains the sandbox, testnet, adapter-conformance, verification and receipt plane. Production routing and settlement remain PAYRAIL responsibilities. BE remains the explicit evaluator layer, and 54-T performs the required governance/security review before production routing; neither is bypassed by a generic approval.
 
 See `docs/FISCALITH-FORGE-CERTIFICATION-PLANE.md`.

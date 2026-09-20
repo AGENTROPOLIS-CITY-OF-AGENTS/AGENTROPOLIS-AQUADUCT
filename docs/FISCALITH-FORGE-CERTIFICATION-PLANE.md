@@ -15,7 +15,7 @@ AQUADUCT remains testnet / sandbox infrastructure. It does **not** become a seco
 ## Canonical relationship
 
 ```text
-AGENTENTITY
+AGENT-ENTITY
     ↓
 ATRALITH / ATG
     ↓
@@ -32,10 +32,14 @@ verification + receipts
     ↓
 Proof Graph
     ↓
+BE
+evaluation / evidence-based promotion assessment
+    ↓
 AGENT-ENTITY FORGE
 certify / restrict / promote / revoke
     ↓
-human / policy approval
+54-T
+governance / security review
     ↓
 PAYRAIL
 production routing
@@ -61,11 +65,37 @@ production routing
 - production settlement routing
 - mainnet treasury authority
 - principal mandate issuance
-- AGENTENTITY identity
+- AGENT-ENTITY identity
 - ATRALITH semantics
 - FISCALITH semantics
 - final AEGIS authority decisions
 - Forge promotion decisions
+- BE evaluation decisions
+- 54-T governance/security review authority
+
+### BE owns
+
+- evaluation of AQUADUCT evidence (proofs, receipts, simulation, testnet behavior)
+- evidence-based promotion assessment / recommendation
+- capability evaluation feeding FORGE orchestration
+
+BE remains an explicit evaluator layer on the promotion path. AQUADUCT
+verifies and produces evidence; BE evaluates that evidence before FORGE acts.
+
+### FORGE owns
+
+- certification / restriction / promotion / revocation orchestration
+- consuming verified evidence for a governed promotion decision
+- produce/review promotion candidates for 54-T governance and security review
+
+### 54-T owns
+
+- governance and security review before production routing
+- containment and trust enforcement around financial adapter tests
+- the required review stage between certification/promotion and PAYRAIL
+
+54-T is a governance/security review stage, not only test containment. A
+generic human/policy approval does not bypass 54-T.
 
 ## FISCALITH integration
 
@@ -134,7 +164,7 @@ These are evidence objects. They do not independently grant authority.
 TEST PASS != PRODUCTION AUTHORITY
 ```
 
-The Forge may consume AQUADUCT evidence and recommend a certification state, but promotion remains governed by the principal mandate, AEGIS policy, and human/policy approval requirements.
+The Forge may consume AQUADUCT evidence and recommend a certification state, but promotion remains governed by BE evaluation of that evidence and principal mandate, AEGIS policy, and the 54-T governance/security review. BE remains an explicit evaluator layer on the promotion path; it is not bypassed by a generic approval.
 
 ## Recommended lifecycle
 
@@ -147,8 +177,10 @@ DISCOVER
   -> VERIFY
   -> RECEIPT
   -> PROOF GRAPH
+  -> BE EVALUATION
   -> CERTIFY
   -> PROMOTE
+  -> 54-T GOVERNANCE / SECURITY REVIEW
   -> PRODUCTION
   -> MONITOR
   -> RE-CERTIFY ON MATERIAL CHANGE
@@ -172,4 +204,4 @@ DISCOVER
 
 ## Standing rule
 
-> **AQUADUCT proves safely. FORGE decides certification state. AEGIS governs authority. PAYRAIL moves approved production value.**
+> **AQUADUCT proves safely. BE evaluates evidence. FORGE decides certification state. AEGIS governs authority. 54-T performs the governance/security review. PAYRAIL moves approved production value.**

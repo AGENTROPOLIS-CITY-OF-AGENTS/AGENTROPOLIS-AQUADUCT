@@ -398,6 +398,7 @@ fn require_non_empty(c: &AegisCandidate) -> Result<(), AegisVerifyError> {
         ("policy_version", &c.policy_version),
         ("verifier", &c.verifier),
         ("risk_tier", &c.risk_tier),
+        ("timestamp", &c.timestamp),
     ] {
         if value.trim().is_empty() {
             return Err(AegisVerifyError::MissingField(field.into()));

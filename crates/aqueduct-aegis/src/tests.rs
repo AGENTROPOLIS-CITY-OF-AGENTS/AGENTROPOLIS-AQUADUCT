@@ -64,6 +64,20 @@ fn valid_candidate_deterministic_receipt_id() -> Result<(), Box<dyn std::error::
     Ok(())
 }
 
+#[test]
+fn empty_timestamp_rejected() {
+    let mut c = base_candidate();
+    c.timestamp = "".into();
+    assert!(verified(&c).err().is_some());
+}
+
+#[test]
+fn whitespace_timestamp_rejected() {
+    let mut c = base_candidate();
+    c.timestamp = "   ".into();
+    assert!(verified(&c).err().is_some());
+}
+
 // ---------------- SCHEMA / VERSIONING ----------------
 #[test]
 fn wrong_schema_rejected() {

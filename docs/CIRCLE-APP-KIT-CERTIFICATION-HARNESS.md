@@ -70,11 +70,15 @@ EVIDENCE
       ↓
 PROOF GRAPH
       ↓
+BE EVALUATION
+      ↓
 FORGE CERTIFICATION
+      ↓
+54-T GOVERNANCE / SECURITY REVIEW
       ↓
 AEGIS / HUMAN APPROVAL
       ↓
 PAYRAIL PRODUCTION ENABLEMENT
 ```
 
-A test pass is evidence, not authority.
+A test pass is evidence, not authority. BE remains the explicit evaluator layer, and 54-T performs the required governance/security review before production enablement; neither is bypassed by a generic approval.
