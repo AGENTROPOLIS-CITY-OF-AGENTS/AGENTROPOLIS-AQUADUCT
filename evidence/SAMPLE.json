@@ -1,0 +1,1117 @@
+{
+  "run_id": "run:sample",
+  "provider_ref": "mock-circle-app-kit",
+  "chain_id": 5042002,
+  "created_at": "2026-01-01T00:00:00.000Z",
+  "verifier_ref": "aquaduct-harness",
+  "policy_version_ref": "policy:aquaduct-harness-v1",
+  "proof_envelope_schema": "https://agentropolis.dev/forge/proof-envelope.v1.json",
+  "grants_authority": false,
+  "promotion": "REQUIRES_FORGE_AND_AEGIS",
+  "summary": {
+    "scenarios": 17,
+    "passed": 17,
+    "failed": 0,
+    "proofs": 39
+  },
+  "matrix": [
+    {
+      "id": "provider-discovery",
+      "capability": "DISCOVERY",
+      "checks": [
+        {
+          "name": "declared-capabilities-known",
+          "ok": true,
+          "detail": []
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:001"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "send",
+      "capability": "SEND",
+      "checks": [
+        {
+          "name": "quote-pending",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "execute-settled",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "recipient-bound",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "gas-in-usdc",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "deterministic-finality",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "balance-delta",
+          "ok": true,
+          "detail": {
+            "before": 1000,
+            "after": 975
+          }
+        },
+        {
+          "name": "replay-idempotent",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "replay-no-double-spend",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:002",
+        "proof:run:sample:003",
+        "proof:run:sample:004",
+        "proof:run:sample:005",
+        "proof:run:sample:006"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "send-dual-usdc",
+      "capability": "SEND",
+      "checks": [
+        {
+          "name": "both-interfaces-quoted",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "normalized-net-amount",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "interface-bound-in-quote",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:007"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "quote-binding",
+      "capability": "SEND",
+      "checks": [
+        {
+          "name": "mismatched-quote-refused",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "expired-quote-refused",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:008",
+        "proof:run:sample:009"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "signer-unavailable",
+      "capability": "SEND",
+      "checks": [
+        {
+          "name": "refused-without-signer",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:010"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "bridge",
+      "capability": "BRIDGE",
+      "checks": [
+        {
+          "name": "route-quoted",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "pending-after-burn",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "pending-after-attest",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "settled-after-mint",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "pending-vs-settled-distinct",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:011",
+        "proof:run:sample:012",
+        "proof:run:sample:013",
+        "proof:run:sample:014"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "bridge-partial-recovery",
+      "capability": "BRIDGE",
+      "checks": [
+        {
+          "name": "partial-failure-observed",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "restart-refused",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "resume-continues-from-persisted-state",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "resume-settles",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:015",
+        "proof:run:sample:016",
+        "proof:run:sample:017"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "swap",
+      "capability": "SWAP",
+      "checks": [
+        {
+          "name": "quote-within-slippage",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "swap-settled",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:018",
+        "proof:run:sample:019",
+        "proof:run:sample:020"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "swap-slippage-breach",
+      "capability": "SWAP",
+      "checks": [
+        {
+          "name": "slippage-breach-refused",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:021",
+        "proof:run:sample:022"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "fee-limit",
+      "capability": "BRIDGE",
+      "checks": [
+        {
+          "name": "fee-limit-refused",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:023",
+        "proof:run:sample:024"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "unified-balance",
+      "capability": "UNIFIED_BALANCE",
+      "checks": [
+        {
+          "name": "deposit-settled",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "unified-balance-reconciles",
+          "ok": true,
+          "detail": 29.995
+        },
+        {
+          "name": "spend-settled",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "delegated-authority-bound",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "overspend-fails",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:025",
+        "proof:run:sample:026",
+        "proof:run:sample:027",
+        "proof:run:sample:028"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "onramp",
+      "capability": "ONRAMP",
+      "checks": [
+        {
+          "name": "session-or-refusal",
+          "ok": true,
+          "detail": "SESSION_CREATED"
+        },
+        {
+          "name": "secret-handle-not-secret",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:029"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "onramp-missing-key",
+      "capability": "ONRAMP",
+      "checks": [
+        {
+          "name": "missing-key-refused",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:030"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "earn",
+      "capability": "EARN",
+      "checks": [
+        {
+          "name": "preview-pending",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "deposit-settled",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "withdraw-settled",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "position-limit-refused",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:031",
+        "proof:run:sample:032",
+        "proof:run:sample:033",
+        "proof:run:sample:034",
+        "proof:run:sample:035"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "mainnet-refused",
+      "capability": "CHAIN",
+      "checks": [
+        {
+          "name": "mainnet-quote-refused",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "mainnet-execute-refused",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:036"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "54t-containment",
+      "capability": "CONTAINMENT",
+      "checks": [
+        {
+          "name": "refused-before-provider",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "containment-state",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:037",
+        "proof:run:sample:038"
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "capability-coverage",
+      "capability": "DISCOVERY",
+      "checks": [
+        {
+          "name": "declared-all-exercised",
+          "ok": true,
+          "detail": []
+        },
+        {
+          "name": "exercised-all-declared",
+          "ok": true,
+          "detail": []
+        }
+      ],
+      "proof_ids": [
+        "proof:run:sample:039"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "proofs": [
+    {
+      "proof_id": "proof:run:sample:001",
+      "proof_class": "ProofOfCapability",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": null,
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:3ff4d06d2afce5fbb6209c8a39afc46a8103f1e8f73b4bd4206314054e9f62b8"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:002",
+      "proof_class": "ProofOfQuote",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:send-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:9391be42d67acd3379adc8e9261a21b53f114183b5a3c01d4c3c618cc15d34a3"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:003",
+      "proof_class": "ProofOfExecution",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:send-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:ed87627ade3edb2a92fbc63331ed71ac46e4c05712eeb73bfb48c5e490de2cbb"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:004",
+      "proof_class": "ProofOfBalanceChange",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:send-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:9c06a34216fe31be450259a2feb2c2451503daf1cb05e2748a7b7d3efbd9efee",
+        "sha256:04081fd35e086cd34f1908afea00a22facc14d23fdf9e79d0ab24f1f205d3e3a"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:005",
+      "proof_class": "ProofOfSettlement",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:send-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:ed87627ade3edb2a92fbc63331ed71ac46e4c05712eeb73bfb48c5e490de2cbb"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:006",
+      "proof_class": "ProofOfOutcome",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:send-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:b420ab755b2e3d523e8481a78cc281893c9b215ddf5167d6d0d8bc94fe3bf028"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:007",
+      "proof_class": "ProofOfRoute",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:send-native",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:e40dc1c0156162f48383dfd942a56a89dd5f3eaf1b08dad7357860ec5dac14d9",
+        "sha256:af2fb493705c9b249dc6e5b78e28ef61d1cd52070acbd15255251e71e005b2fa"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:008",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:send-bind",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:206d22a46d12aba8673c11ff0c0fdabe0d9c4fd44cb45849bf98d7e82eea0559"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:009",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:send-expired",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:3627d63ce260f49760c244a36c405061197da49a89e66e6e16d384ab127a38c0"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:010",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:send-nosigner",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:c4ae84424112c7be4aae72b6d0ab04a62df1db338637dcb4db1de900609812c8"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:011",
+      "proof_class": "ProofOfRoute",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:bridge-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:78079f503b7271cf40d8cbc8dfb5a78cbceac4e7bc3f0f3b214efcc826359169"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:012",
+      "proof_class": "ProofOfQuote",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:bridge-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:78079f503b7271cf40d8cbc8dfb5a78cbceac4e7bc3f0f3b214efcc826359169"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:013",
+      "proof_class": "ProofOfExecution",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:bridge-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:fcfe3ccae1a3e496252c8409e55f695d951f7a4231130d88017f8f7f5c6ed8e6"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:014",
+      "proof_class": "ProofOfSettlement",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:bridge-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:fcfe3ccae1a3e496252c8409e55f695d951f7a4231130d88017f8f7f5c6ed8e6",
+        "sha256:3d0db2ddf439cb525d2ea2d772cb371bf92b11367f08d4f11fec84718e9abc86",
+        "sha256:6d9c56137e6dc899c027ca3e3022ff3819378263967284cb34a03c895d7683c3"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:015",
+      "proof_class": "ProofOfPartialExecution",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:bridge-partial",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:d626d7b78636cbb2111c68b0b6b0554491de160482674a31f39a3dae25dc518f",
+        "sha256:4b2f1d108e41fbef3558407f73aed249fc4302b1753befe2e2cc645ae44518cd"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:016",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:bridge-partial",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:a36825c25eb3c82ad872617acc95a24fd33da255153178ae24229ffe9cc79299"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:017",
+      "proof_class": "ProofOfRecovery",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:bridge-partial",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:cd8363d4e70c811015d3326b86ccbc393ad8ee811e12e3bec5991242930e9541",
+        "sha256:f80e670df28077f6d668d3edb96b64e08f6ebf7c65974bd9dd68c75795d2ede6"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:018",
+      "proof_class": "ProofOfQuote",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:swap-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:54f860385f020043d83a1a0d3ccd41c45a770cf7905465eb8c69a994f4cc0d0b"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:019",
+      "proof_class": "ProofOfExecution",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:swap-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:97916bbdb8a3cefd721b456865c206e74502f2222cc73d1433667f0eb9a3972d"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:020",
+      "proof_class": "ProofOfFiscalDiscipline",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:swap-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:2504849c4b0434d24812da865e2e86a813315b983726ecca2d86d2726e1fa46b"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:021",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:swap-breach",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:755f20dcf4867a7447c896f6ae28cad09de79d243bfd7e77a67488e862ac07b3"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:022",
+      "proof_class": "ProofOfFiscalDiscipline",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:swap-breach",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:755f20dcf4867a7447c896f6ae28cad09de79d243bfd7e77a67488e862ac07b3"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:023",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:bridge-fee",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:b3a1959c0c68b112142adf08ad0913d401bb30186a0ec9b928451e8290bc60e4"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:024",
+      "proof_class": "ProofOfFiscalDiscipline",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:bridge-fee",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:b3a1959c0c68b112142adf08ad0913d401bb30186a0ec9b928451e8290bc60e4"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:025",
+      "proof_class": "ProofOfExecution",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:ub-dep",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:2d3797f7ba3dbef164c0ae812a694fd243fff9801bc622014d6eed45fefdf1f4"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:026",
+      "proof_class": "ProofOfBalanceChange",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:ub-dep",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:0c53addbf163f3eb7aa648f11f8e41faf9db1c3218ee4476d634c0c9615cac10"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:027",
+      "proof_class": "ProofOfExecution",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:ub-spend",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:9a9589253e7282d6458ec7e9cb8e5b916de3e43d766d923cd479af315804f269"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:028",
+      "proof_class": "ProofOfOutcome",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:ub-over",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:e2c27ad0dc613621e1de1c23c69292f05f04f38e2cad64fe497f4002b673e5a5"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:029",
+      "proof_class": "ProofOfExecution",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:onramp-1",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:96658cef46d3d2c527b93f43adae9091b5a19d6cc3ca117a0ac4f62c01245f1c"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:030",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:onramp-nokey",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:6f3ffc8bece2a54d23123619a5e30892bd3c56b1dfc3aa27d6a3b9debafd2c80"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:031",
+      "proof_class": "ProofOfQuote",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:earn-dep",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:8d81563c55f2d54dda826e5ca11ac9a8e498c3ae2014f883442dbc7afec7dc00"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:032",
+      "proof_class": "ProofOfExecution",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:earn-dep",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:7c83ed077b3cd8847e25749863247de81c33e6b5df3e5e9da6adbc69bbdfd8b3"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:033",
+      "proof_class": "ProofOfExecution",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:earn-wd",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:2a5bbed16724cfe2a99c07036989d6a9ff93edb5828e3576fbb90e17cf8eb96d"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:034",
+      "proof_class": "ProofOfOutcome",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:earn-wd",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:7c83ed077b3cd8847e25749863247de81c33e6b5df3e5e9da6adbc69bbdfd8b3",
+        "sha256:2a5bbed16724cfe2a99c07036989d6a9ff93edb5828e3576fbb90e17cf8eb96d"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:035",
+      "proof_class": "ProofOfFiscalDiscipline",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:earn-over",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:5920af5077cc3ae072882abfd8e3a75e4ecb742c3a6e95296b413283c87b9826"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:036",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:mainnet-send",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:a763ef9e9856fd2ab55e79c6579bbfbd36669d9e7497d94597c1aeb26f0487b6",
+        "sha256:a763ef9e9856fd2ab55e79c6579bbfbd36669d9e7497d94597c1aeb26f0487b6"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:037",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:leaky",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:539001fae2f1650ddc8132703199ea598e1204259983ad8822639209da588567"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:038",
+      "proof_class": "ProofOfRefusal",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": "intent:leaky-nested",
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:bb920fb346cd5f2f7684d7a81b9e5d114729b58b903f364a0508145bee184a54"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    },
+    {
+      "proof_id": "proof:run:sample:039",
+      "proof_class": "ProofOfCapability",
+      "agent_entity_ref": "agententity:harness-actor",
+      "intent_ref": null,
+      "mandate_ref": "mandate:harness-sandbox",
+      "execution_envelope_ref": null,
+      "evidence_refs": [
+        "sha256:4d706af3a741629caf34c8ba87002baa597a1eece644a58bcc626ef0b2654f9f"
+      ],
+      "verifier_ref": "aquaduct-harness",
+      "policy_version_ref": "policy:aquaduct-harness-v1",
+      "security_attestation_ref": null,
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "status": "VERIFIED",
+      "grants_authority": false
+    }
+  ]
+}
