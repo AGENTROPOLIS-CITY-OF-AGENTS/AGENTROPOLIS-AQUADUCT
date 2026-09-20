@@ -1,5 +1,5 @@
 {
-  "schema": "agentropolis.aquaduct.testnet-registry.v1",
+  "schema": "agentropolis.aquaduct.testnet-registry.v2",
   "generatedAt": "2026-09-19",
   "policy": {
     "scope": "public test/dev/stage/preview networks relevant to AGENTROPOLIS rails plus networks exposed by approved multi-network test faucets",
@@ -13,7 +13,18 @@
       "adapter-ready",
       "executable"
     ],
-    "defaultExecutionState": "disabled"
+    "defaultExecutionState": "disabled",
+    "mainnetCounterpartsCatalogued": true,
+    "mainnetExecutionAllowed": false,
+    "mainnetObservationViaTestnetPayment": "provider-rpc-only",
+    "fastLaneOrder": [
+      "virtual-testnet",
+      "programmatic-faucet",
+      "faucet-api",
+      "multi-chain-faucet",
+      "chain-native-faucet",
+      "human-fallback"
+    ]
   },
   "networks": [
     {
@@ -33,9 +44,26 @@
           "provider": "Robinhood",
           "url": "https://faucet.testnet.chain.robinhood.com",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "ethereum-sepolia",
@@ -54,9 +82,30 @@
           "provider": "Ethereum.org",
           "url": "https://ethereum.org/developers/docs/networks/",
           "automation": "mixed"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "ethereum-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "ethereum-hoodi",
@@ -75,9 +124,30 @@
           "provider": "Ethereum.org",
           "url": "https://ethereum.org/developers/docs/networks/",
           "automation": "mixed"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "ethereum-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "base-sepolia",
@@ -102,9 +172,30 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "base-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "op-sepolia",
@@ -129,9 +220,24 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "op-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "arbitrum-sepolia",
@@ -156,9 +262,24 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "arbitrum-one",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "polygon-amoy",
@@ -183,9 +304,30 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "polygon-pos-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "avalanche-fuji",
@@ -210,9 +352,24 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "avalanche-c-chain",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "bsc-testnet",
@@ -231,9 +388,30 @@
           "provider": "BNB Chain",
           "url": "https://www.bnbchain.org/en/testnet-faucet",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "bsc-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "scroll-sepolia",
@@ -254,7 +432,16 @@
           "automation": "mixed"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "scroll-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "starknet-sepolia",
@@ -275,7 +462,12 @@
           "automation": "mixed"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "starknet-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "zksync-sepolia",
@@ -300,9 +492,30 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "zksync-era-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "linea-sepolia",
@@ -323,7 +536,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "linea-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "unichain-sepolia",
@@ -348,9 +570,24 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "unichain-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "ink-sepolia",
@@ -375,9 +612,24 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "ink-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "worldchain-sepolia",
@@ -404,7 +656,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "world-chain-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "zora-sepolia",
@@ -425,7 +686,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "zora-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "mode-sepolia",
@@ -446,7 +716,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "mode-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "lisk-sepolia",
@@ -467,7 +746,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "lisk-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "cyber-sepolia",
@@ -486,9 +774,24 @@
           "provider": "Superchain Faucet",
           "url": "https://console.optimism.io/faucet",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "cyber-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "metal-sepolia",
@@ -509,7 +812,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "metal-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "bob-sepolia",
@@ -530,7 +842,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "bob-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "shape-sepolia",
@@ -551,7 +872,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "shape-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "minato-sepolia",
@@ -572,7 +902,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "soneium-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "arc-testnet",
@@ -593,7 +932,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "hedera-testnet",
@@ -620,7 +964,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "hedera-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "hedera-previewnet",
@@ -641,7 +990,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "hedera-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "solana-devnet",
@@ -672,9 +1026,26 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "solana-mainnet-beta",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "solana-testnet",
@@ -693,9 +1064,26 @@
           "provider": "Solana CLI",
           "url": "https://solana.com/docs/references/clusters",
           "automation": "programmatic"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "solana-mainnet-beta",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "xrpl-testnet",
@@ -722,7 +1110,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "xrpl-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "xrpl-devnet",
@@ -743,7 +1136,12 @@
           "automation": "mixed"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "xrpl-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "xrpl-xahau-testnet",
@@ -764,7 +1162,8 @@
           "automation": "mixed"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": null
     },
     {
       "id": "xrpl-lending-devnet",
@@ -785,7 +1184,12 @@
           "automation": "mixed"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "xrpl-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "xrpl-wasm-devnet",
@@ -806,7 +1210,12 @@
           "automation": "mixed"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "xrpl-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "stellar-testnet",
@@ -833,7 +1242,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "stellar-public",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "stellar-futurenet",
@@ -854,7 +1268,12 @@
           "automation": "programmatic"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "stellar-public",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "sui-testnet",
@@ -881,7 +1300,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "sui-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "sui-devnet",
@@ -902,7 +1326,12 @@
           "automation": "mixed"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "sui-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "aptos-testnet",
@@ -929,7 +1358,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "aptos-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "aptos-devnet",
@@ -950,7 +1384,12 @@
           "automation": "mixed"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "aptos-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "polkadot-paseo",
@@ -971,7 +1410,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "polkadot-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "polkadot-westend",
@@ -992,7 +1436,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "polkadot-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "monero-stagenet",
@@ -1013,7 +1462,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#ff7a18"
+      "color": "#ff7a18",
+      "mainnetCounterpart": {
+        "id": "monero-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "monero-testnet",
@@ -1034,7 +1488,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#ff7a18"
+      "color": "#ff7a18",
+      "mainnetCounterpart": {
+        "id": "monero-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "tron-shasta",
@@ -1055,7 +1514,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "tron-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "tron-nile",
@@ -1076,7 +1540,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "tron-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "cronos-testnet",
@@ -1097,7 +1566,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "cronos-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "dogecoin-testnet",
@@ -1118,7 +1596,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "dogecoin-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "algorand-testnet",
@@ -1139,7 +1622,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "algorand-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "near-testnet",
@@ -1166,7 +1654,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "near-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
     },
     {
       "id": "celo-sepolia",
@@ -1187,7 +1680,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "celo-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "codex-sepolia",
@@ -1208,7 +1710,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "hyperevm-testnet",
@@ -1227,9 +1734,30 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "hyperevm-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "monad-testnet",
@@ -1248,9 +1776,26 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "noble-testnet",
@@ -1271,7 +1816,8 @@
           "automation": "human-required"
         }
       ],
-      "color": "#b7ff33"
+      "color": "#b7ff33",
+      "mainnetCounterpart": null
     },
     {
       "id": "plume-testnet",
@@ -1292,7 +1838,12 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "sei-testnet",
@@ -1317,9 +1868,24 @@
           "provider": "Circle",
           "url": "https://faucet-v2.circle.com/",
           "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "sei-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "sonic-testnet",
@@ -1346,7 +1912,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "sonic-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "xdc-apothem",
@@ -1373,7 +1948,16 @@
           "automation": "human-required"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "xdc-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     },
     {
       "id": "litvm-liteforge",
@@ -1394,7 +1978,276 @@
           "automation": "manual"
         }
       ],
-      "color": "#28efff"
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "blast-sepolia",
+      "name": "Blast",
+      "network": "Blast Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.blast.io/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "blast-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "berachain-bepolia",
+      "name": "Berachain",
+      "network": "bepolia",
+      "asset": "BERA",
+      "family": "EVM / Cosmos",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.berachain.com/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "berachain-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "morph-holesky",
+      "name": "Morph",
+      "network": "Testnet",
+      "asset": "ETH",
+      "family": "EVM / Rollup",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.morphl2.io/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "morph-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "mantle-sepolia",
+      "name": "Mantle",
+      "network": "Sepolia",
+      "asset": "MNT",
+      "family": "EVM / Rollup",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.mantle.xyz/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "mantle-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "story-aeneid",
+      "name": "Story",
+      "network": "Aeneid Testnet",
+      "asset": "IP",
+      "family": "EVM / Story",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.story.foundation/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "story-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "plasma-testnet",
+      "name": "Plasma",
+      "network": "Testnet",
+      "asset": "XPL",
+      "family": "EVM / Plasma",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.plasma.to/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "ton-testnet",
+      "name": "TON",
+      "network": "Testnet",
+      "asset": "TON",
+      "family": "TON",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "TonAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.ton.org/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "ton-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "xlayer-testnet",
+      "name": "XLayer",
+      "network": "Testnet",
+      "asset": "OKB",
+      "family": "EVM / XLayer",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://www.okx.com/xlayer/docs/developer/quick-start",
+      "funding": [
+        {
+          "kind": "test-payment-token",
+          "provider": "QuickNode x402",
+          "url": "https://www.quicknode.com/x402",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "xlayer-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "stable-testnet",
+      "name": "Stable",
+      "network": "Testnet",
+      "asset": "USDT",
+      "family": "EVM / Stable",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.stable.xyz/",
+      "funding": [
+        {
+          "kind": "provider-faucet",
+          "provider": "Alchemy",
+          "url": "https://www.alchemy.com/rpc/stable-testnet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
     }
   ]
 }
