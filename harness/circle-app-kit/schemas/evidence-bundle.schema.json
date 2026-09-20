@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentropolis.dev/aquaduct/circle-app-kit/evidence-bundle.v1.json",
+  "title": "AQUADUCT Circle App Kit conformance evidence bundle",
+  "description": "Certification evidence emitted by the AQUADUCT harness. Evidence never grants authority; promotion requires Forge certification and AEGIS approval.",
+  "type": "object",
+  "required": ["run_id", "provider_ref", "chain_id", "created_at", "verifier_ref", "policy_version_ref", "proof_envelope_schema", "grants_authority", "promotion", "summary", "matrix", "proofs"],
+  "properties": {
+    "run_id": { "type": "string" },
+    "provider_ref": { "type": "string" },
+    "chain_id": { "const": 5042002 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "verifier_ref": { "const": "aquaduct-harness" },
+    "policy_version_ref": { "type": "string" },
+    "proof_envelope_schema": { "const": "https://agentropolis.dev/forge/proof-envelope.v1.json" },
+    "grants_authority": { "const": false },
+    "promotion": { "const": "REQUIRES_FORGE_AND_AEGIS" },
+    "summary": {
+      "type": "object",
+      "required": ["scenarios", "passed", "failed", "proofs"],
+      "properties": {
+        "scenarios": { "type": "integer" },
+        "passed": { "type": "integer" },
+        "failed": { "type": "integer" },
+        "proofs": { "type": "integer" }
+      }
+    },
+    "matrix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "capability", "status", "checks", "proof_ids"],
+        "properties": {
+          "id": { "type": "string" },
+          "capability": { "type": "string" },
+          "status": { "enum": ["PASS", "FAIL"] },
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "ok"],
+              "properties": { "name": { "type": "string" }, "ok": { "type": "boolean" } }
+            }
+          },
+          "proof_ids": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "proofs": {
+      "type": "array",
+      "items": { "$ref": "https://agentropolis.dev/forge/proof-envelope.v1.json" }
+    }
+  }
+}

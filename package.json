@@ -1,0 +1,13 @@
+{
+  "name": "agentropolis-aquaduct",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test harness/circle-app-kit/test/",
+    "harness:mock": "node harness/circle-app-kit/run.mjs --provider mock --out evidence/",
+    "validate:static": "node scripts/validate-static.mjs"
+  }
+}

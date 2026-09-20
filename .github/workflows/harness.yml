@@ -1,0 +1,37 @@
+name: Circle App Kit Conformance Harness
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'harness/**'
+      - 'evidence/SAMPLE.json'
+      - 'package.json'
+      - '.github/workflows/harness.yml'
+  pull_request:
+    paths:
+      - 'harness/**'
+      - 'evidence/SAMPLE.json'
+      - 'package.json'
+      - '.github/workflows/harness.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Harness tests (offline, mock provider)
+        run: npm test
+      - name: Mock evidence run
+        run: node harness/circle-app-kit/run.mjs --provider mock --out evidence/ci
+      - name: Evidence never grants authority
+        run: |
+          grep -q '"grants_authority": false' evidence/ci/*.json
+          grep -q '"promotion": "REQUIRES_FORGE_AND_AEGIS"' evidence/ci/*.json
+          ! grep -q '"grants_authority": true' evidence/ci/*.json

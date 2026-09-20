@@ -17,3 +17,11 @@ dist/
 # OS/editor noise
 .DS_Store
 Thumbs.db
+
+# Rust build artifacts
+/target/
+/crates/*/target/
+
+# Harness evidence output (only the committed mock sample is tracked)
+/evidence/*
+!/evidence/SAMPLE.json
