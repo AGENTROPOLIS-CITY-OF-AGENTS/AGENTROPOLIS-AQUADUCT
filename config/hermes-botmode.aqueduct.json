@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "profileId": "agentropolis.aqueduct.botmode",
   "name": "AQUEDUCT BOT MODE",
   "district": "AGENTROPOLIS AQUEDUCT",
@@ -13,6 +13,12 @@
       "transport": "websocket",
       "url": null,
       "publicTelemetryOnly": true
+    },
+    "agentd": {
+      "component": "aqueduct-agentd",
+      "executionScope": "testnet-faucet-provisioning",
+      "deploymentClaimed": false,
+      "preferredDispatch": "one-pass-cron"
     }
   },
   "authority": {
@@ -22,7 +28,9 @@
       "testnet-only",
       "no-private-keys-in-browser",
       "no-seed-material",
+      "registered-public-wallet-addresses-only",
       "provider-rate-limits-authoritative",
+      "provider-cooldowns-enforced",
       "no-captcha-bypass",
       "no-mainnet-execution",
       "receipt-required"
@@ -35,6 +43,7 @@
       "WALLET_ATLAS",
       "AQUEDUCT_MCP",
       "AQUEDUCT_AGENT_KIT",
+      "AQUEDUCT_AGENTD",
       "CHAINWELLS",
       "VEILWELL"
     ],
@@ -61,6 +70,13 @@
       "role": "registry",
       "color": "#28efff",
       "responsibilities": ["wallet-family-resolution", "network-resolution", "balance-observation"]
+    },
+    {
+      "id": "agentd",
+      "name": "AQUEDUCT AGENTD",
+      "role": "testnet-faucet-executor",
+      "color": "#39ff88",
+      "responsibilities": ["balance-threshold-observation", "machine-callable-faucet-execution", "provider-cooldown-enforcement", "post-funding-verification", "receipt-emission"]
     },
     {
       "id": "route-engine",
@@ -91,15 +107,7 @@
       "responsibilities": ["xmr-stagenet-policy", "remote-node-risk", "wallet-rpc-isolation", "mainnet-deny"]
     }
   ],
-  "workflow": [
-    "DISCOVER",
-    "MEASURE",
-    "AUTHORIZE",
-    "ROUTE",
-    "EXECUTE",
-    "VERIFY",
-    "RECEIPT"
-  ],
+  "workflow": ["DISCOVER", "MEASURE", "AUTHORIZE", "ROUTE", "EXECUTE", "VERIFY", "RECEIPT"],
   "chainFamilies": [
     {"id":"evm","label":"EVM","color":"#8ea1ff"},
     {"id":"solana","label":"SOLANA","color":"#14f195"},
@@ -111,17 +119,6 @@
   ],
   "receipt": {
     "required": true,
-    "fields": [
-      "profileId",
-      "agentId",
-      "network",
-      "walletId",
-      "provider",
-      "amount",
-      "policyDecision",
-      "transactionId",
-      "verificationState",
-      "timestamp"
-    ]
+    "fields": ["profileId", "agentId", "network", "walletId", "provider", "amount", "policyDecision", "transactionId", "verificationState", "timestamp"]
   }
 }
