@@ -1,0 +1,82 @@
+{
+  "schema": "agentropolis.aquaduct.provisioning-providers.v1",
+  "generatedAt": "2026-09-19",
+  "policy": {
+    "objective": "minimize developer wait time without bypassing provider anti-abuse controls",
+    "secrets": "server-side capability handles only",
+    "mainnetGasFunding": false,
+    "paidTestnetTokensAreNotAssets": true,
+    "fallbackRule": "fallback may improve availability but may not evade per-provider cooldowns, CAPTCHA, identity gates, or wallet eligibility"
+  },
+  "providers": [
+    {
+      "id": "tenderly-vnet",
+      "name": "Tenderly Virtual TestNets",
+      "lane": "virtual-testnet",
+      "scope": "EVM mainnet forks",
+      "capability": "fork live production state and provision test balances without public faucet scarcity",
+      "tokenModel": "unlimited virtual native/ERC-20 balance controls inside isolated VNet",
+      "publicTestnetEquivalent": false,
+      "priority": 1,
+      "url": "https://tenderly.co/virtual-testnets"
+    },
+    {
+      "id": "quicknode-faucet",
+      "name": "QuickNode Multi-Chain Faucet",
+      "lane": "public-testnet",
+      "scope": "22 current blockchain families",
+      "capability": "multi-chain public testnet funding",
+      "paidAcceleration": "paid-plan users receive larger drips and priority where offered",
+      "priority": 2,
+      "url": "https://faucet.quicknode.com/drip"
+    },
+    {
+      "id": "chainstack-faucet-api",
+      "name": "Chainstack Faucet API",
+      "lane": "public-testnet",
+      "scope": "multi-chain",
+      "capability": "API-backed faucet requests plus web fallback",
+      "allocationPath": "protocol teams can contact Chainstack about faucet-token allocations",
+      "priority": 3,
+      "url": "https://faucet.chainstack.com/"
+    },
+    {
+      "id": "chain-native",
+      "name": "Chain-native faucets",
+      "lane": "public-testnet",
+      "scope": "per-network",
+      "capability": "official chain faucet, friendbot, airdrop, developer portal, or native test utility",
+      "priority": 4
+    },
+    {
+      "id": "circle-faucet",
+      "name": "Circle Testnet Faucet",
+      "lane": "test-stablecoin",
+      "scope": "supported USDC test networks",
+      "capability": "test USDC for payment and settlement flows",
+      "priority": 5,
+      "url": "https://faucet-v2.circle.com/"
+    },
+    {
+      "id": "alchemy-faucet",
+      "name": "Alchemy Faucets",
+      "lane": "public-testnet",
+      "scope": "supported Alchemy networks",
+      "capability": "public faucet and RPC development path",
+      "eligibility": "provider-defined wallet activity/balance checks may apply",
+      "priority": 6,
+      "url": "https://www.alchemy.com/faucets"
+    },
+    {
+      "id": "quicknode-x402",
+      "name": "QuickNode x402 / MPP",
+      "lane": "provider-access",
+      "scope": "RPC access across 80+ provider-supported chains",
+      "capability": "testnet payment tokens can currently pay provider request fees, including requests against mainnet endpoints",
+      "mainnetGasIncluded": false,
+      "mainnetTransactionFundsIncluded": false,
+      "priority": 1,
+      "url": "https://www.quicknode.com/x402"
+    }
+  ]
+}

@@ -142,6 +142,8 @@ The Pages surface renders the profile with `botmode.js` and `botmode.css`. The v
 
 ## Represented testnet lanes
 
+The canonical source is `config/testnet-registry.json`. The UI now loads that registry dynamically instead of relying on a fixed Chainwell list. As of 2026-09-19 it contains **60 governed test/dev/stage/preview lanes** with multi-source funding metadata where available. See `docs/TESTNET-COVERAGE.md`.
+
 - Robinhood Chain Testnet
 - Ethereum Sepolia
 - Base Sepolia
