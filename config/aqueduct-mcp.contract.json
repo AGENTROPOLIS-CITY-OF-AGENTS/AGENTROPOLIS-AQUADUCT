@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "service": "agentropolis-aqueduct-mcp",
+  "transport": "streamable-http",
+  "health_path": "/health",
+  "manifest_path": "/.well-known/mcp.json",
+  "endpoint_path": "/mcp",
+  "authority": "testnet-provisioning",
+  "mainnet_allowed": false,
+  "write_default": "deny",
+  "execution_backend": "aqueduct-agentd",
+  "wallet_registry": "WALLET_ATLAS",
+  "faucet_registry": "CHAINWELLS",
+  "policy_engine": "FLOWKEEPER",
+  "receipt_system": "AQUEDUCT_RECEIPTS",
+  "configured": false,
+  "clients": [
+    "hermes-agent",
+    "agentropolis-agent-mcp",
+    "agentropolis-mission-control",
+    "botbae"
+  ],
+  "tools": [
+    {"name":"aqueduct.wallet.resolve","mode":"read"},
+    {"name":"aqueduct.wallet.balance","mode":"read"},
+    {"name":"aqueduct.faucets.discover","mode":"read"},
+    {"name":"aqueduct.faucets.plan","mode":"read"},
+    {"name":"aqueduct.faucets.prime","mode":"write","approval":"policy-gated"},
+    {"name":"aqueduct.faucets.status","mode":"read"},
+    {"name":"aqueduct.faucets.verify","mode":"read"},
+    {"name":"aqueduct.receipts.list","mode":"read"}
+  ],
+  "guardrails": [
+    "testnet-and-stagenet-only",
+    "registered-public-wallet-addresses-only",
+    "no-private-keys",
+    "no-seed-phrases",
+    "no-mainnet-execution",
+    "no-captcha-bypass",
+    "provider-rate-limits-authoritative",
+    "cooldown-enforced",
+    "receipt-required"
+  ],
+  "note": "Runtime base URLs and credentials are operator supplied. This contract never contains wallet secrets, seed phrases, cookies, CAPTCHA tokens, signer credentials, or provider API keys. configured=false means no deployment is claimed by this repository."
+}

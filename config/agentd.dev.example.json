@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "wallet_id": "agentropolis-dev",
+  "interval_secs": 3600,
+  "receipt_dir": "var/aqueduct/receipts",
+  "lanes": [
+    {
+      "enabled": false,
+      "network": "solana-devnet",
+      "asset": "SOL",
+      "address": "3Hgd67zF7KFkhd3mwKF8K7rDsPNu1VbuG75P5sYDeBt6",
+      "minimum_units": 1000000000,
+      "top_up_units": 2000000000,
+      "cooldown_secs": 3600,
+      "provider": "solana_devnet_rpc"
+    },
+    {
+      "enabled": false,
+      "network": "stellar-testnet",
+      "asset": "XLM",
+      "address": "REPLACE_WITH_PUBLIC_STELLAR_TEST_ADDRESS",
+      "minimum_units": 1000000000,
+      "top_up_units": 100000000000,
+      "cooldown_secs": 3600,
+      "provider": "stellar_testnet_friendbot"
+    },
+    {
+      "enabled": false,
+      "network": "xrpl-testnet",
+      "asset": "XRP",
+      "address": "rU95aW9A1znRiZFoa1Q3vPjfzdywBrd2DQ",
+      "minimum_units": 10000000,
+      "top_up_units": 100000000,
+      "cooldown_secs": 3600,
+      "provider": "xrpl_testnet_faucet"
+    },
+    {
+      "enabled": false,
+      "network": "ethereum-sepolia",
+      "asset": "ETH",
+      "address": "0x921b4c20ef5cd65f8678a47b1600c1c2818110c1",
+      "minimum_units": 10000000000000000,
+      "top_up_units": 50000000000000000,
+      "cooldown_secs": 86400,
+      "provider": "human_required"
+    }
+  ]
+}
