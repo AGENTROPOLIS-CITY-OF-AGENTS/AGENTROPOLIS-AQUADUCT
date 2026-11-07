@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AGENTROPOLIS AQUEDUCT is the governed testnet utility network inside HERMES3D Agent City, with Chainwell service stations, HERMES Bot Mode, privacy lanes, Rust authority, BE evaluation, and verifiable receipts.">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#080B10">
   <meta property="og:title" content="AGENTROPOLIS AQUEDUCT">
   <meta property="og:description" content="HERMES3D Agent City Testnet Utility Infrastructure">
   <meta property="og:type" content="website">
@@ -13,10 +13,24 @@
   <meta name="twitter:title" content="AGENTROPOLIS AQUEDUCT">
   <meta name="twitter:description" content="HERMES3D Agent City Testnet Utility Infrastructure">
   <title>AGENTROPOLIS AQUEDUCT | HERMES3D Utility Grid</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="botmode.css">
-  <link rel="stylesheet" href="ui-2027.css">
-  <script src="./agentropolis-loop-baseline.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="board.css">
+  <!-- REMOVED in PR B: the live Pages site serves a stale deploy whose script tag
+       points at the Design System URL, which 404s (verified 2026-11-06 and
+       2026-11-07) and throws a SyntaxError on every load. Main already rewired
+       the tag to the vendored local file agentropolis-loop-baseline.js
+       (SHA 15254b44, Oct 14 "use vendored loop baseline" commit), but the live
+       site never picked that up: pages.yml deploys on push to main only after
+       scripts/validate-static.mjs passes, so a failing validate step leaves the
+       old deploy live. Restoring the vendored tag here would also collide with
+       the spatial-runtime widget: both are fixed bottom-right at right:14px
+       bottom:14px, so the QRAG trigger would sit exactly under the SPATIAL
+       GRID trigger and be unclickable. Follow-up for NEURO: restore the local
+       file AND resolve the corner collision (offset one widget), or leave the
+       tag out; and separately check why the pages deploy is stale. -->
+  <script src="tower-board-kit.js" defer></script>
 </head>
 <body>
   <canvas id="aqueduct3d" aria-label="HERMES3D AGENTROPOLIS city with AQUEDUCT Chainwell utility stations"></canvas>
@@ -49,7 +63,7 @@
     <section id="map" class="hero city-command section" aria-labelledby="cityTitle">
       <div class="crt-vignette" aria-hidden="true"></div>
 
-      <aside class="systems-rail reveal" aria-label="Agent City systems">
+      <aside class="systems-rail reveal anim-fade-slide-right delay-100" aria-label="Agent City systems">
         <div class="rail-heading">
           <p class="micro red">AGENT CITY</p>
           <h2>SYSTEMS</h2>
@@ -68,7 +82,7 @@
         </div>
       </aside>
 
-      <section class="city-stage reveal" aria-label="HERMES3D live city model">
+      <section class="city-stage reveal anim-fade-in delay-200" aria-label="HERMES3D live city model">
         <div class="city-stage-head">
           <div>
             <p class="micro cyan">HERMES3D / LIVE CITY MODEL</p>
@@ -97,7 +111,7 @@
         </div>
       </section>
 
-      <aside class="utility-context reveal" aria-label="AQUEDUCT utility context">
+      <aside class="utility-context reveal anim-fade-slide-left delay-300" aria-label="AQUEDUCT utility context">
         <div class="context-head">
           <p class="micro cyan">AQUEDUCT UTILITY</p>
           <h2>CHAINWELL SERVICE</h2>
@@ -111,7 +125,7 @@
         </div>
 
         <dl class="utility-metrics">
-          <div><dt>CHAINWELLS</dt><dd id="chainCount">--</dd></div>
+          <div><dt>CHAINWELLS</dt><dd id="chainCount" class="countup" data-target="15">0</dd></div>
           <div><dt>AUTHORITY</dt><dd>RUST</dd></div>
           <div><dt>EVALUATOR</dt><dd class="green">BE READY</dd></div>
           <div><dt>GOVERNANCE</dt><dd class="red">54-T READY</dd></div>

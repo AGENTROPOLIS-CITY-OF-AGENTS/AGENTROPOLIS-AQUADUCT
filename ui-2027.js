@@ -1,6 +1,10 @@
 import "./spatial-runtime.js";
 
-const cssHref = new URL("./ui-2027.css", import.meta.url).href;
+// PR B: retargeted from ./ui-2027.css to ./board.css. ui-2027.css is unlinked
+// from index.html; leaving this pointing at ui-2027.css would re-inject the old
+// stylesheet (with its !important rules) at runtime and defeat the restyle.
+// board.css is already linked in index.html, so this guard now no-ops.
+const cssHref = new URL("./board.css", import.meta.url).href;
 if (![...document.styleSheets].some((sheet) => sheet.href === cssHref)) {
   const link = document.createElement("link");
   link.rel = "stylesheet";
