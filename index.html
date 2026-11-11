@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="botmode.css">
   <link rel="stylesheet" href="ui-2027.css">
+  <link rel="stylesheet" href="guide.css">
   <script src="./agentropolis-loop-baseline.js" defer></script>
 </head>
 <body>
@@ -77,6 +78,7 @@
           <div class="city-stage-status">
             <span><i class="status-led green"></i> CITY ONLINE</span>
             <span><i class="status-led cyan"></i> UTILITY FLOW</span>
+            <span>PREVIEW · TESTNET ONLY</span>
           </div>
         </div>
 
@@ -126,6 +128,42 @@
           <strong>NO KEYS IN BROWSER</strong>
         </div>
       </aside>
+    </section>
+
+    <section id="guide" class="guide-section" aria-labelledby="guideTitle">
+      <div class="guide-panel">
+        <div class="guide-top">
+          <p class="guide-eyebrow">NAVIGATOR · GUIDE</p>
+          <span class="guide-badge">PREVIEW · NOT LIVE</span>
+        </div>
+        <h2 id="guideTitle">First, tell me what you came for.</h2>
+        <p class="guide-lede">Pick what you came to do. No account. No keys. Just pick one.</p>
+        <div class="guide-actions">
+          <a class="guide-card" href="#faucets">
+            <span class="guide-step">01 · CHAINWELL</span>
+            <strong>Pick a Chainwell</strong>
+            <span class="guide-desc">Open the registry and find the service station for the testnet resource you need.</span>
+            <span class="guide-go">VIEW STATIONS</span>
+          </a>
+          <a class="guide-card" href="#map">
+            <span class="guide-step">02 · STATUS</span>
+            <strong>Check status</strong>
+            <span class="guide-desc">See what is online, what is read-only, and what stays denied.</span>
+            <span class="guide-go">SEE STATUS</span>
+          </a>
+          <a class="guide-card" href="#protocol">
+            <span class="guide-step">03 · FLOWKEEPER</span>
+            <strong>See how it works</strong>
+            <span class="guide-desc">Follow the service path: discover, authorize, verify, receipt.</span>
+            <span class="guide-go">FOLLOW THE PATH</span>
+          </a>
+        </div>
+        <div class="guide-more">
+          <a href="#veilwell">Veilwell privacy lane</a>
+          <a href="#botmode">HERMES Bot Mode team</a>
+        </div>
+        <p class="guide-frame"><strong>PREVIEW · TESTNET ONLY · NOT LIVE</strong> Guidance is not permission. This page shows the utility. It does not grant access, sign, or execute. Execution is disabled. Receipts are required.</p>
+      </div>
     </section>
 
     <section id="botmode" class="botmode-section">
@@ -247,6 +285,7 @@
   <footer class="footer">
     <div class="footer-rail"><span>HERMES3D</span><b>+</b><span>AQUEDUCT</span><b>+</b><span>BOT MODE</span><b>+</b><span>RUST</span><b>+</b><span>BE</span><b>+</b><span>54-T</span></div>
     <p>AGENTROPOLIS AQUEDUCT — governed testnet utility infrastructure inside HERMES3D Agent City.</p>
+    <p class="muted">PREVIEW · NOT LIVE. Guidance is not permission. Testnet only; execution disabled.</p>
   </footer>
 
   <script type="module" src="app.js"></script>
