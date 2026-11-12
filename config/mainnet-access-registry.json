@@ -1,0 +1,68 @@
+{
+  "schema": "agentropolis.aquaduct.mainnet-access.v1",
+  "generatedAt": "2026-09-19",
+  "policy": {
+    "purpose": "catalog and observe production counterparts without granting asset authority",
+    "executionDefault": "deny",
+    "signingDefault": "deny",
+    "spendingDefault": "deny",
+    "rpcObservation": "allowed only through separately scoped provider capability",
+    "note": "testnet-paid RPC access pays the infrastructure provider request; it does not provide mainnet gas or transaction capital"
+  },
+  "providerRoutes": [
+    {
+      "id": "quicknode-x402-mainnet-observation",
+      "provider": "QuickNode",
+      "queryScope": "80+ provider-supported chains including mainnets",
+      "paymentNetworks": [
+        {
+          "network": "Base Sepolia",
+          "token": "USDC",
+          "mode": "testnet"
+        },
+        {
+          "network": "Polygon Amoy",
+          "token": "USDC",
+          "mode": "testnet"
+        },
+        {
+          "network": "Arc Testnet",
+          "token": "USDC",
+          "mode": "testnet"
+        },
+        {
+          "network": "Solana Devnet",
+          "token": "USDC",
+          "mode": "testnet"
+        },
+        {
+          "network": "XLayer Testnet",
+          "token": "USDG",
+          "mode": "testnet"
+        },
+        {
+          "network": "Base Mainnet",
+          "token": "USDC",
+          "mode": "mainnet"
+        },
+        {
+          "network": "Polygon Mainnet",
+          "token": "USDC",
+          "mode": "mainnet"
+        },
+        {
+          "network": "Solana Mainnet",
+          "token": "USDC",
+          "mode": "mainnet"
+        },
+        {
+          "network": "XLayer Mainnet",
+          "token": "USDG",
+          "mode": "mainnet"
+        }
+      ],
+      "authority": "RPC provider payment only",
+      "transactionExecution": "not granted"
+    }
+  ]
+}

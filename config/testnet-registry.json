@@ -1,0 +1,2253 @@
+{
+  "schema": "agentropolis.aquaduct.testnet-registry.v2",
+  "generatedAt": "2026-09-19",
+  "policy": {
+    "scope": "public test/dev/stage/preview networks relevant to AGENTROPOLIS rails plus networks exposed by approved multi-network test faucets",
+    "mainnetAllowed": false,
+    "noHardcodedDripAmounts": true,
+    "providerRulesAuthoritative": true,
+    "humanVerificationMustNotBeBypassed": true,
+    "discoveryLifecycle": [
+      "discovered",
+      "verified",
+      "adapter-ready",
+      "executable"
+    ],
+    "defaultExecutionState": "disabled",
+    "mainnetCounterpartsCatalogued": true,
+    "mainnetExecutionAllowed": false,
+    "mainnetObservationViaTestnetPayment": "provider-rpc-only",
+    "fastLaneOrder": [
+      "virtual-testnet",
+      "programmatic-faucet",
+      "faucet-api",
+      "multi-chain-faucet",
+      "chain-native-faucet",
+      "human-fallback"
+    ]
+  },
+  "networks": [
+    {
+      "id": "robinhood-testnet",
+      "name": "Robinhood Chain",
+      "network": "Testnet",
+      "asset": "ETH",
+      "family": "EVM / Arbitrum",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "ArbitrumAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.robinhood.com/chain/connecting/",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "Robinhood",
+          "url": "https://faucet.testnet.chain.robinhood.com",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "ethereum-sepolia",
+      "name": "Ethereum",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://ethereum.org/developers/docs/networks/",
+      "funding": [
+        {
+          "kind": "provider-faucet-index",
+          "provider": "Ethereum.org",
+          "url": "https://ethereum.org/developers/docs/networks/",
+          "automation": "mixed"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "ethereum-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "ethereum-hoodi",
+      "name": "Ethereum",
+      "network": "Hoodi",
+      "asset": "ETH",
+      "family": "EVM",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://ethereum.org/developers/docs/networks/",
+      "funding": [
+        {
+          "kind": "provider-faucet-index",
+          "provider": "Ethereum.org",
+          "url": "https://ethereum.org/developers/docs/networks/",
+          "automation": "mixed"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "ethereum-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "base-sepolia",
+      "name": "Base",
+      "network": "Base Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "BaseAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.base.org/base-chain/network-information",
+      "funding": [
+        {
+          "kind": "native-gas-faucet-index",
+          "provider": "Base",
+          "url": "https://docs.base.org/base-chain/tools/network-faucets",
+          "automation": "mixed"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "base-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "op-sepolia",
+      "name": "Optimism",
+      "network": "OP Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.optimism.io/chain/networks",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "op-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "arbitrum-sepolia",
+      "name": "Arbitrum",
+      "network": "Arbitrum Sepolia",
+      "asset": "ETH",
+      "family": "EVM / Arbitrum",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "ArbitrumAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.arbitrum.io/",
+      "funding": [
+        {
+          "kind": "provider-faucet-index",
+          "provider": "Ethereum.org",
+          "url": "https://ethereum.org/developers/docs/networks/",
+          "automation": "mixed"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "arbitrum-one",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "polygon-amoy",
+      "name": "Polygon",
+      "network": "Amoy",
+      "asset": "POL",
+      "family": "EVM / Polygon",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "PolygonAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.polygon.technology/pos/reference/rpc-endpoints/",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "Polygon",
+          "url": "https://faucet.polygon.technology/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "polygon-pos-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "avalanche-fuji",
+      "name": "Avalanche",
+      "network": "Fuji C-Chain",
+      "asset": "AVAX",
+      "family": "EVM / Avalanche",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "AvalancheAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://build.avax.network/docs/quick-start/networks/fuji-testnet",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "Avalanche",
+          "url": "https://core.app/tools/testnet-faucet/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "avalanche-c-chain",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "bsc-testnet",
+      "name": "BNB Chain",
+      "network": "BSC Testnet",
+      "asset": "tBNB",
+      "family": "EVM / BNB",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "BnbAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.bnbchain.org/bnb-smart-chain/developers/quick-guide/",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "BNB Chain",
+          "url": "https://www.bnbchain.org/en/testnet-faucet",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "bsc-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "scroll-sepolia",
+      "name": "Scroll",
+      "network": "Scroll Sepolia",
+      "asset": "ETH",
+      "family": "EVM / zkEVM",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.scroll.io/en/developers",
+      "funding": [
+        {
+          "kind": "native-gas-source",
+          "provider": "Scroll",
+          "url": "https://docs.scroll.io/en/developers",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "scroll-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "starknet-sepolia",
+      "name": "Starknet",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "Starknet",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "StarknetAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.starknet.io/",
+      "funding": [
+        {
+          "kind": "provider-faucet-index",
+          "provider": "Ethereum.org",
+          "url": "https://ethereum.org/developers/docs/networks/",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "starknet-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "zksync-sepolia",
+      "name": "ZKsync",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / ZKsync",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.zksync.io/",
+      "funding": [
+        {
+          "kind": "bridge-or-faucet",
+          "provider": "ZKsync",
+          "url": "https://docs.zksync.io/zksync-network/quick-start",
+          "automation": "mixed"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "zksync-era-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "linea-sepolia",
+      "name": "Linea",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / zkEVM",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.linea.build/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "linea-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "unichain-sepolia",
+      "name": "Unichain",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.unichain.org/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "unichain-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "ink-sepolia",
+      "name": "Ink",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.inkonchain.com/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "ink-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "worldchain-sepolia",
+      "name": "World Chain",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.world.org/world-chain/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "world-chain-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "zora-sepolia",
+      "name": "Zora",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.zora.co/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "zora-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "mode-sepolia",
+      "name": "Mode",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.mode.network/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "mode-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "lisk-sepolia",
+      "name": "Lisk",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.lisk.com/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "lisk-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "cyber-sepolia",
+      "name": "Cyber",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.cyber.co/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "cyber-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "metal-sepolia",
+      "name": "Metal",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.metall2.com/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "metal-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "bob-sepolia",
+      "name": "BOB",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.gobob.xyz/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "bob-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "shape-sepolia",
+      "name": "Shape",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.shape.network/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "shape-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "minato-sepolia",
+      "name": "Minato",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.soneium.org/",
+      "funding": [
+        {
+          "kind": "native-gas-faucet",
+          "provider": "Superchain Faucet",
+          "url": "https://console.optimism.io/faucet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "soneium-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "arc-testnet",
+      "name": "Arc",
+      "network": "Arc Testnet",
+      "asset": "USDC",
+      "family": "EVM / Circle",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.arc.network/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "hedera-testnet",
+      "name": "Hedera",
+      "network": "Testnet",
+      "asset": "HBAR",
+      "family": "Hedera",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "HederaAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.hedera.com/",
+      "funding": [
+        {
+          "kind": "developer-portal",
+          "provider": "Hedera Portal",
+          "url": "https://portal.hedera.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "hedera-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "hedera-previewnet",
+      "name": "Hedera",
+      "network": "Previewnet",
+      "asset": "HBAR",
+      "family": "Hedera",
+      "category": "non-evm",
+      "environment": "previewnet",
+      "adapter": "HederaAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.hedera.com/",
+      "funding": [
+        {
+          "kind": "developer-portal",
+          "provider": "Hedera Portal",
+          "url": "https://portal.hedera.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "hedera-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "solana-devnet",
+      "name": "Solana",
+      "network": "Devnet",
+      "asset": "SOL",
+      "family": "Solana",
+      "category": "non-evm",
+      "environment": "devnet",
+      "adapter": "SolanaAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://solana.com/docs/references/clusters",
+      "funding": [
+        {
+          "kind": "programmatic-airdrop",
+          "provider": "Solana CLI",
+          "url": "https://solana.com/docs/references/clusters",
+          "automation": "programmatic"
+        },
+        {
+          "kind": "web-faucet",
+          "provider": "Solana Foundation",
+          "url": "https://faucet.solana.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "solana-mainnet-beta",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "solana-testnet",
+      "name": "Solana",
+      "network": "Testnet",
+      "asset": "SOL",
+      "family": "Solana",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "SolanaAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://solana.com/docs/references/clusters",
+      "funding": [
+        {
+          "kind": "programmatic-airdrop",
+          "provider": "Solana CLI",
+          "url": "https://solana.com/docs/references/clusters",
+          "automation": "programmatic"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "solana-mainnet-beta",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "xrpl-testnet",
+      "name": "XRPL",
+      "network": "Testnet",
+      "asset": "XRP",
+      "family": "XRPL",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "XrplAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://xrpl.org/docs/concepts/networks-and-servers/parallel-networks",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "XRPL",
+          "url": "https://xrpl.org/resources/dev-tools/xrp-faucets",
+          "automation": "mixed"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "xrpl-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "xrpl-devnet",
+      "name": "XRPL",
+      "network": "Devnet",
+      "asset": "XRP",
+      "family": "XRPL",
+      "category": "non-evm",
+      "environment": "devnet",
+      "adapter": "XrplAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://xrpl.org/docs/concepts/networks-and-servers/parallel-networks",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "XRPL",
+          "url": "https://xrpl.org/resources/dev-tools/xrp-faucets",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "xrpl-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "xrpl-xahau-testnet",
+      "name": "XRPL / Xahau",
+      "network": "Xahau Testnet",
+      "asset": "XRP/XAH",
+      "family": "XRPL / Hooks",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "XrplAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://xrpl.org/resources/dev-tools/xrp-faucets",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "XRPL",
+          "url": "https://xrpl.org/resources/dev-tools/xrp-faucets",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": null
+    },
+    {
+      "id": "xrpl-lending-devnet",
+      "name": "XRPL",
+      "network": "Lending Devnet",
+      "asset": "XRP",
+      "family": "XRPL",
+      "category": "non-evm",
+      "environment": "devnet",
+      "adapter": "XrplAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://xrpl.org/resources/dev-tools/xrp-faucets",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "XRPL",
+          "url": "https://xrpl.org/resources/dev-tools/xrp-faucets",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "xrpl-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "xrpl-wasm-devnet",
+      "name": "XRPL",
+      "network": "WASM Devnet",
+      "asset": "XRP",
+      "family": "XRPL / WASM",
+      "category": "non-evm",
+      "environment": "devnet",
+      "adapter": "XrplAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://xrpl.org/resources/dev-tools/xrp-faucets",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "XRPL",
+          "url": "https://xrpl.org/resources/dev-tools/xrp-faucets",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "xrpl-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "stellar-testnet",
+      "name": "Stellar",
+      "network": "Testnet",
+      "asset": "XLM",
+      "family": "Stellar",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "StellarAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://developers.stellar.org/docs/networks",
+      "funding": [
+        {
+          "kind": "friendbot",
+          "provider": "Stellar",
+          "url": "https://friendbot.stellar.org",
+          "automation": "programmatic"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "stellar-public",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "stellar-futurenet",
+      "name": "Stellar",
+      "network": "Futurenet",
+      "asset": "XLM",
+      "family": "Stellar",
+      "category": "non-evm",
+      "environment": "futurenet",
+      "adapter": "StellarAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://developers.stellar.org/docs/networks",
+      "funding": [
+        {
+          "kind": "friendbot",
+          "provider": "Stellar",
+          "url": "https://friendbot-futurenet.stellar.org",
+          "automation": "programmatic"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "stellar-public",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "sui-testnet",
+      "name": "Sui",
+      "network": "Testnet",
+      "asset": "SUI",
+      "family": "Move / Sui",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "SuiAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.sui.io/guides/developer/getting-started/connect",
+      "funding": [
+        {
+          "kind": "web-faucet",
+          "provider": "Sui",
+          "url": "https://faucet.sui.io/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "sui-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "sui-devnet",
+      "name": "Sui",
+      "network": "Devnet",
+      "asset": "SUI",
+      "family": "Move / Sui",
+      "category": "non-evm",
+      "environment": "devnet",
+      "adapter": "SuiAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.sui.io/guides/developer/getting-started/connect",
+      "funding": [
+        {
+          "kind": "cli-or-web-faucet",
+          "provider": "Sui",
+          "url": "https://faucet.sui.io/?network=devnet",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "sui-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "aptos-testnet",
+      "name": "Aptos",
+      "network": "Testnet",
+      "asset": "APT",
+      "family": "Move / Aptos",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "AptosAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://aptos.dev/",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "Aptos",
+          "url": "https://aptos.dev/network/faucet",
+          "automation": "mixed"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "aptos-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "aptos-devnet",
+      "name": "Aptos",
+      "network": "Devnet",
+      "asset": "APT",
+      "family": "Move / Aptos",
+      "category": "non-evm",
+      "environment": "devnet",
+      "adapter": "AptosAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://aptos.dev/",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "Aptos",
+          "url": "https://aptos.dev/network/faucet",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "aptos-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "polkadot-paseo",
+      "name": "Polkadot",
+      "network": "Paseo",
+      "asset": "PAS",
+      "family": "Substrate",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "SubstrateAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.polkadot.com/reference/parachains/networks/",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "Polkadot",
+          "url": "https://docs.polkadot.com/smart-contracts/faucet/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "polkadot-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "polkadot-westend",
+      "name": "Polkadot",
+      "network": "Westend",
+      "asset": "WND",
+      "family": "Substrate",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "SubstrateAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.polkadot.com/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "polkadot-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "monero-stagenet",
+      "name": "VEILWELL",
+      "network": "Monero Stagenet",
+      "asset": "sXMR",
+      "family": "Monero / Privacy",
+      "category": "privacy",
+      "environment": "stagenet",
+      "adapter": "MoneroAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.getmonero.org/infrastructure/networks/",
+      "funding": [
+        {
+          "kind": "community-faucet-index",
+          "provider": "Monero Docs",
+          "url": "https://docs.getmonero.org/infrastructure/networks/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#ff7a18",
+      "mainnetCounterpart": {
+        "id": "monero-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "monero-testnet",
+      "name": "VEILWELL",
+      "network": "Monero Testnet",
+      "asset": "tXMR",
+      "family": "Monero / Privacy",
+      "category": "privacy",
+      "environment": "testnet",
+      "adapter": "MoneroAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://docs.getmonero.org/infrastructure/networks/",
+      "funding": [
+        {
+          "kind": "community-faucet-index",
+          "provider": "Monero Docs",
+          "url": "https://docs.getmonero.org/infrastructure/networks/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#ff7a18",
+      "mainnetCounterpart": {
+        "id": "monero-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "tron-shasta",
+      "name": "TRON",
+      "network": "Shasta",
+      "asset": "TRX",
+      "family": "TRON",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "TronAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://developers.tron.network/docs/networks",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "TRON",
+          "url": "https://shasta.tronex.io/join/getJoinPage",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "tron-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "tron-nile",
+      "name": "TRON",
+      "network": "Nile",
+      "asset": "TRX",
+      "family": "TRON",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "TronAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://developers.tron.network/docs/networks",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "TRON",
+          "url": "https://nileex.io/join/getJoinPage",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "tron-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "cronos-testnet",
+      "name": "Cronos",
+      "network": "Cronos Testnet",
+      "asset": "TCRO",
+      "family": "EVM / Cosmos",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://github.com/crypto-org-chain/cronos-testnets",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "Cronos",
+          "url": "https://cronos.org/faucet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "cronos-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "dogecoin-testnet",
+      "name": "Dogecoin",
+      "network": "Testnet",
+      "asset": "TESTDOGE",
+      "family": "UTXO / Dogecoin",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "DogecoinAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://github.com/dogecoin/dogecoin/blob/master/doc/getting-started.md",
+      "funding": [
+        {
+          "kind": "community-faucet",
+          "provider": "Dogecoin Developer Community",
+          "url": "https://faucet.doge.toys",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "dogecoin-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "algorand-testnet",
+      "name": "Algorand",
+      "network": "Testnet",
+      "asset": "ALGO",
+      "family": "Algorand",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "AlgorandAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://developer.algorand.org/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "algorand-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "near-testnet",
+      "name": "NEAR",
+      "network": "Testnet",
+      "asset": "NEAR",
+      "family": "NEAR",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "NearAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.near.org/",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "NEAR",
+          "url": "https://docs.near.org/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "near-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "celo-sepolia",
+      "name": "Celo",
+      "network": "Sepolia",
+      "asset": "CELO",
+      "family": "EVM / Celo",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.celo.org/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "celo-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "codex-sepolia",
+      "name": "Codex",
+      "network": "Sepolia",
+      "asset": "ETH",
+      "family": "EVM",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.codex.xyz/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "hyperevm-testnet",
+      "name": "HyperEVM",
+      "network": "Testnet",
+      "asset": "HYPE",
+      "family": "EVM / Hyperliquid",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://hyperliquid.gitbook.io/hyperliquid-docs/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "hyperevm-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "monad-testnet",
+      "name": "Monad",
+      "network": "Testnet",
+      "asset": "MON",
+      "family": "EVM / Monad",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.monad.xyz/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "noble-testnet",
+      "name": "Noble",
+      "network": "Testnet",
+      "asset": "USDC",
+      "family": "Cosmos / Noble",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "CosmosAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.noble.xyz/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": null
+    },
+    {
+      "id": "plume-testnet",
+      "name": "Plume",
+      "network": "Testnet",
+      "asset": "ETH",
+      "family": "EVM / Plume",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.plume.org/",
+      "funding": [
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "sei-testnet",
+      "name": "Sei",
+      "network": "Testnet",
+      "asset": "SEI",
+      "family": "EVM / Cosmos",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.sei.io/",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "Sei",
+          "url": "https://docs.sei.io/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "sei-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "sonic-testnet",
+      "name": "Sonic",
+      "network": "Testnet",
+      "asset": "S",
+      "family": "EVM / Sonic",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.soniclabs.com/sonic/build-on-sonic/getting-started",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "Sonic",
+          "url": "https://testnet.soniclabs.com/account",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "sonic-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "xdc-apothem",
+      "name": "XDC",
+      "network": "Apothem",
+      "asset": "TXDC",
+      "family": "EVM / XDC",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.xdc.network/xdcchain/developers/rpc/",
+      "funding": [
+        {
+          "kind": "native-faucet",
+          "provider": "XDC",
+          "url": "https://faucet.apothem.network",
+          "automation": "human-required"
+        },
+        {
+          "kind": "stablecoin-faucet",
+          "provider": "Circle",
+          "url": "https://faucet-v2.circle.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "xdc-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "litvm-liteforge",
+      "name": "LitVM",
+      "network": "LiteForge",
+      "asset": "zkLTC",
+      "family": "EVM / LitVM",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "LitVMAdapter",
+      "adapterStatus": "existing",
+      "docs": "https://liteforge.explorer.caldera.xyz/",
+      "funding": [
+        {
+          "kind": "network-source",
+          "provider": "LitVM",
+          "url": "https://liteforge.explorer.caldera.xyz/",
+          "automation": "manual"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "blast-sepolia",
+      "name": "Blast",
+      "network": "Blast Sepolia",
+      "asset": "ETH",
+      "family": "EVM / OP Stack",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "SuperchainAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.blast.io/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "blast-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "berachain-bepolia",
+      "name": "Berachain",
+      "network": "bepolia",
+      "asset": "BERA",
+      "family": "EVM / Cosmos",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.berachain.com/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "berachain-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "morph-holesky",
+      "name": "Morph",
+      "network": "Testnet",
+      "asset": "ETH",
+      "family": "EVM / Rollup",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.morphl2.io/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "morph-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "mantle-sepolia",
+      "name": "Mantle",
+      "network": "Sepolia",
+      "asset": "MNT",
+      "family": "EVM / Rollup",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.mantle.xyz/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "mantle-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "story-aeneid",
+      "name": "Story",
+      "network": "Aeneid Testnet",
+      "asset": "IP",
+      "family": "EVM / Story",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.story.foundation/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "story-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "plasma-testnet",
+      "name": "Plasma",
+      "network": "Testnet",
+      "asset": "XPL",
+      "family": "EVM / Plasma",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.plasma.to/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "QuickNode",
+          "url": "https://faucet.quicknode.com/drip",
+          "automation": "human-required"
+        },
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "ton-testnet",
+      "name": "TON",
+      "network": "Testnet",
+      "asset": "TON",
+      "family": "TON",
+      "category": "non-evm",
+      "environment": "testnet",
+      "adapter": "TonAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.ton.org/",
+      "funding": [
+        {
+          "kind": "multi-chain-faucet",
+          "provider": "Chainstack",
+          "url": "https://faucet.chainstack.com/",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#b7ff33",
+      "mainnetCounterpart": {
+        "id": "ton-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      }
+    },
+    {
+      "id": "xlayer-testnet",
+      "name": "XLayer",
+      "network": "Testnet",
+      "asset": "OKB",
+      "family": "EVM / XLayer",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://www.okx.com/xlayer/docs/developer/quick-start",
+      "funding": [
+        {
+          "kind": "test-payment-token",
+          "provider": "QuickNode x402",
+          "url": "https://www.quicknode.com/x402",
+          "automation": "mixed"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": {
+        "id": "xlayer-mainnet",
+        "mode": "catalog-only",
+        "execution": "separately-governed"
+      },
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    },
+    {
+      "id": "stable-testnet",
+      "name": "Stable",
+      "network": "Testnet",
+      "asset": "USDT",
+      "family": "EVM / Stable",
+      "category": "evm",
+      "environment": "testnet",
+      "adapter": "EVMAdapter",
+      "adapterStatus": "planned",
+      "docs": "https://docs.stable.xyz/",
+      "funding": [
+        {
+          "kind": "provider-faucet",
+          "provider": "Alchemy",
+          "url": "https://www.alchemy.com/rpc/stable-testnet",
+          "automation": "human-required"
+        }
+      ],
+      "color": "#28efff",
+      "mainnetCounterpart": null,
+      "fastLane": {
+        "virtualTestnet": "Tenderly",
+        "publicTestnetFallback": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+name: Testnet Registry
+
+on:
+  pull_request:
+    paths:
+      - "config/testnet-registry.json"
+      - "scripts/validate_testnet_registry.py"
+      - ".github/workflows/testnet-registry.yml"
+  push:
+    branches: [main]
+    paths:
+      - "config/testnet-registry.json"
+      - "scripts/validate_testnet_registry.py"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/validate_testnet_registry.py

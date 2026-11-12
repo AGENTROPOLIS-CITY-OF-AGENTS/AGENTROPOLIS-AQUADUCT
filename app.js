@@ -1,7 +1,7 @@
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 import { createScrollScene } from "./scroll-scene.js";
 
-const chains = [
+let chains = [
   { id:"ethereum-sepolia", name:"Ethereum", network:"Sepolia", asset:"ETH", family:"EVM", category:"evm", mark:"ETH", mode:"Provider utility", adapter:"EVMAdapter", color:0x8ea1ff, faucet:"https://ethereum.org/en/developers/docs/networks/", docs:"https://ethereum.org/en/developers/docs/networks/", note:"Sepolia testnet utility station." },
   { id:"base-sepolia", name:"Base", network:"Base Sepolia", asset:"ETH", family:"EVM / OP Stack", category:"evm", mark:"BASE", mode:"Provider utility", adapter:"BaseAdapter", color:0x3478ff, faucet:"https://docs.base.org/base-chain/tools/network-faucets", docs:"https://docs.base.org/base-chain/network-information", note:"Base Sepolia testnet utility station." },
   { id:"op-sepolia", name:"Optimism", network:"OP Sepolia", asset:"ETH", family:"EVM / OP Stack", category:"evm", mark:"OP", mode:"Superchain utility", adapter:"SuperchainAdapter", color:0xff344d, faucet:"https://console.optimism.io/faucet", docs:"https://docs.optimism.io/chain/networks", note:"OP Sepolia testnet utility station." },
@@ -28,7 +28,51 @@ const districts = [
   { id:"gaming", name:"GAMING DISTRICT", x:9, z:7, color:0x14f195, height:6 }
 ];
 
-const stationSlots = [[-14,-10],[-9,-11],[-4,-11],[2,-11],[7,-11],[13,-9],[-14,-3],[-14,4],[-11,10],[-5,12],[1,12],[7,12],[13,8],[14,1],[13,-5]];
+function stationSlot(index, total) {
+  const rings = [
+    { count: 16, radiusX: 14, radiusZ: 11 },
+    { count: 20, radiusX: 18, radiusZ: 14 },
+    { count: Math.max(24, total - 36), radiusX: 22, radiusZ: 17 }
+  ];
+  let cursor = index;
+  for (let ringIndex = 0; ringIndex < rings.length; ringIndex += 1) {
+    const ring = rings[ringIndex];
+    if (cursor < ring.count) {
+      const angle = (cursor / ring.count) * Math.PI * 2 - Math.PI / 2 + ringIndex * 0.12;
+      return [Math.cos(angle) * ring.radiusX, Math.sin(angle) * ring.radiusZ];
+    }
+    cursor -= ring.count;
+  }
+  const angle = (index / Math.max(total, 1)) * Math.PI * 2;
+  return [Math.cos(angle) * 25, Math.sin(angle) * 20];
+}
+
+function normalizeRegistryNetwork(network) {
+  const color = typeof network.color === "string"
+    ? Number.parseInt(network.color.replace("#", ""), 16)
+    : network.color;
+  const primary = Array.isArray(network.funding) && network.funding.length ? network.funding[0] : null;
+  return {
+    ...network,
+    color: Number.isFinite(color) ? color : 0x9fc6ff,
+    faucet: primary?.url || network.docs,
+    mode: primary?.automation || "metadata-only",
+    mark: network.mark || network.name.replace(/[^A-Za-z0-9]/g, "").slice(0, 5).toUpperCase(),
+    note: network.note || `${network.network} / ${network.environment || "testnet"} utility station. ${network.adapterStatus || "planned"} adapter.`
+  };
+}
+
+async function loadTestnetRegistry() {
+  try {
+    const response = await fetch("./config/testnet-registry.json", { cache: "no-store" });
+    if (!response.ok) throw new Error(`registry fetch failed: ${response.status}`);
+    const registry = await response.json();
+    if (!Array.isArray(registry.networks) || registry.networks.length === 0) throw new Error("registry has no networks");
+    chains = registry.networks.map(normalizeRegistryNetwork);
+  } catch (error) {
+    console.warn("AQUEDUCT registry unavailable; using embedded fallback lanes", error);
+  }
+}
 const agentSpawns = [[-2,-1],[2,1],[-7,-3],[6,-2],[-4,6],[4,6],[10,4],[-10,3],[1,7],[-1,-7]];
 const bootLines = [
   "boot://hermes3d-agent-city",
@@ -219,7 +263,7 @@ async function createAqueduct(){
   const labelLayer=document.createElement("div"); labelLayer.className="city-label-layer"; document.body.appendChild(labelLayer); const labels=[]; const selectable=[]; const districtVisuals=new Map();
   districts.forEach((district,di)=>{const visual=createDistrictPad(world,district);districtVisuals.set(district.id,visual);const group=new THREE.Group();const count=7;for(let i=0;i<count;i+=1){const angle=(i/count)*Math.PI*2;const radius=i===0?0:1.3+((di*31+i*17)%10)/12;const h=i===0?district.height:1.8+((di*23+i*13)%10)/10*district.height*.47;createBuilding(group,district.x+Math.cos(angle)*radius,district.z+Math.sin(angle)*radius,i===0?1.7:.65+((i*7)%5)*.12,i===0?1.7:.65+((i*5)%4)*.15,h,district.color,di+i);}world.add(group);const label=makeLabel(district.name,"district-label");labelLayer.appendChild(label);labels.push({label,position:new THREE.Vector3(district.x,district.height+1.25,district.z),priority:"district"});});
   const utilityHub=createUtilityHub(world); const utilityLight=new THREE.PointLight(0x28efff,100,38); utilityLight.position.set(8,10,-6); scene.add(utilityLight); const redLight=new THREE.PointLight(0xff2738,88,34); redLight.position.set(0,11,1); scene.add(redLight); const violetLight=new THREE.PointLight(0xac5cff,38,29); violetLight.position.set(0,8,10); scene.add(violetLight); scene.add(new THREE.HemisphereLight(0x7ccfff,0x08090d,.7)); const keyLight=new THREE.DirectionalLight(0xd7f8ff,2.2); keyLight.position.set(18,30,16); keyLight.castShadow=!mobile; keyLight.shadow.mapSize.set(1024,1024); keyLight.shadow.camera.left=-24; keyLight.shadow.camera.right=24; keyLight.shadow.camera.top=22; keyLight.shadow.camera.bottom=-22; scene.add(keyLight);
-  const stations=chains.map((chain,index)=>{const [x,z]=stationSlots[index];const station=createChainwellStation(world,chain,x,z,selectable,index);const label=makeLabel(`${chain.mark} CHAINWELL`,chain.category==="privacy"?"privacy-label":"utility-label");labelLayer.appendChild(label);labels.push({label,position:new THREE.Vector3(x,2.55,z),priority:"station"});return station;});
+  const stations=chains.map((chain,index)=>{const [x,z]=stationSlot(index, chains.length);const station=createChainwellStation(world,chain,x,z,selectable,index);const label=makeLabel(`${chain.mark} CHAINWELL`,chain.category==="privacy"?"privacy-label":"utility-label");labelLayer.appendChild(label);labels.push({label,position:new THREE.Vector3(x,2.55,z),priority:"station"});return station;});
   const flowOrigin=new THREE.Vector3(8,.28,-6); const flowConduits=stations.map((station,index)=>createFlowConduit(world,flowOrigin,station,index));
   const roles=["city","hermes","wallet-atlas","route-engine","verifier","receipt-scribe","veil-sentinel","city","city","city"]; const agents=roles.map((role,index)=>{const stationIndex=role==="veil-sentinel"?stations.length-1:(index*2+1)%Math.max(1,stations.length-1);const station=stations[stationIndex];const spawn=agentSpawns[index%agentSpawns.length];const route=createServiceCurve(new THREE.Vector3(spawn[0],.12,spawn[1]),station,index);const color=role==="hermes"?0xff2738:role==="veil-sentinel"?0xff7a18:role==="receipt-scribe"?0xac5cff:role==="wallet-atlas"?0xff4da6:0x28efff;const agent=createHumanoid(color,role,route,index/roles.length,stationIndex);world.add(agent);return agent;});
   const starGeometry=new THREE.BufferGeometry(); const starCount=mobile?180:420; const starPositions=new Float32Array(starCount*3); for(let i=0;i<starCount;i+=1){starPositions[i*3]=(Math.random()-.5)*100;starPositions[i*3+1]=6+Math.random()*46;starPositions[i*3+2]=(Math.random()-.5)*100;} starGeometry.setAttribute("position",new THREE.BufferAttribute(starPositions,3)); scene.add(new THREE.Points(starGeometry,new THREE.PointsMaterial({color:0xcffcff,size:.035,transparent:true,opacity:.38})));
@@ -237,4 +281,4 @@ async function createAqueduct(){
 
 closeDetail?.addEventListener("click",()=>detailPanel?.classList.remove("open"));
 addEventListener("keydown",(event)=>{if(event.key==="Escape")detailPanel?.classList.remove("open");});
-addEventListener("load",()=>{renderCards();setupFilters();typeBootSequence();createAqueduct().catch((error)=>{console.error(error);document.documentElement.dataset.sceneError="true";});});
+addEventListener("load",async()=>{await loadTestnetRegistry();if(chainCount)chainCount.textContent=String(chains.length);renderCards();setupFilters();typeBootSequence();createAqueduct().catch((error)=>{console.error(error);document.documentElement.dataset.sceneError="true";});});
